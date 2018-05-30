@@ -9,44 +9,44 @@ Texto::Texto( string na ) {
     string palavra;
     string ext = ".txt";
     nomearq = na + ext;
-    
+
     //strcat(na, test);
     ifstream arq(nomearq);
-    
+
     while(arq >> palavra) {
         if( size > 10000 )
             break;
-        
+
         p[size++] = palavra;
-        
+
     }
-    
+
     arq.close();
 }
 
 /*Palavra*/string Texto::percorrerTexto() {
-    
+
     if(++pos_atual > size) {
         return "";
     }
-    
+
     return p[pos_atual];
 }
 
-void Texto::corrigirPalavra( int pos_atual, /*Palavra*/string corrigida ) {
+void Texto::corrigirPalavra( /*Palavra*/string corrigida ) {
     p[pos_atual] = corrigida;
 }
 
-void Texto:: salvarArquivo() {
+void Texto:: salvarTexto() {
     string n = nomearq + "-Copy.txt";
     ofstream arq( n );
-    
+
     int i=0;
     while( i <= size ) {
         arq << p[i++];
         arq << " ";
     }
-    
+
     cout << "Arquivo Salvo" << endl;
-    
+
 }
