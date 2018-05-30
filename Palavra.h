@@ -15,6 +15,7 @@
 class Palavra {
 public:
     /// Construtor de Palavra
+
     /** Recebe uma string para inicializar a palavra */
     Palavra(std::string p=""/**< [in] Palavra a ser inicializada. Por padrão, "". */);
 
@@ -45,11 +46,12 @@ private:
 
 /// Operador <<
 /** Exibe na tela a palavra p.
- * \return Objeto o (com a palavra p já exibida).*/
+ * \return Objeto o (com a palavra p já exibida).*/   
 std::ostream &operator<< (std::ostream & o, Palavra &p /**< [in] Palavra a ser exibida.*/);
 
 /// Operador >>
 /** Escreve na palavra p.
+
  * \return Objeto i (com a palavra p já escrita).*/
 std::istream &operator>> (std::istream & i, Palavra &p /**< [in] Palavra a ser escrita.*/);
 
