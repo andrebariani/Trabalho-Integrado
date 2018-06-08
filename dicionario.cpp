@@ -74,3 +74,12 @@
         }
     }
 
+    void dicionario::printar()
+    {
+        for(int i = 0; i < cont; i++)
+        {
+            
+            std::cout << dict[i] << std::endl;
+
+        }
+    }

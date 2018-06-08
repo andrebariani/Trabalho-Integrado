@@ -19,4 +19,8 @@ class dicionario
         void consulta(arq dict, Palavra p);
         void inclusao(arq dict, Palavra p);
         void atualizarArquivo();
+
+        //Just for tests
+
+        void printar();
 };
