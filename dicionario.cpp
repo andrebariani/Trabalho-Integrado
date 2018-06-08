@@ -25,12 +25,11 @@
             {
                 std::cout << "ERROR" << std::endl;
             }
-
     }
 
     //Functions:
 
-    void dicionario::consulta(arq dict, Palavra p) //Muito provavelmente haverá mudanças
+    void dicionario::consulta(Palavra p) //Muito provavelmente haverá mudanças
     {
         for(int i = 0, i < cont; i++)
         {
@@ -45,7 +44,7 @@
         return 0;
     }
 
-    void dicionario::inclusao(arq dict, Palavra p)
+    void dicionario::inclusao(Palavra p)
     {
         for(int i = 0, i < cont; i++)
         {
@@ -70,7 +69,9 @@
         file.open("teste.txt", ios::out);
         for(int i = 0; i < cont; i++)
         {
+
             file << dict[i].palavra << std::endl;
+        
         }
     }
 
