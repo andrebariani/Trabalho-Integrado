@@ -16,8 +16,8 @@ class dicionario
 
         //Functions:
 
-        void consulta(arq dict, Palavra p);
-        void inclusao(arq dict, Palavra p);
+        void consulta(Palavra p);
+        void inclusao(Palavra p);
         void atualizarArquivo();
 
         //Just for tests

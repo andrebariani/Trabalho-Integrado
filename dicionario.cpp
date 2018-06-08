@@ -8,7 +8,7 @@
         ifstream file;
 
         //It is opened in the "in" way, so it only permits the reading of the file
-        file.open("teste.txt", ios::in);
+        file.open("dict.txt", ios::in);
 
             //"is_open" returns TRUE if the "file" is opened
             //"good" returns TRUE if it doens't have any problem
@@ -25,11 +25,12 @@
             {
                 std::cout << "ERROR" << std::endl;
             }
+
     }
 
     //Functions:
 
-    void dicionario::consulta(Palavra p) //Muito provavelmente haverá mudanças
+    void dicionario::consulta(arq dict, Palavra p) //Muito provavelmente haverá mudanças
     {
         for(int i = 0, i < cont; i++)
         {
@@ -44,7 +45,7 @@
         return 0;
     }
 
-    void dicionario::inclusao(Palavra p)
+    void dicionario::inclusao(arq dict, Palavra p)
     {
         for(int i = 0, i < cont; i++)
         {
@@ -66,12 +67,10 @@
         ofstream file;
 
         //Opens the file in an "out" way, to write there
-        file.open("teste.txt", ios::out);
+        file.open("dict.txt", ios::out);
         for(int i = 0; i < cont; i++)
         {
-
             file << dict[i].palavra << std::endl;
-        
         }
     }
 
