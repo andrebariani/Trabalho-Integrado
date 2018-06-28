@@ -19,9 +19,6 @@ public:
     /** Recebe uma string para inicializar a palavra */
     Palavra(std::string p=""/**< [in] Palavra a ser inicializada. Por padrão, "". */);
 
-    //Palavra(const Palavra& orig);
-    //~Palavra();
-
     /// Comparacao palavras semelhantes
     /** \return Verdadeiro se as primeiras letras da palavra são iguais às respectivas de p2, falso do contrário.
      *  Dispara um erro caso as letras não existam. */
@@ -46,7 +43,7 @@ private:
 
 /// Operador <<
 /** Exibe na tela a palavra p.
- * \return Objeto o (com a palavra p já exibida).*/   
+ * \return Objeto o (com a palavra p já exibida).*/
 std::ostream &operator<< (std::ostream & o, Palavra &p /**< [in] Palavra a ser exibida.*/);
 
 /// Operador >>
