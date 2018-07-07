@@ -44,9 +44,9 @@ class Node {
         void setEsq( Node * p);
 
     private:
-        T dado;
-        Node * dir, esq;
-        bool bal[2];
+        T dado;         ///< Dado do tipo T
+        Node * dir, esq;///< Ponteiros direito e esquerdo
+        bool bal[2];    ///< Fator de balanceamento
 }
 
 /*! \class Arvore Binaria de Busca
