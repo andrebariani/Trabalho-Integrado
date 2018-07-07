@@ -20,6 +20,10 @@ class Node {
     public:
         ///Construtor
         /** Inicializa o No*/
+        Node();
+
+        ///Construtor com dado
+        /** Inicializa o No ja com o dado do tipo T*/
         Node(T dado);
 
         ///Get Dado
