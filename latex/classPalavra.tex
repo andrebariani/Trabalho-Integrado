@@ -1,0 +1,113 @@
+\hypertarget{classPalavra}{}\section{Palavra Class Reference}
+\label{classPalavra}\index{Palavra@{Palavra}}
+
+
+Classe de manipulação de palavras.  
+
+
+
+
+{\ttfamily \#include $<$Palavra.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPalavra_a81db9f79dee404bfd73fe9fc9f861be3}{Palavra} (std\+::string p=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Construtor de \hyperlink{classPalavra}{Palavra}. \end{DoxyCompactList}\item 
+bool \hyperlink{classPalavra_ae3c7cea7ef6603efb3899adc34dba9d8}{semelhantes} (\hyperlink{classPalavra}{Palavra} \&p2)
+\begin{DoxyCompactList}\small\item\em Comparacao palavras semelhantes. \end{DoxyCompactList}\item 
+bool \hyperlink{classPalavra_a0db696a5fd0261a07d35d367a114afa7}{operator==} (\hyperlink{classPalavra}{Palavra} \&p2)
+\begin{DoxyCompactList}\small\item\em Operador ==. \end{DoxyCompactList}\item 
+void \hyperlink{classPalavra_a77fbc808d5749f73a2974b7276a0d000}{set\+Palavra} (std\+::string p)
+\begin{DoxyCompactList}\small\item\em set \hyperlink{classPalavra}{Palavra} \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classPalavra_a08bfe271e5e30c04f711fcf94609ab9a}{get\+Palavra} ()
+\begin{DoxyCompactList}\small\item\em get \hyperlink{classPalavra}{Palavra} \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Classe de manipulação de palavras. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Palavra@{Palavra}!Palavra@{Palavra}}
+\index{Palavra@{Palavra}!Palavra@{Palavra}}
+\subsubsection[{\texorpdfstring{Palavra(std\+::string p="""")}{Palavra(std::string p="")}}]{\setlength{\rightskip}{0pt plus 5cm}Palavra\+::\+Palavra (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{p = {\ttfamily \char`\"{}\char`\"{}}}
+\end{DoxyParamCaption}
+)}\hypertarget{classPalavra_a81db9f79dee404bfd73fe9fc9f861be3}{}\label{classPalavra_a81db9f79dee404bfd73fe9fc9f861be3}
+
+
+Construtor de \hyperlink{classPalavra}{Palavra}. 
+
+Recebe uma string para inicializar a palavra 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & \hyperlink{classPalavra}{Palavra} a ser inicializada. Por padrão, \char`\"{}\char`\"{}. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{Palavra@{Palavra}!get\+Palavra@{get\+Palavra}}
+\index{get\+Palavra@{get\+Palavra}!Palavra@{Palavra}}
+\subsubsection[{\texorpdfstring{get\+Palavra()}{getPalavra()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Palavra\+::get\+Palavra (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classPalavra_a08bfe271e5e30c04f711fcf94609ab9a}{}\label{classPalavra_a08bfe271e5e30c04f711fcf94609ab9a}
+
+
+get \hyperlink{classPalavra}{Palavra} 
+
+\begin{DoxyReturn}{Returns}
+string com a palavra armazenada. 
+\end{DoxyReturn}
+\index{Palavra@{Palavra}!operator==@{operator==}}
+\index{operator==@{operator==}!Palavra@{Palavra}}
+\subsubsection[{\texorpdfstring{operator==(\+Palavra \&p2)}{operator==(Palavra &p2)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Palavra\+::operator== (
+\begin{DoxyParamCaption}
+\item[{{\bf Palavra} \&}]{p2}
+\end{DoxyParamCaption}
+)}\hypertarget{classPalavra_a0db696a5fd0261a07d35d367a114afa7}{}\label{classPalavra_a0db696a5fd0261a07d35d367a114afa7}
+
+
+Operador ==. 
+
+\begin{DoxyReturn}{Returns}
+Verdadeiro se as palavras são iguais, falso do contrário. 
+\end{DoxyReturn}
+\index{Palavra@{Palavra}!semelhantes@{semelhantes}}
+\index{semelhantes@{semelhantes}!Palavra@{Palavra}}
+\subsubsection[{\texorpdfstring{semelhantes(\+Palavra \&p2)}{semelhantes(Palavra &p2)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Palavra\+::semelhantes (
+\begin{DoxyParamCaption}
+\item[{{\bf Palavra} \&}]{p2}
+\end{DoxyParamCaption}
+)}\hypertarget{classPalavra_ae3c7cea7ef6603efb3899adc34dba9d8}{}\label{classPalavra_ae3c7cea7ef6603efb3899adc34dba9d8}
+
+
+Comparacao palavras semelhantes. 
+
+\begin{DoxyReturn}{Returns}
+Verdadeiro se as primeiras letras da palavra são iguais às respectivas de p2, falso do contrário. Dispara um erro caso as letras não existam. 
+\end{DoxyReturn}
+\index{Palavra@{Palavra}!set\+Palavra@{set\+Palavra}}
+\index{set\+Palavra@{set\+Palavra}!Palavra@{Palavra}}
+\subsubsection[{\texorpdfstring{set\+Palavra(std\+::string p)}{setPalavra(std::string p)}}]{\setlength{\rightskip}{0pt plus 5cm}void Palavra\+::set\+Palavra (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{classPalavra_a77fbc808d5749f73a2974b7276a0d000}{}\label{classPalavra_a77fbc808d5749f73a2974b7276a0d000}
+
+
+set \hyperlink{classPalavra}{Palavra} 
+
+Atribui na palavra a string p. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & \hyperlink{classPalavra}{Palavra} a ser atualizada. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Palavra_8h}{Palavra.\+h}\item 
+\hyperlink{Palavra_8cpp}{Palavra.\+cpp}\end{DoxyCompactItemize}
