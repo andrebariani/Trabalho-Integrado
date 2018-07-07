@@ -1,4 +1,4 @@
-\hypertarget{Arvore_8h}{}\section{Arvore.\+h File Reference}
+\hypertarget{Arvore_8h}{}\section{Referência do Arquivo Arvore.\+h}
 \label{Arvore_8h}\index{Arvore.\+h@{Arvore.\+h}}
 
 
@@ -7,14 +7,14 @@ Classe \hyperlink{classArvore}{Arvore} Binaria de Busca Autor\+: Anderson Pinhei
 
 {\ttfamily \#include $<$iostream$>$}\\*
 {\ttfamily \#include $<$vector$>$}\\*
-Include dependency graph for Arvore.\+h\+:
+Gráfico de dependência de inclusões para Arvore.\+h\+:
 % FIG 0
-\subsection*{Classes}
+\subsection*{Componentes}
 \begin{DoxyCompactItemize}
 \item 
 class \hyperlink{classNode}{Node$<$ T $>$}
 \begin{DoxyCompactList}\small\item\em Classe de nós para a \hyperlink{classArvore}{Arvore} Binaria de Busca. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Functions}
+\subsection*{Funções}
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{Arvore_8h_ac98846991818f0d9dc8d55997e75a2fe}{Node} ()
@@ -48,12 +48,12 @@ T $\ast$ \hyperlink{Arvore_8h_aa1fb84cbf0abcfc6e18bd0f4edec10c6}{busca} (T d)
 \begin{DoxyCompactList}\small\item\em Busca. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
+\subsection{Descrição Detalhada}
 Classe \hyperlink{classArvore}{Arvore} Binaria de Busca Autor\+: Anderson Pinheiro Garrote Created on 23 de Maio de 2018, 18\+:10. 
 
 
 
-\subsection{Function Documentation}
+\subsection{Funções}
 \index{Arvore.\+h@{Arvore.\+h}!Arvore@{Arvore}}
 \index{Arvore@{Arvore}!Arvore.\+h@{Arvore.\+h}}
 \subsubsection[{\texorpdfstring{Arvore()}{Arvore()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Arvore} (
@@ -77,7 +77,7 @@ Inicializa a \hyperlink{classArvore}{Arvore} \index{Arvore.\+h@{Arvore.\+h}!busc
 Busca. 
 
 Retorna verdadeiro se o T foi encontrado, falso do contrário. 
-\begin{DoxyParams}[1]{Parameters}
+\begin{DoxyParams}[1]{Parâmetros}
 \mbox{\tt in}  & {\em d} & Dado a ser buscado. \\
 \hline
 \end{DoxyParams}
@@ -128,7 +128,7 @@ Insere.
 Insere o T d na arvore. Retorna exceção se não for inserido com sucesso.
 
 Insere o dado d na arvore. Retorna exceção se não for inserido com sucesso. 
-\begin{DoxyParams}[1]{Parameters}
+\begin{DoxyParams}[1]{Parâmetros}
 \mbox{\tt in}  & {\em d} & Dado a ser inserido. \\
 \hline
 \end{DoxyParams}
@@ -168,7 +168,7 @@ Remove.
 Remove o T d na arvore. Retorna exceção se não for inserido com sucesso.
 
 Remove o T d na arvore. Retorna exceção se não for removido com sucesso. 
-\begin{DoxyParams}[1]{Parameters}
+\begin{DoxyParams}[1]{Parâmetros}
 \mbox{\tt in}  & {\em d} & Dado a ser removido. \\
 \hline
 \end{DoxyParams}
