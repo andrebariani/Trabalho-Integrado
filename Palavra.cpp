@@ -1,7 +1,7 @@
 /*! \file Palavra.cpp
     \brief Classe palavra e funções relacionadas
  *  Autor: Anderson Pinheiro Garrote
- 
+
  *  Created on 17 de Maio de 2018, 11:14
 */
 /*! \class Palavra
@@ -23,6 +23,10 @@ bool Palavra::semelhantes( Palavra& p2)
 bool Palavra::operator==( Palavra& p2)
 {
     return palavra==p2.getPalavra();
+}
+bool Palavra::operator<( Palavra& p2)
+{
+    return palavra<p2.getPalavra();
 }
 void Palavra::setPalavra(std::string p){
     palavra=p;

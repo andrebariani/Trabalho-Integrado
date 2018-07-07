@@ -28,6 +28,10 @@ public:
     /** \return Verdadeiro se as palavras são iguais, falso do contrário.*/
     bool operator==( Palavra& p2);
 
+    /// Operador <
+    /** \return Verdadeiro se a palavra é menor que a segunda (valor de char menor e tamanho menor), falso do contrário.*/
+    bool Palavra::operator<( Palavra& p2);
+
     /// set Palavra
     /** Atribui na palavra a string p.*/
     void setPalavra(std::string p /**< [in] Palavra a ser atualizada.*/);
