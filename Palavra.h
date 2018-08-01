@@ -30,7 +30,11 @@ public:
 
     /// Operador <
     /** \return Verdadeiro se a palavra é menor que a segunda (valor de char menor e tamanho menor), falso do contrário.*/
-    bool Palavra::operator<( Palavra& p2);
+    bool operator<( Palavra& p2);
+
+    /// Operador =
+    /** \Atribui o valor da palavra em uma segunda palavra.*/
+    void operator=( Palavra p2/**< [in] Valor da Palavra para atribuir à segunda palavra*/ );
 
     /// set Palavra
     /** Atribui na palavra a string p.*/

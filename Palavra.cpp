@@ -28,6 +28,10 @@ bool Palavra::operator<( Palavra& p2)
 {
     return palavra<p2.getPalavra();
 }
+void Palavra::operator=( Palavra p2)
+{
+    palavra = p2.getPalavra();
+}
 void Palavra::setPalavra(std::string p){
     palavra=p;
 }
