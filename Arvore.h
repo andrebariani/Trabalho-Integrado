@@ -13,50 +13,16 @@
 
 template <class T>
 
-/*! \class Node
-    \brief Classe de nós para a Arvore Binaria de Busca
-*/
-class Node {
-    public:
-        ///Construtor
-        /** Inicializa o No*/
-        Node();
-
-        ///Construtor com dado
-        /** Inicializa o No ja com o dado do tipo T*/
-        Node(T dado);
-
-        ///Get Dado
-        /** Retorna o dado do tipo T armazenado no node*/
-        T getDado();
-        ///Set Dado
-        /** Armazena no node o dado do tipo T */
-        void setDado( T dado);
-
-        ///Get No Direito
-        /** Retorna o ponteiro do filho direito do node*/
-        Node * getDir();
-        ///Set No Direito
-        /** Define o node apontado por p como o filho direito do node*/
-        void setDir( Node * p);
-
-        ///Get No Esquerdo
-        /** Retorna o ponteiro do filho esquerdo do node*/
-        Node * getEsq();
-        ///Set No Esquerdo
-        /** Define o node apontado por p como o filho esquerdo do node*/
-        void setEsq( Node * p);
-
-    private:
-        T dado;         ///< Dado do tipo T
-        Node * dir, esq;///< Ponteiros direito e esquerdo
-        bool bal[2];    ///< Fator de balanceamento
-}
-
 /*! \class Arvore Binaria de Busca
     \brief Classe de manipulação de arvores de busca
 */
 class Arvore {
+    typedef struct _node{
+        T dado;
+        bool bal[2];
+        struct _node * esq;
+        struct _node * dir;
+    }Node;
     public:
 
         ///Construtor
@@ -86,8 +52,7 @@ class Arvore {
         T * busca( T d /**< [in] Dado a ser buscado.*/);
 
     private:
-        unsigned qtd;
-        /*std::vector*/ T dados[1000];
+        Node * raiz;
 
 };
 
@@ -95,14 +60,20 @@ class Arvore {
 /******************************************************************************
 * IMPLEMENTAÇÃO
 *******************************************************************************/
-
+///Construtor
+/** Construtor da arvore, inicializa com ela vazia*/
 template <class T>
 Arvore<T>::Arvore() {
-    qtd=0;
+    raiz=NULL;
 }
+///Construtor por Cópia
+/* Aloca uma nova arvore igual a original*/
 template <class T>
-Arvore<T>::Arvore(const Arvore& orig) {
+Arvore<T>::Arvore(const Arvore& orig  /**< [in] Arvore de origem a ser copiada.*/) {
 }
+
+///Destrutor
+/* Destroi a arvore*/
 template <class T>
 Arvore<T>::~Arvore() {
 }
@@ -112,7 +83,7 @@ Arvore<T>::~Arvore() {
 template <class T>
 bool Arvore<T>::vazia()
 {
-    return qtd == 0;
+    return raiz==NULL;
 }
 
 ///Insere
@@ -121,8 +92,39 @@ bool Arvore<T>::vazia()
 template <class T>
 void Arvore<T>::insere( T d /**< [in] Dado a ser inserido.*/)
 {
-    dados[qtd]=d;
-    qtd++;
+    Node* p = new Node;
+
+    if(p){
+        //Atribuir valor no no
+        p->dados = d;
+        p->esq=NULL;
+        p->dir=NULL;
+
+        //Arvore vazia
+        if(raiz==NULL)
+            raiz=p;
+
+        else{
+            Node * t = raiz;
+            //Enquanto houverem nós
+            Node * pai = NULL;
+            while(t)
+            {
+                //Define o no como o novo pai
+                pai=t;
+                //Procure a posição correta
+                if(d<t->dado)
+                    t=t->dir;
+                else if(d>t->dado)
+                    t=t->esq;
+            }
+            //Posição encontrada, corrija o pai
+            if(d<pai->dado)
+                pai->dir=p;
+            else if(d>pai->dado)
+                pai->esq=p;
+        }
+    }
 }
 
 ///Remove
