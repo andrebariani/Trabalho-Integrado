@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['salvararquivo',['salvarArquivo',['../classTexto.html#aa637986e50d826319f321167dfaf2d9c',1,'Texto']]],
   ['semelhantes',['semelhantes',['../classPalavra.html#ae3c7cea7ef6603efb3899adc34dba9d8',1,'Palavra']]],
   ['setdado',['setDado',['../classNode.html#a688af9d8d82a99f49f171146d1c42eee',1,'Node::setDado()'],['../Arvore_8h.html#a8bbe733fe2388b0929e7af1d7329e49c',1,'setDado():&#160;Arvore.h']]],
   ['setdir',['setDir',['../classNode.html#aee19f2d06c7cdc8b6fa3c0e199f9865a',1,'Node::setDir()'],['../Arvore_8h.html#ac84c10da720baf596ba1546ee8b70931',1,'setDir():&#160;Arvore.h']]],

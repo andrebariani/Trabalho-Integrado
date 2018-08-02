@@ -5,6 +5,208 @@
 Classe \hyperlink{classArvore}{Arvore} Binaria de Busca Autor\+: Anderson Pinheiro Garrote Created on 23 de Maio de 2018, 18\+:10.  
 
 
-{\ttfamily \#include $<$iostream$>$}\\*
-{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
 Gráfico de dependência de inclusões para Arvore.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{Arvore_8h__incl}
+\end{center}
+\end{figure}
+\subsection*{Componentes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classNode}{Node$<$ T $>$}
+\begin{DoxyCompactList}\small\item\em Classe de nós para a \hyperlink{classArvore}{Arvore} Binaria de Busca. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Arvore_8h_ac98846991818f0d9dc8d55997e75a2fe}{Node} ()
+\begin{DoxyCompactList}\small\item\em Construtor. \end{DoxyCompactList}\item 
+\hyperlink{Arvore_8h_a3d396688b3490dff5ef54e15e88553ce}{Node} (T dado)
+\begin{DoxyCompactList}\small\item\em Construtor com dado. \end{DoxyCompactList}\item 
+T \hyperlink{Arvore_8h_a6adb089606bc876dd9fbee8d8d268d22}{get\+Dado} ()
+\begin{DoxyCompactList}\small\item\em Get Dado. \end{DoxyCompactList}\item 
+void \hyperlink{Arvore_8h_a8bbe733fe2388b0929e7af1d7329e49c}{set\+Dado} (T dado)
+\begin{DoxyCompactList}\small\item\em Set Dado. \end{DoxyCompactList}\item 
+\hyperlink{classNode}{Node} $\ast$ \hyperlink{Arvore_8h_aeb92265075af12f1ce26d5c55883349d}{get\+Dir} ()
+\begin{DoxyCompactList}\small\item\em Get No Direito. \end{DoxyCompactList}\item 
+void \hyperlink{Arvore_8h_ac84c10da720baf596ba1546ee8b70931}{set\+Dir} (\hyperlink{classNode}{Node} $\ast$p)
+\begin{DoxyCompactList}\small\item\em Set No Direito. \end{DoxyCompactList}\item 
+\hyperlink{classNode}{Node} $\ast$ \hyperlink{Arvore_8h_ac70e1498aba191bf3ced9d3d1cf7b814}{get\+Esq} ()
+\begin{DoxyCompactList}\small\item\em Get No Esquerdo. \end{DoxyCompactList}\item 
+void \hyperlink{Arvore_8h_acfa72d5482b5e55dffa8f10da5e7a696}{set\+Esq} (\hyperlink{classNode}{Node} $\ast$p)
+\begin{DoxyCompactList}\small\item\em Set No Esquerdo. \end{DoxyCompactList}\item 
+\hyperlink{Arvore_8h_a29faec8b627e16e757f3853ba6adf93f}{Arvore} ()
+\begin{DoxyCompactList}\small\item\em Construtor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{Arvore_8h_a2c7fd354984bd3ed38346ee5e3c609fa}\label{Arvore_8h_a2c7fd354984bd3ed38346ee5e3c609fa}} 
+{\bfseries Arvore} (const \hyperlink{classArvore}{Arvore} \&orig)
+\item 
+bool \hyperlink{Arvore_8h_a4b4d398632dc3c8b3ce36b6846c64647}{vazia} ()
+\begin{DoxyCompactList}\small\item\em Vazia. \end{DoxyCompactList}\item 
+void \hyperlink{Arvore_8h_ac7cd51efc9439f87f55d29fa18440cc6}{insere} (T d)
+\begin{DoxyCompactList}\small\item\em Insere. \end{DoxyCompactList}\item 
+void \hyperlink{Arvore_8h_a7b02af7c5546ea64dc0c14acd2455284}{remove} (T d)
+\begin{DoxyCompactList}\small\item\em Remove. \end{DoxyCompactList}\item 
+T $\ast$ \hyperlink{Arvore_8h_aa1fb84cbf0abcfc6e18bd0f4edec10c6}{busca} (T d)
+\begin{DoxyCompactList}\small\item\em Busca. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descrição Detalhada}
+Classe \hyperlink{classArvore}{Arvore} Binaria de Busca Autor\+: Anderson Pinheiro Garrote Created on 23 de Maio de 2018, 18\+:10. 
+
+
+
+\subsection{Funções}
+\mbox{\Hypertarget{Arvore_8h_a29faec8b627e16e757f3853ba6adf93f}\label{Arvore_8h_a29faec8b627e16e757f3853ba6adf93f}} 
+\index{Arvore.\+h@{Arvore.\+h}!Arvore@{Arvore}}
+\index{Arvore@{Arvore}!Arvore.\+h@{Arvore.\+h}}
+\subsubsection{\texorpdfstring{Arvore()}{Arvore()}}
+{\footnotesize\ttfamily \hyperlink{classArvore}{Arvore} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Construtor. 
+
+Inicializa a \hyperlink{classArvore}{Arvore} \mbox{\Hypertarget{Arvore_8h_aa1fb84cbf0abcfc6e18bd0f4edec10c6}\label{Arvore_8h_aa1fb84cbf0abcfc6e18bd0f4edec10c6}} 
+\index{Arvore.\+h@{Arvore.\+h}!busca@{busca}}
+\index{busca@{busca}!Arvore.\+h@{Arvore.\+h}}
+\subsubsection{\texorpdfstring{busca()}{busca()}}
+{\footnotesize\ttfamily T $\ast$ Arvore\+::busca (\begin{DoxyParamCaption}\item[{T}]{d }\end{DoxyParamCaption})}
+
+
+
+Busca. 
+
+Retorna verdadeiro se o T foi encontrado, falso do contrário. 
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em d} & Dado a ser buscado. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{Arvore_8h_a6adb089606bc876dd9fbee8d8d268d22}\label{Arvore_8h_a6adb089606bc876dd9fbee8d8d268d22}} 
+\index{Arvore.\+h@{Arvore.\+h}!get\+Dado@{get\+Dado}}
+\index{get\+Dado@{get\+Dado}!Arvore.\+h@{Arvore.\+h}}
+\subsubsection{\texorpdfstring{get\+Dado()}{getDado()}}
+{\footnotesize\ttfamily T Arvore\+::get\+Dado (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get Dado. 
+
+Retorna o dado do tipo T armazenado no node \mbox{\Hypertarget{Arvore_8h_aeb92265075af12f1ce26d5c55883349d}\label{Arvore_8h_aeb92265075af12f1ce26d5c55883349d}} 
+\index{Arvore.\+h@{Arvore.\+h}!get\+Dir@{get\+Dir}}
+\index{get\+Dir@{get\+Dir}!Arvore.\+h@{Arvore.\+h}}
+\subsubsection{\texorpdfstring{get\+Dir()}{getDir()}}
+{\footnotesize\ttfamily \hyperlink{classNode}{Node}$\ast$ Arvore\+::get\+Dir (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get No Direito. 
+
+Retorna o ponteiro do filho direito do node \mbox{\Hypertarget{Arvore_8h_ac70e1498aba191bf3ced9d3d1cf7b814}\label{Arvore_8h_ac70e1498aba191bf3ced9d3d1cf7b814}} 
+\index{Arvore.\+h@{Arvore.\+h}!get\+Esq@{get\+Esq}}
+\index{get\+Esq@{get\+Esq}!Arvore.\+h@{Arvore.\+h}}
+\subsubsection{\texorpdfstring{get\+Esq()}{getEsq()}}
+{\footnotesize\ttfamily \hyperlink{classNode}{Node}$\ast$ Arvore\+::get\+Esq (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get No Esquerdo. 
+
+Retorna o ponteiro do filho esquerdo do node \mbox{\Hypertarget{Arvore_8h_ac7cd51efc9439f87f55d29fa18440cc6}\label{Arvore_8h_ac7cd51efc9439f87f55d29fa18440cc6}} 
+\index{Arvore.\+h@{Arvore.\+h}!insere@{insere}}
+\index{insere@{insere}!Arvore.\+h@{Arvore.\+h}}
+\subsubsection{\texorpdfstring{insere()}{insere()}}
+{\footnotesize\ttfamily void Arvore\+::insere (\begin{DoxyParamCaption}\item[{T}]{d }\end{DoxyParamCaption})}
+
+
+
+Insere. 
+
+Insere o T d na arvore. Retorna exceção se não for inserido com sucesso.
+
+Insere o dado d na arvore. Retorna exceção se não for inserido com sucesso. 
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em d} & Dado a ser inserido. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{Arvore_8h_ac98846991818f0d9dc8d55997e75a2fe}\label{Arvore_8h_ac98846991818f0d9dc8d55997e75a2fe}} 
+\index{Arvore.\+h@{Arvore.\+h}!Node@{Node}}
+\index{Node@{Node}!Arvore.\+h@{Arvore.\+h}}
+\subsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Arvore\+::\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Construtor. 
+
+Inicializa o No \mbox{\Hypertarget{Arvore_8h_a3d396688b3490dff5ef54e15e88553ce}\label{Arvore_8h_a3d396688b3490dff5ef54e15e88553ce}} 
+\index{Arvore.\+h@{Arvore.\+h}!Node@{Node}}
+\index{Node@{Node}!Arvore.\+h@{Arvore.\+h}}
+\subsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Arvore\+::\+Node (\begin{DoxyParamCaption}\item[{T}]{dado }\end{DoxyParamCaption})}
+
+
+
+Construtor com dado. 
+
+Inicializa o No ja com o dado do tipo T \mbox{\Hypertarget{Arvore_8h_a7b02af7c5546ea64dc0c14acd2455284}\label{Arvore_8h_a7b02af7c5546ea64dc0c14acd2455284}} 
+\index{Arvore.\+h@{Arvore.\+h}!remove@{remove}}
+\index{remove@{remove}!Arvore.\+h@{Arvore.\+h}}
+\subsubsection{\texorpdfstring{remove()}{remove()}}
+{\footnotesize\ttfamily void Arvore\+::remove (\begin{DoxyParamCaption}\item[{T}]{d }\end{DoxyParamCaption})}
+
+
+
+Remove. 
+
+Remove o T d na arvore. Retorna exceção se não for inserido com sucesso.
+
+Remove o T d na arvore. Retorna exceção se não for removido com sucesso. 
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em d} & Dado a ser removido. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{Arvore_8h_a8bbe733fe2388b0929e7af1d7329e49c}\label{Arvore_8h_a8bbe733fe2388b0929e7af1d7329e49c}} 
+\index{Arvore.\+h@{Arvore.\+h}!set\+Dado@{set\+Dado}}
+\index{set\+Dado@{set\+Dado}!Arvore.\+h@{Arvore.\+h}}
+\subsubsection{\texorpdfstring{set\+Dado()}{setDado()}}
+{\footnotesize\ttfamily void Arvore\+::set\+Dado (\begin{DoxyParamCaption}\item[{T}]{dado }\end{DoxyParamCaption})}
+
+
+
+Set Dado. 
+
+Armazena no node o dado do tipo T \mbox{\Hypertarget{Arvore_8h_ac84c10da720baf596ba1546ee8b70931}\label{Arvore_8h_ac84c10da720baf596ba1546ee8b70931}} 
+\index{Arvore.\+h@{Arvore.\+h}!set\+Dir@{set\+Dir}}
+\index{set\+Dir@{set\+Dir}!Arvore.\+h@{Arvore.\+h}}
+\subsubsection{\texorpdfstring{set\+Dir()}{setDir()}}
+{\footnotesize\ttfamily void Arvore\+::set\+Dir (\begin{DoxyParamCaption}\item[{\hyperlink{classNode}{Node} $\ast$}]{p }\end{DoxyParamCaption})}
+
+
+
+Set No Direito. 
+
+Define o node apontado por p como o filho direito do node \mbox{\Hypertarget{Arvore_8h_acfa72d5482b5e55dffa8f10da5e7a696}\label{Arvore_8h_acfa72d5482b5e55dffa8f10da5e7a696}} 
+\index{Arvore.\+h@{Arvore.\+h}!set\+Esq@{set\+Esq}}
+\index{set\+Esq@{set\+Esq}!Arvore.\+h@{Arvore.\+h}}
+\subsubsection{\texorpdfstring{set\+Esq()}{setEsq()}}
+{\footnotesize\ttfamily void Arvore\+::set\+Esq (\begin{DoxyParamCaption}\item[{\hyperlink{classNode}{Node} $\ast$}]{p }\end{DoxyParamCaption})}
+
+
+
+Set No Esquerdo. 
+
+Define o node apontado por p como o filho esquerdo do node \mbox{\Hypertarget{Arvore_8h_a4b4d398632dc3c8b3ce36b6846c64647}\label{Arvore_8h_a4b4d398632dc3c8b3ce36b6846c64647}} 
+\index{Arvore.\+h@{Arvore.\+h}!vazia@{vazia}}
+\index{vazia@{vazia}!Arvore.\+h@{Arvore.\+h}}
+\subsubsection{\texorpdfstring{vazia()}{vazia()}}
+{\footnotesize\ttfamily bool Arvore\+::vazia (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Vazia. 
+
+Retorna verdadeiro se a \hyperlink{classArvore}{Arvore} está vazia, falso do contrário. 
