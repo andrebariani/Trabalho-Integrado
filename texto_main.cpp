@@ -23,7 +23,7 @@ int main(int argc, char** argv) {
         char y;
         cin >> y;
 
-        if(y == 's'){
+        if(y == 's') {
             cout << "Trocar por qual palavra?" << '\n';
 
             Palavra p;

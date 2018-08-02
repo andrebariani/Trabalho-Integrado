@@ -39,13 +39,19 @@ class Texto {
         /** Salva o texto em um novo arquivo com extensão ".txt" com as palavras corrigidas */
         void salvarArquivo();
 
+        void Palavra getAnterior();
+
+        void Palavra getProximo();
+
 
     private:
         Palavra *texto; /// Vetor contendo todas as palavras do texto
-        // Nome do arquivo do texto original
+        string *delim; /// Vetor de delimitadores do Texto (tudo que não for palavra)
         string nomearq; /// nome do arquivo original
         static int pos_atual; /// Posição atual do vetor de palavras do texto. Valor é incrementado com toda a chamada de percorrerTexto()
-        static int size; /// Tamanho do vetor de palavras do Texto
+        static int total_size;
+        static int t_size; /// Tamanho do vetor de palavras do Texto
+        static int d_size; /// Tamanho do vetor de delimitadores do Texto
 };
 
 #endif /* TEXTO_H */
