@@ -1,26 +1,27 @@
 #include <iostream>
 #include <fstream>
 #include <cstring>
+#include <vector>
+#include "Arvore.h"
+#include "Palavra.h"
 
 class dicionario
 {
     private:
-        Palavra dict[10000];
-
+        std::vector<Palavra> Semelhantes;
+        Arvore<Palavra> arvore;
         int cont;
-    private:
 
-        //Constructor:
+    public:
 
-        dicionario()
+        //Construtor:
+        //Coloca as palavras do arquivo na árvore de palavras
+        dicionario();
 
-        //Functions:
-
-        void consulta(Palavra p);
-        void inclusao(Palavra p);
+        //Salva a árvore de palavras no arquivo
         void atualizarArquivo();
 
-        //Just for tests
+        //Retorna primeiro elemento do vetor de palavras semelhantes
+        Palavra * buscaSemelhante(Palavra p);
 
-        void printar();
 };

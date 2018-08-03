@@ -1,85 +1,69 @@
-#include "dicionario.h"
+#include "Dicionario.h"
 
-    dicionario::dicionario()
-    {
-        cont = 0; //Number of words
+Dicionario::Dicionario()
+{
+    cont = 0; //Number of words
 
-        //Create an object ifstream "file"
-        ifstream file;
+    //Cria um objeto ifstream "file"
+    ifstream file;
 
-        //It is opened in the "in" way, so it only permits the reading of the file
-        file.open("dict.txt", ios::in);
+    //Abre o arquivo no modo "in" que permite apenas leitura
+    file.open("dict.txt", std::ifstream::in);
 
-            //"is_open" returns TRUE if the "file" is opened
-            //"good" returns TRUE if it doens't have any problem
-            if(file.is_open() && file.good())
-            {
-                //"file" sends it's contents to "dict" 
-                while(!file.fail()) //"fail" returns 1 when the file reaches it's end
-                {
-                    file >> dict[i].palavra;
-                    cont++;
-                }
-            }
-            else
-            {
-                std::cout << "ERROR" << std::endl;
-            }
-
-    }
-
-    //Functions:
-
-    void dicionario::consulta(arq dict, Palavra p) //Muito provavelmente haverá mudanças
-    {
-        for(int i = 0, i < cont; i++)
+        //"is_open" retorna TRUE se o "file" está aberto
+        //"good" retorna TRUE se abriu sem problemas
+        if(file.is_open() && file.good())
         {
-            if(!strcmp(p, dict[i].palavra))
+            Palavra p;
+            string s;
+            //"file" envia seu conteúdo para "dict" 
+            while(!file.fail()) //"fail" retorna 1 quando o arquivo acaba
             {
-                //Found it
-                return 1; 
+                file >> s;
+                p.setPalavra(s);
+                cont++;
             }
         }
-
-        //Nope
-        return 0;
-    }
-
-    void dicionario::inclusao(arq dict, Palavra p)
-    {
-        for(int i = 0, i < cont; i++)
+        else
         {
-            if(!strcmp(p, dict[i].palavra))
-            {
-                //Found it, so doesn't need to include
-                return 0; 
-            }
+            std::cout << "ERROR" << std::endl;
         }
 
-        //Including it
-        cont++;
-        strcpy(dict[i + 1].palavra, p);
-        return 1;
-    }
+    //Fecha o arquivo
+    file.close();
 
-    void dicionario::atualizarArquivo()
+    //Abre o arquivo no modo "trunc" para limpar o arquivo
+    file.open("dict.txt", ios::in |  std::ifstream::trunc);
+    
+    //Fecha o arquivo    
+    file.close();
+}
+
+void Dicionario::atualizarArquivo()
+{
+    ofstream file;
+
+    //Abre o arquivo no modo "out", para escrever e o "app" para que escreva no fim do arquivo
+    file.open("dict.txt", std::ofstream::out | std::ofstream::app);
+
+    for(int i = 0; i < cont; i++)
     {
-        ofstream file;
-
-        //Opens the file in an "out" way, to write there
-        file.open("dict.txt", ios::out);
-        for(int i = 0; i < cont; i++)
-        {
-            file << dict[i].palavra << std::endl;
-        }
+        file << palavra << std::endl;
     }
 
-    void dicionario::printar()
+    //Fecha o arquivo
+    file.close();
+}
+
+Palavra * Dicionario::buscaSemelhante(Palavra p)
+{
+    Palavra * It = busca();
+    int i = 0;
+
+    while(It -> semelhantes(p))
     {
-        for(int i = 0; i < cont; i++)
-        {
-            
-            std::cout << dict[i] << std::endl;
-
-        }
-    }
+            Semelhantes[i] = *It;
+            i++;
+            It++;
+    } 
+}
