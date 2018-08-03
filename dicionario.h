@@ -18,6 +18,8 @@ class dicionario
         //Coloca as palavras do arquivo na árvore de palavras
         dicionario();
 
+        void limparArquivo();
+
         //Salva a árvore de palavras no arquivo
         void atualizarArquivo();
 
