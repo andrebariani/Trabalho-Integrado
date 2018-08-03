@@ -242,12 +242,12 @@ No* rotED( No* A ) {
     C->dir = A;
     //Corrgir balanceamento
     if( C->bal == -1 ) {
-        A->bal = 0;
-        B->bal = 1;
+        A->bal = 1;
+        B->bal = 0;
         C->bal = 0;
     } else if( C->bal == 1 ) {
-        A->bal = -1;
-        B->bal = 0;
+        A->bal = 0;
+        B->bal = -1;
         C->bal = 0;
     } else { // C->bal == 0
         A->bal = 0;
