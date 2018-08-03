@@ -56,6 +56,10 @@ class Arvore {
             Retorna exceção se não for inserido com sucesso.*/
         void remove( T d /**< [in] Dado a ser removido.*/);
 
+        ///Em ordem
+        /** Percorre a arvore em ordem, processando com a função recebida de parametro.*/
+        void emOrdem( pFuncao processa(T dado));/**< [in] Função que processa o No*/);
+
         ///Busca
         /** Retorna um ponteiro para T se o T foi encontrado, NULL do contrário.*/
         T * busca( T d /**< [in] Dado a ser buscado.*/);
@@ -158,7 +162,7 @@ void Arvore<T>::insere( T d /**< [in] Dado a ser inserido.*/)
             pai->dados=d;
         }
 
-    //Balaceia
+    //Balanceia
 
 }
 
@@ -176,8 +180,19 @@ void Arvore<T>::remove( T d /**< [in] Dado a ser removido.*/)
 template <class T>
 T * Arvore<T>::busca( T d /**< [in] Dado a ser buscado.*/)
 {
-
+    No * p=raiz;
+    while( p )
+    {
+        if( d < p->dados )
+            p = p->esq;
+        else if( d > p->dados )
+            p = p->dir;
+        else // key == p->data->ke
+            return p;
+    }
+    return p;
 }
+
 
 No* rotEE( No* A ) {
     No* B = A->esq;
@@ -190,6 +205,12 @@ No* rotDD( No* A ) {
     A->dir = B->esq;
     B->esq = A;
     return B;
+}
+
+//
+void Arvore<T>::emOrdem( pFuncao processa() /**< [in] Função que processa o No*/)
+{
+
 }
 
 
