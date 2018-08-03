@@ -93,17 +93,19 @@ Palavra Texto::percorrerTexto() {
 }
 
 Palavra Texto::getPalavraAnterior() {
-    if( it_palavras != palavras.begin() )
-        return *(it_palavras - 1);
-    Palavra Null;
-    return Null;
+    if( (it_palavras - 1) == palavras.begin() ) {
+        Palavra Null;
+        return Null;
+    }
+    return *(it_palavras - 2);
 }
 
 Palavra Texto::getPalavraProximo() {
-    if( (it_palavras + 1) < palavras.end() )
-        return *(it_palavras + 1);
-    Palavra Null;
-    return Null;
+    if( it_palavras == palavras.end() ) {
+        Palavra Null;
+        return Null;
+    }
+    return *(it_palavras);
 }
 
 void Texto::corrigirPalavra( Palavra corrigida ) {

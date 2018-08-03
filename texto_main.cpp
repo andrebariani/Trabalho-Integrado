@@ -16,18 +16,18 @@ int main(int argc, char** argv) {
     Palavra Null;
 
     while(!(palavra == Null)) {
-        // Palavra pa = txt.getPalavraAnterior();
-        // if(!(pa == Null)) {
-        // cout << "Anterior: -" << pa << "-" << endl;
-        // }
+        Palavra pa = txt.getPalavraAnterior();
+        if(!(pa == Null)) {
+        cout << "Anterior: -" << pa << "-" << endl;
+        }
 
         cout << "Atual: -" << palavra << "-" << endl;
 
-        // Palavra pp = txt.getPalavraProximo();
-        // if(!(pp == Null)) {
-        // // cout << "Proximo: -" << txt.getPalavraProximo() << "-" << endl;
-        // cout << "Proximo: -" << pp << "-" << endl;
-        // }
+        Palavra pp = txt.getPalavraProximo();
+        if(!(pp == Null)) {
+        // cout << "Proximo: -" << txt.getPalavraProximo() << "-" << endl;
+        cout << "Proximo: -" << pp << "-" << endl;
+        }
 
         cout << "Trocar palavra?" << endl;
 
