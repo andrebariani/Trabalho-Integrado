@@ -1,18 +1,27 @@
 #ifndef CORRETOR_H
 #define CORRETOR_H
+
+#include "Palavra.h"
+#include "Texto.h"
+#include "dicionario.h"
   
-#include<string>
+#include <string>
+#include <forward_list>
 
 class Corretor {
 private:
-	Palavra semelhantes[10000];
-	Palavra erros[10000];
 	Texto tex;
 	Dicionario dic;
+	Palavra pal;	
+	struct erros{
+		string palavra;
+		int contador;
+	};
 
 public:
-	void corrigirPalavra();
-	void ignorarErro();
-	Palavra selecPalavraSemelhante(Palavra p);
-	void addPalavraDic(Palavra p);
+	void adicionarErro();
+	void apresentarErro();
+	void corrigir();// usar uma palavra fornecida pelo dicionário para corrigir uma palavra errada no texto
+	void ignorar();//ignorar um erro encontrado pelo corretor e não fazer mais nada
+	void adicionarDicionario();
 };
