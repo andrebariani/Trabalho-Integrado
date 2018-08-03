@@ -172,7 +172,30 @@ void Arvore<T>::insere( T d /**< [in] Dado a ser inserido.*/)
 template <class T>
 void Arvore<T>::remove( T d /**< [in] Dado a ser removido.*/)
 {
-
+    remove_no(arvore->raiz, d);
+}
+No* remove_no( No *p, T d ) {
+    if( !p )
+        return 0;
+    if( d < p->dados )
+        p->esq = remove_no(p->esq,d);
+    else if( d > p->data->d)
+        p->dir = remove_no(p->dir,d);
+    else {
+        if( !p->dir ) {
+            No *esquerda = p->esq;
+            delete p;
+        return esquerda;
+        }
+        if( !p->esq ) {
+            No *direita = p->dir;
+            delete p;
+            return direita;
+        }
+        p->data = max_node(p->esq)->data;
+        p->esq = remove_no( p->esq, p->data->d );
+    }
+    return p;
 }
 
 ///Busca
@@ -254,6 +277,13 @@ No* rotED( No* A ) {
         B->bal = 0;
     }
     return C;
+}
+
+No* max_node( No* p ) {
+    if( ! p->dir )
+        return p;
+    else
+        return max_node( p->dir );
 }
 
 
