@@ -31,9 +31,14 @@ Dicionario::Dicionario()
 
     //Fecha o arquivo
     file.close();
+}
+
+void Dicionario::limparArquivo()
+{
+    ifstream file;
 
     //Abre o arquivo no modo "trunc" para limpar o arquivo
-    file.open("dict.txt", ios::in |  std::ifstream::trunc);
+    file.open("dict.txt", std::ifstream::in |  std::ifstream::trunc);
     
     //Fecha o arquivo    
     file.close();
@@ -58,6 +63,7 @@ void Dicionario::atualizarArquivo()
 Palavra * Dicionario::buscaSemelhante(Palavra p)
 {
     Palavra * It = busca();
+    Palavra * Inicio = It;
     int i = 0;
 
     while(It -> semelhantes(p))
@@ -66,4 +72,6 @@ Palavra * Dicionario::buscaSemelhante(Palavra p)
             i++;
             It++;
     } 
+
+    return Inicio;
 }

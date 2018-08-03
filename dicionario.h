@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include <cstring>
 #include <vector>
 #include "Arvore.h"
 #include "Palavra.h"
@@ -20,6 +19,8 @@ class dicionario
 
         //Salva a árvore de palavras no arquivo
         void atualizarArquivo();
+
+        void limparArquivo();
 
         //Retorna primeiro elemento do vetor de palavras semelhantes
         Palavra * buscaSemelhante(Palavra p);
