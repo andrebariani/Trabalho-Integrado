@@ -13,6 +13,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <vector>
 
 #include "Palavra.h"
 
@@ -41,21 +42,20 @@ class Texto {
 
         /// Pegar palavra anterior
         /** Retorna palavra anterior à palavra atual  */
-        Palavra getAnterior();
+        Palavra getPalavraAnterior();
 
         /// Pegar palavra superior
         /** Retorna palavra superior à palavra atual  */
-        Palavra getProximo();
+        Palavra getPalavraProximo();
 
 
     private:
-        Palavra *texto; /// Vetor contendo todas as palavras do texto
-        string *delim; /// Vetor de delimitadores do Texto (tudo que não for palavra)
+        vector<Palavra> palavras; /// Vetor contendo todas as palavras do texto
+        vector<string> delim; /// Vetor de delimitadores do Texto (tudo que não for palavra)
         string nomearq; /// nome do arquivo original
-        static int pos_atual; /// Posição atual do vetor de palavras do texto. Valor é incrementado com toda a chamada de percorrerTexto()
-        static int total_size;
-        static int t_size; /// Tamanho do vetor de palavras do Texto
-        static int d_size; /// Tamanho do vetor de delimitadores do Texto
+        vector<Palavra>::iterator it_palavras; /// Iterador do vetor de palavras do texto.
+        bool word_first_flag; /// Flag que identfica se a primeira string de um arquivo é um delimitador ou palavra
+        int total_size;
 };
 
 #endif /* TEXTO_H */
