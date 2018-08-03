@@ -39,9 +39,13 @@ class Texto {
         /** Salva o texto em um novo arquivo com extensão ".txt" com as palavras corrigidas */
         void salvarArquivo();
 
-        void Palavra getAnterior();
+        /// Pegar palavra anterior
+        /** Retorna palavra anterior à palavra atual  */
+        Palavra getAnterior();
 
-        void Palavra getProximo();
+        /// Pegar palavra superior
+        /** Retorna palavra superior à palavra atual  */
+        Palavra getProximo();
 
 
     private:

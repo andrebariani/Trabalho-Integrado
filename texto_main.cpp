@@ -16,8 +16,18 @@ int main(int argc, char** argv) {
     Palavra Null;
 
     while(!(palavra == Null)) {
-        cout << "-" << palavra << "-" << endl;
+        Palavra pa = txt.getAnterior();
+        if(!(pa == Null)) {
+        cout << "Anterior: -" << pa << "-" << endl;
+        }
 
+        cout << "Atual: -" << palavra << "-" << endl;
+
+        Palavra pp = txt.getProximo();
+        if(!(pp == Null)) {
+        cout << "Proximo: -" << pp << "-" << endl;
+        }
+        
         cout << "Trocar palavra?" << endl;
 
         char y;

@@ -81,6 +81,22 @@ Palavra Texto::percorrerTexto() {
     return texto[pos_atual];
 }
 
+Palavra Texto::getAnterior() {
+    Palavra pal;
+
+    if( pos_atual != 0 )
+        return texto[pos_atual - 1];
+    return pal;
+}
+
+Palavra Texto::getProximo() {
+    Palavra pal;
+
+    if( pos_atual+1 < t_size )
+        return texto[pos_atual + 1];
+    return pal;
+}
+
 void Texto::corrigirPalavra( Palavra corrigida ) {
     texto[pos_atual] = corrigida;
 }
