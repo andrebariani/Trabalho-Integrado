@@ -187,7 +187,7 @@ T * Arvore<T>::busca( T d /**< [in] Dado a ser buscado.*/)
             p = p->esq;
         else if( d > p->dados )
             p = p->dir;
-        else // key == p->data->ke
+        else // d == p->dados
             return p;
     }
     return p;
@@ -198,14 +198,64 @@ No* rotEE( No* A ) {
     No* B = A->esq;
     A->esq = B->dir;
     B->dir = A;
+    A->bal = 0;
+    B->bal = 0;
     return B;
 }
 No* rotDD( No* A ) {
     No* B = A->dir;
     A->dir = B->esq;
     B->esq = A;
+    A->bal = 0;
+    B->bal = 0;
     return B;
 }
+No* rotDE( No* A ) {
+    No* B = A->dir;
+    No* C = B->esq;
+    B->esq = C->dir;
+    C->dir = B;
+    A->dir = C->esq;
+    C->esq = A;
+    //Corrgir balanceamento
+    if( C->bal == -1 ) {
+        A->bal = 0;
+        B->bal = 1;
+        C->bal = 0;
+    } else if( C->bal == 1 ) {
+        A->bal = -1;
+        B->bal = 0;
+        C->bal = 0;
+    } else { // C->bal == 0
+        A->bal = 0;
+        B->bal = 0;
+    }
+    return C;
+}
+
+No* rotED( No* A ) {
+    No* B = A->esq;
+    No* C = B->dir;
+    B->dir = C->esq;
+    C->esq = B;
+    A->esq = C->dir;
+    C->dir = A;
+    //Corrgir balanceamento
+    if( C->bal == -1 ) {
+        A->bal = 0;
+        B->bal = 1;
+        C->bal = 0;
+    } else if( C->bal == 1 ) {
+        A->bal = -1;
+        B->bal = 0;
+        C->bal = 0;
+    } else { // C->bal == 0
+        A->bal = 0;
+        B->bal = 0;
+    }
+    return C;
+}
+
 
 //
 void Arvore<T>::emOrdem( pFuncao processa() /**< [in] Função que processa o No*/)
