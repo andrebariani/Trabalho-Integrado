@@ -15,14 +15,23 @@ template <class T>
 
 /*! \class Arvore Binaria de Busca
     \brief Classe de manipulação de arvores de busca
+    Implementação Rubro-Negra
 */
 class Arvore {
-    typedef struct _node{
+
+    typedef struct _no{
+        struct _no (T _data, int _bal=0){
+            dado = _dado;
+            esq = dir = NULL;
+            bal = _bal;
+        }
+
         T dado;
-        bool bal[2];
-        struct _node * esq;
-        struct _node * dir;
-    }Node;
+        int bal;
+        struct _no * esq;
+        struct _no * dir;
+    }No;
+
     public:
 
         ///Construtor
@@ -48,13 +57,17 @@ class Arvore {
         void remove( T d /**< [in] Dado a ser removido.*/);
 
         ///Busca
-        /** Retorna verdadeiro se o T foi encontrado, falso do contrário.*/
+        /** Retorna um ponteiro para T se o T foi encontrado, NULL do contrário.*/
         T * busca( T d /**< [in] Dado a ser buscado.*/);
 
     private:
-        Node * raiz;
+        No * raiz;
 
 };
+
+///Busca Semelhantes
+/** Retorna verdadeiro se o T foi encontrado, falso do contrário.*/
+T * buscaSemelhantes( T d /**< [in] Dado a ser buscado.*/, Iterator it);
 
 
 /******************************************************************************
@@ -92,39 +105,61 @@ bool Arvore<T>::vazia()
 template <class T>
 void Arvore<T>::insere( T d /**< [in] Dado a ser inserido.*/)
 {
-    Node* p = new Node;
-
-    if(p){
-        //Atribuir valor no no
+    //Arvore vazia
+    if(raiz==NULL){
+        //Aloca o No
+        No* p = new No;
+        raiz=p;
+        //Atribuir valor no No
         p->dados = d;
         p->esq=NULL;
         p->dir=NULL;
-
-        //Arvore vazia
-        if(raiz==NULL)
-            raiz=p;
-
-        else{
-            Node * t = raiz;
-            //Enquanto houverem nós
-            Node * pai = NULL;
-            while(t)
-            {
-                //Define o no como o novo pai
-                pai=t;
-                //Procure a posição correta
-                if(d<t->dado)
-                    t=t->dir;
-                else if(d>t->dado)
-                    t=t->esq;
-            }
-            //Posição encontrada, corrija o pai
-            if(d<pai->dado)
-                pai->dir=p;
-            else if(d>pai->dado)
-                pai->esq=p;
-        }
     }
+    else{
+        No * t = raiz;
+        No * pai = NULL;
+        //Enquanto houverem nós
+        while(t)
+        {
+            //Define o no como o novo pai
+            pai=t;
+            //Procure a posição correta
+            if(d<t->dado)//dado menor
+                t=t->esq;
+            else if(d>t->dado)//dado maior
+                t=t->dir;
+            else//dado encontrado
+                t=NULL;
+        }
+
+        //Posição encontrada
+        if(d<pai->dado){//Dado menor que o pai
+            //Aloca o No
+            No* p = new No;
+            //Atribuir valor no No
+            p->dados = d;
+            p->esq=NULL;
+            p->dir=NULL;
+            //Corrija o pai
+            pai->esq=p;
+        }
+        else if(d>pai->dado){
+            //Aloca o No
+            No* p = new No;
+            //Atribuir valor no No
+            p->dados = d;
+            p->esq=NULL;
+            p->dir=NULL;
+            //Corrija o pai
+            pai->dir=p;
+        }
+        else//Dado igual o pai
+        {
+            pai->dados=d;
+        }
+
+    //Balaceia
+
 }
 
 ///Remove
@@ -133,27 +168,28 @@ void Arvore<T>::insere( T d /**< [in] Dado a ser inserido.*/)
 template <class T>
 void Arvore<T>::remove( T d /**< [in] Dado a ser removido.*/)
 {
-    for(int i=0;i<qtd;i++)
-        if(d==dados[i])
-        {
-            qtd--;
-            for(i; i<qtd; i++)
-                dados[i]=dados[i+1];
-            return;
-        }
-    //dados.erase(dados.begin);
+
 }
 
 ///Busca
-/** Retorna verdadeiro se o T foi encontrado, falso do contrário.*/
+/** Retorna ponteiro para T se o T foi encontrado, NULL do contrário.*/
 template <class T>
 T * Arvore<T>::busca( T d /**< [in] Dado a ser buscado.*/)
 {
-    for(int i=0;i<qtd;i++)
-        if(d==dados[i])
-            return &dados[i];
 
-    return NULL;
+}
+
+No* rotEE( No* A ) {
+    No* B = A->esq;
+    A->esq = B->dir;
+    B->dir = A;
+    return B;
+}
+No* rotDD( No* A ) {
+    No* B = A->dir;
+    A->dir = B->esq;
+    B->esq = A;
+    return B;
 }
 
 
