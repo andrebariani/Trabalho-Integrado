@@ -16,7 +16,9 @@ Texto::Texto( string na ) {
     // Setando local para aceitar acentos
     // Mesmo com locale, char pega lixo
     // setlocale não está funcionando, WHY!?!?!?!
-    setlocale(LC_ALL, "portuguese-brazilian");
+    // setlocale(LC_ALL, "LANG_PORTUGUESE");
+    // cout << "Locale: " << setlocale(LC_ALL, "LANG_PORTUGUESE") << endl;
+    printf ("Locale is: %s\n", setlocale(LC_ALL,"pt_BR.UTF-8") );
 
     // Tratando da Extensão do arquivo de entrada
     size_t found = nomearq.find(".txt");
@@ -28,7 +30,9 @@ Texto::Texto( string na ) {
     //
 
     cout << nomearq << endl;
+
     ifstream arq(nomearq);
+    // arq.open( nomearq, std::fstream::in );
 
     char c;
 
