@@ -66,6 +66,7 @@ class Arvore {
     private:
         No * raiz;
         No * remove_no( No *p, T d );
+        No * max_node( No* p );
 };
 
 
@@ -87,6 +88,7 @@ Arvore<T>::Arvore() {
 /* Aloca uma nova arvore igual a original*/
 template <class T>
 Arvore<T>::Arvore(const Arvore& orig  /**< [in] Arvore de origem a ser copiada.*/) {
+
 }
 
 ///Destrutor
@@ -115,7 +117,7 @@ void Arvore<T>::insere( T d /**< [in] Dado a ser inserido.*/)
         No* p = new No;
         raiz=p;
         //Atribuir valor no No
-        p->dados = d;
+        p->dado = d;
         p->esq=NULL;
         p->dir=NULL;
     }
@@ -141,7 +143,7 @@ void Arvore<T>::insere( T d /**< [in] Dado a ser inserido.*/)
             //Aloca o No
             No* p = new No;
             //Atribuir valor no No
-            p->dados = d;
+            p->dado = d;
             p->esq=NULL;
             p->dir=NULL;
             //Corrija o pai
@@ -151,7 +153,7 @@ void Arvore<T>::insere( T d /**< [in] Dado a ser inserido.*/)
             //Aloca o No
             No* p = new No;
             //Atribuir valor no No
-            p->dados = d;
+            p->dado = d;
             p->esq=NULL;
             p->dir=NULL;
             //Corrija o pai
@@ -159,7 +161,7 @@ void Arvore<T>::insere( T d /**< [in] Dado a ser inserido.*/)
         }
         else//Dado igual o pai
         {
-            pai->dados=d;
+            pai->dado=d;
         }
     }
     //Balanceia
@@ -179,9 +181,9 @@ template <class T>
 typename Arvore<T>::No* Arvore<T>::remove_no( No *p, T d ) {
     if( !p )
         return 0;
-    if( d < p->dados )
+    if( d < p->dado )
         p->esq = remove_no(p->esq,d);
-    else if( d > p->data->d)
+    else if( d > p->dado )
         p->dir = remove_no(p->dir,d);
     else {
         if( !p->dir ) {
@@ -194,8 +196,8 @@ typename Arvore<T>::No* Arvore<T>::remove_no( No *p, T d ) {
             delete p;
             return direita;
         }
-        p->data = max_node(p->esq)->data;
-        p->esq = remove_no( p->esq, p->data->d );
+        p->dado = max_node(p->esq)->dado;
+        p->esq = remove_no( p->esq, p->dado  );
     }
     return p;
 }
@@ -208,14 +210,14 @@ T * Arvore<T>::busca( T d /**< [in] Dado a ser buscado.*/)
     No * p=raiz;
     while( p )
     {
-        if( d < p->dados )
+        if( d < p->dado )
             p = p->esq;
-        else if( d > p->dados )
+        else if( d > p->dado )
             p = p->dir;
-        else // d == p->dados
-            return p;
+        else // d == p->dado
+            return  &p->dado;
     }
-    return p;
+    return NULL;
 }
 /*
 
@@ -280,8 +282,9 @@ No* rotED( No* A ) {
     }
     return C;
 }
-
-No* max_node( No* p ) {
+*/
+template <class T>
+typename Arvore<T>::No* Arvore<T>::max_node( No* p ) {
     if( ! p->dir )
         return p;
     else
