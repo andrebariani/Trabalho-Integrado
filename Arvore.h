@@ -174,7 +174,8 @@ void Arvore<T>::insere( T d /**< [in] Dado a ser inserido.*/)
 template <class T>
 void Arvore<T>::remove( T d /**< [in] Dado a ser removido.*/)
 {
-    remove_no(raiz, d);
+    raiz=remove_no(raiz, d);
+    if(raiz) std::cout << raiz->dado << '\n';
 }
 
 template <class T>
