@@ -57,7 +57,7 @@ class Arvore {
 
         ///Em ordem
         /** Percorre a arvore em ordem, processando com a função recebida de parametro.*/
-//        void emOrdem( pFuncao processa(T dado));/**< [in] Função que processa o No*/);
+        void percursoEmOrdem( void (*processa)(T)/**< [in] Função que processa o No*/);
 
         ///Busca
         /** Retorna um ponteiro para T se o T foi encontrado, NULL do contrário.*/
@@ -65,8 +65,55 @@ class Arvore {
 
     private:
         No * raiz;
+        ///Remove No
+        /**
+         * Método auxiliar para remover o No
+         * @param  p Ponteiro No atual
+         * @param  d Dado a ser buscado
+         * @return   Ponteiro da arvore sem o No
+         */
         No * remove_no( No *p, T d );
+        // No maximo
+        /**
+         * Método auxiliar para encontrar o maior valor de uma subarvore
+         * @param  p raiz da subarvore
+         * @return   Ponteiro pro maior No
+         */
         No * max_node( No* p );
+        ///Em Ordem
+        /**
+         * Método auxiliar para realizar o percurso em ordem, usando os Nos
+         * @param t Raiz da subarvore
+         */
+        void emOrdem(No * t, void (*processa)(T));
+        ///Rotação Esquerda
+        /**
+         * Método auxiliar para realizar a rotação
+         * @param  A Ponteiro do nó atual
+         * @return   No rotacionado
+         */
+        No* rotEE( No* A );
+        ///Rotação Direita
+        /**
+         * Método auxiliar para realizar a rotação
+         * @param  A Ponteiro do nó atual
+         * @return   No rotacionado
+         */
+        No* rotDD( No* A );
+        ///Rotação DireitaEsquerda
+        /**
+         * Método auxiliar para realizar a rotação
+         * @param  A Ponteiro do nó atual
+         * @return   No rotacionado
+         */
+        No* rotDE( No* A );
+        ///Rotação EsquerdaDireita
+        /**
+         * Método auxiliar para realizar a rotação
+         * @param  A Ponteiro do nó atual
+         * @return   No rotacionado
+         */
+        No* rotED( No* A );
 };
 
 
@@ -84,6 +131,7 @@ template <class T>
 Arvore<T>::Arvore() {
     raiz=NULL;
 }
+
 ///Construtor por Cópia
 /* Aloca uma nova arvore igual a original*/
 template <class T>
@@ -175,7 +223,6 @@ template <class T>
 void Arvore<T>::remove( T d /**< [in] Dado a ser removido.*/)
 {
     raiz=remove_no(raiz, d);
-    if(raiz) std::cout << raiz->dado << '\n';
 }
 
 template <class T>
@@ -198,7 +245,7 @@ typename Arvore<T>::No* Arvore<T>::remove_no( No *p, T d ) {
             return direita;
         }
         p->dado = max_node(p->esq)->dado;
-        p->esq = remove_no( p->esq, p->dado  );
+        p->esq = remove_no( p->esq, p->dado);
     }
     return p;
 }
@@ -220,9 +267,19 @@ T * Arvore<T>::busca( T d /**< [in] Dado a ser buscado.*/)
     }
     return NULL;
 }
-/*
 
-No* rotEE( No* A ) {
+//Método auxiliar para encontrar o maior valor de uma subarvore
+template <class T>
+typename Arvore<T>::No* Arvore<T>::max_node( No* p ) {
+    if( ! p->dir )
+        return p;
+    else
+        return max_node( p->dir );
+}
+
+//Método auxiliar para realizar a rotação EE
+template <class T>
+typename Arvore<T>::No* Arvore<T>::rotEE( No* A ) {
     No* B = A->esq;
     A->esq = B->dir;
     B->dir = A;
@@ -230,7 +287,10 @@ No* rotEE( No* A ) {
     B->bal = 0;
     return B;
 }
-No* rotDD( No* A ) {
+
+//Método auxiliar para realizar a rotação DD
+template <class T>
+typename Arvore<T>::No* Arvore<T>::rotDD( No* A ) {
     No* B = A->dir;
     A->dir = B->esq;
     B->esq = A;
@@ -238,7 +298,10 @@ No* rotDD( No* A ) {
     B->bal = 0;
     return B;
 }
-No* rotDE( No* A ) {
+
+//Método auxiliar para realizar a rotação DE
+template <class T>
+typename Arvore<T>::No* Arvore<T>::rotDE( No* A ) {
     No* B = A->dir;
     No* C = B->esq;
     B->esq = C->dir;
@@ -261,7 +324,9 @@ No* rotDE( No* A ) {
     return C;
 }
 
-No* rotED( No* A ) {
+//Método auxiliar para realizar a rotação ED
+template <class T>
+typename Arvore<T>::No* Arvore<T>::rotED( No* A ) {
     No* B = A->esq;
     No* C = B->dir;
     B->dir = C->esq;
@@ -283,19 +348,23 @@ No* rotED( No* A ) {
     }
     return C;
 }
-*/
+
+//Método auxiliar para realizar o percurso em ordem, usando os Nos
 template <class T>
-typename Arvore<T>::No* Arvore<T>::max_node( No* p ) {
-    if( ! p->dir )
-        return p;
-    else
-        return max_node( p->dir );
+void Arvore<T>::emOrdem(No * t, void (*processa)(T)){
+    if(t){
+        emOrdem(t->esq, processa);
+        processa(t->dado);
+        emOrdem(t->dir, processa);
+    }
 }
 
-
-
-//void Arvore<T>::emOrdem( pFuncao processa() /**< [in] Função que processa o No*)*/
-
-
+///Em ordem
+/** Percorre a arvore em ordem, processando com a função recebida de parametro.*/
+template <class T>
+void Arvore<T>::percursoEmOrdem( void (*processa)(T)/**< [in] Função que processa o No*/)
+{
+    emOrdem(raiz, processa);
+}
 
 #endif /* ARVORE_H */
