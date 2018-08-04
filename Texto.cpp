@@ -3,22 +3,27 @@
 using namespace std;
 
 Texto::Texto( string na ) {
+    // Inicializa variáveis
     total_size = 0;
     word_first_flag = false;
     nomearq = na;
     string p = "";
     string d = "";
     vector<string>::iterator it_delim;
-
     it_palavras = palavras.begin();
     it_delim = delim.begin();
+
+    // Setando local para aceitar acentos
+    // Mesmo com locale, char pega lixo
+    // setlocale não está funcionando, WHY!?!?!?!
+    setlocale(LC_ALL, "portuguese-brazilian");
 
     // Tratando da Extensão do arquivo de entrada
     size_t found = nomearq.find(".txt");
 
     if(found == std::string::npos) {
         cout << ".txt not found" << endl;
-        nomearq = nomearq + ".txt";
+        nomearq += ".txt";
     }
     //
 
@@ -31,6 +36,9 @@ Texto::Texto( string na ) {
         if(total_size > 10000) // Atingiu o tamanho máximo do vetor
             break;
 
+        cout << c << endl;
+
+        // switch (isalpha(c) ? 1 : isAcento(c)) {
         switch (isalpha(c)) {
             case 0: // Se não
                 cout << "Delim Found: " <<  "-" << c << "-" << endl;
@@ -83,6 +91,7 @@ Texto::Texto( string na ) {
     // cout << total_size << endl;
     arq.close();
 }
+
 
 Palavra Texto::percorrerTexto() {
     if( it_palavras + 1 > palavras.end() ) {

@@ -14,6 +14,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <locale>
 
 #include "Palavra.h"
 
@@ -48,6 +49,7 @@ class Texto {
         /** Retorna palavra superior à palavra atual  */
         Palavra getPalavraProximo();
 
+        // int isAcento(wchar_t c);
 
     private:
         vector<Palavra> palavras; /// Vetor contendo todas as palavras do texto
@@ -57,5 +59,13 @@ class Texto {
         bool word_first_flag; /// Flag que identfica se a primeira string de um arquivo é um delimitador ou palavra
         int total_size;
 };
+
+//  Trocar na classe Palavra
+// Palavra & Palavra ::operator=(const Palavra & p2 )
+// {
+// this->palavra = p2.palavra;
+// return *this;
+// }
+
 
 #endif /* TEXTO_H */
