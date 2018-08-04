@@ -4,7 +4,6 @@
  *  Created on 23 de Maio de 2018, 18:10
 */
 
-
 #ifndef ARVORE_H
 #define ARVORE_H
 
@@ -20,12 +19,12 @@ template <class T>
 class Arvore {
 
     typedef struct _no{
-        struct _no (T _data, int _bal=0){
+    /*    struct _no (T _data, int _bal=0){
             dado = _dado;
             esq = dir = NULL;
             bal = _bal;
         }
-
+    */
         T dado;
         int bal;
         struct _no * esq;
@@ -58,7 +57,7 @@ class Arvore {
 
         ///Em ordem
         /** Percorre a arvore em ordem, processando com a função recebida de parametro.*/
-        void emOrdem( pFuncao processa(T dado));/**< [in] Função que processa o No*/);
+//        void emOrdem( pFuncao processa(T dado));/**< [in] Função que processa o No*/);
 
         ///Busca
         /** Retorna um ponteiro para T se o T foi encontrado, NULL do contrário.*/
@@ -66,12 +65,13 @@ class Arvore {
 
     private:
         No * raiz;
-
+        No * remove_no( No *p, T d );
 };
+
 
 ///Busca Semelhantes
 /** Retorna verdadeiro se o T foi encontrado, falso do contrário.*/
-T * buscaSemelhantes( T d /**< [in] Dado a ser buscado.*/, Iterator it);
+//T * buscaSemelhantes( T d /**< [in] Dado a ser buscado.*/, Iterator it);
 
 
 /******************************************************************************
@@ -161,7 +161,7 @@ void Arvore<T>::insere( T d /**< [in] Dado a ser inserido.*/)
         {
             pai->dados=d;
         }
-
+    }
     //Balanceia
 
 }
@@ -172,9 +172,11 @@ void Arvore<T>::insere( T d /**< [in] Dado a ser inserido.*/)
 template <class T>
 void Arvore<T>::remove( T d /**< [in] Dado a ser removido.*/)
 {
-    remove_no(arvore->raiz, d);
+    remove_no(raiz, d);
 }
-No* remove_no( No *p, T d ) {
+
+template <class T>
+typename Arvore<T>::No* Arvore<T>::remove_no( No *p, T d ) {
     if( !p )
         return 0;
     if( d < p->dados )
@@ -215,7 +217,7 @@ T * Arvore<T>::busca( T d /**< [in] Dado a ser buscado.*/)
     }
     return p;
 }
-
+/*
 
 No* rotEE( No* A ) {
     No* B = A->esq;
@@ -287,11 +289,9 @@ No* max_node( No* p ) {
 }
 
 
-//
-void Arvore<T>::emOrdem( pFuncao processa() /**< [in] Função que processa o No*/)
-{
 
-}
+//void Arvore<T>::emOrdem( pFuncao processa() /**< [in] Função que processa o No*)*/
+
 
 
 #endif /* ARVORE_H */
