@@ -43,7 +43,7 @@ Texto::Texto( string na ) {
         cout << c << endl;
 
         // switch (isalpha(c) ? 1 : isAcento(c)) {
-        switch (isalpha(c)) {
+        switch (iswalpha(c)) {
             case 0: // Se não
                 cout << "Delim Found: " <<  "-" << c << "-" << endl;
 
