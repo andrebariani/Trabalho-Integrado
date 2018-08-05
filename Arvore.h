@@ -65,8 +65,8 @@ class Arvore {
 
     private:
         No * raiz;
-
-        No* insere_no( No *p, T d , bool &mudouAltura)
+        unsigned qtd;
+        No* insere_no( No *p, T d , bool &mudouAltura);
         ///Remove No
         /**
          * Método auxiliar para remover o No
@@ -132,6 +132,7 @@ class Arvore {
 template <class T>
 Arvore<T>::Arvore() {
     raiz=NULL;
+    qtd=0;
 }
 
 ///Construtor por Cópia
@@ -145,6 +146,9 @@ Arvore<T>::Arvore(const Arvore& orig  /**< [in] Arvore de origem a ser copiada.*
 /* Destroi a arvore*/
 template <class T>
 Arvore<T>::~Arvore() {
+    while (!vazia()) {
+        remove(raiz->dado);
+    }
 }
 
 ///Vazia
@@ -161,7 +165,10 @@ bool Arvore<T>::vazia()
 template <class T>
 void Arvore<T>::insere( T d /**< [in] Dado a ser inserido.*/)
 {
-    raiz=insere_no(raiz, d, false);
+    bool noAlocado=false;
+    raiz=insere_no(raiz, d, noAlocado);
+    if(noAlocado)
+        qtd++;
 }
 ///Insere No
 /** Funcao privada que insere o dado d na arvore.
@@ -180,33 +187,38 @@ typename Arvore<T>::No* Arvore<T>::insere_no( No *p, T d , bool &mudouAltura) {
         //mudouAltura
         mudouAltura=true;
     }
-    if( d < p->dado ){
-        //Chama para  subarvore esquerda
-        p->esq = insere_no(p->esq,d,mudouAltura);
-        //Corrige balanceamento
-        if(mudouAltura && p->bal==-1)
-            if(p->esq->bal == -1)//se foi inserido na subarvore esquerda do No esq
-                p=rotEE(p);
-            else//se foi inserido na subarvore direita do No esq
-                p=rotED(p);
+    else{
+        if( d < p->dado ){
+            //Chama para  subarvore esquerda
+            p->esq = insere_no(p->esq,d,mudouAltura);
+            //Corrige balanceamento
+            if(mudouAltura && p->bal==-1)
+                if(p->esq->bal == -1)//se foi inserido na subarvore esquerda do No esq
+                    p=rotEE(p);
+                else//se foi inserido na subarvore direita do No esq
+                    p=rotED(p);
+            else
+                p->bal--;
+        }
+        else if( d > p->dado ){
+            //Chama para  subarvore direita
+            p->dir = insere_no(p->dir,d,mudouAltura);
+            //Corrige balanceamento
+            if(mudouAltura && p->bal==1)
+                if(p->dir->bal == 1)//se foi inserido na subarvore direita do No dir
+                    p=rotDD(p);
+                else//se foi inserido na subarvore direita do No dir
+                    p=rotDE(p);
+            else
+                p->bal++;
+        }
         else
-            p->bal=-1;
-    }
-    else if( d > p->dado ){
-        //Chama para  subarvore direita
-        p->dir = insere_no(p->dir,d,mudouAltura);
-        //Corrige balanceamento
-        if(mudouAltura && p->bal==1)
-            if(p->dir->bal == 1)//se foi inserido na subarvore direita do No dir
-                p=rotDD(p);
-            else//se foi inserido na subarvore direita do No dir
-                p=rotDE(p);
-        else
-            p->bal=1;
-    }
-    else {
-        //Atualiza o dado
-        p->dado=d;
+        {
+            //Atualiza o dado
+            p->dado=d;
+            //NAO mudou altura
+            mudouAltura=false;
+        }
     }
     return p;
 }
@@ -350,8 +362,10 @@ void Arvore<T>::emOrdem(No * t, void (*processa)(T)){
     if(t){
         emOrdem(t->esq, processa);
         processa(t->dado);
+        std::cout << "(bal=["<< t->bal << "])" << '|';
         emOrdem(t->dir, processa);
     }
+
 }
 
 ///Em ordem
@@ -360,6 +374,7 @@ template <class T>
 void Arvore<T>::percursoEmOrdem( void (*processa)(T)/**< [in] Função que processa o No*/)
 {
     emOrdem(raiz, processa);
+    std::cout  << '\n';
 }
 
 #endif /* ARVORE_H */
