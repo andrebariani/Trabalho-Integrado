@@ -65,6 +65,8 @@ class Arvore {
 
     private:
         No * raiz;
+
+        No* insere_no( No *p, T d , bool &mudouAltura)
         ///Remove No
         /**
          * Método auxiliar para remover o No
@@ -159,61 +161,54 @@ bool Arvore<T>::vazia()
 template <class T>
 void Arvore<T>::insere( T d /**< [in] Dado a ser inserido.*/)
 {
-    //Arvore vazia
-    if(raiz==NULL){
-        //Aloca o No
-        No* p = new No;
-        raiz=p;
-        //Atribuir valor no No
+    raiz=insere_no(raiz, d, false);
+}
+///Insere No
+/** Funcao privada que insere o dado d na arvore.
+    Retorna exceção se não for inserido com sucesso.*/
+template <class T>
+typename Arvore<T>::No* Arvore<T>::insere_no( No *p, T d , bool &mudouAltura) {
+    if( !p )//Posicao encontrada
+    {
+        //Alocar No
+        p = new No;
+        //Atribuir dado no No
         p->dado = d;
+        p->bal=0;
         p->esq=NULL;
         p->dir=NULL;
+        //mudouAltura
+        mudouAltura=true;
     }
-    else{
-        No * t = raiz;
-        No * pai = NULL;
-        //Enquanto houverem nós
-        while(t)
-        {
-            //Define o no como o novo pai
-            pai=t;
-            //Procure a posição correta
-            if(d<t->dado)//dado menor
-                t=t->esq;
-            else if(d>t->dado)//dado maior
-                t=t->dir;
-            else//dado encontrado
-                t=NULL;
-        }
-
-        //Posição encontrada
-        if(d<pai->dado){//Dado menor que o pai
-            //Aloca o No
-            No* p = new No;
-            //Atribuir valor no No
-            p->dado = d;
-            p->esq=NULL;
-            p->dir=NULL;
-            //Corrija o pai
-            pai->esq=p;
-        }
-        else if(d>pai->dado){
-            //Aloca o No
-            No* p = new No;
-            //Atribuir valor no No
-            p->dado = d;
-            p->esq=NULL;
-            p->dir=NULL;
-            //Corrija o pai
-            pai->dir=p;
-        }
-        else//Dado igual o pai
-        {
-            pai->dado=d;
-        }
+    if( d < p->dado ){
+        //Chama para  subarvore esquerda
+        p->esq = insere_no(p->esq,d,mudouAltura);
+        //Corrige balanceamento
+        if(mudouAltura && p->bal==-1)
+            if(p->esq->bal == -1)//se foi inserido na subarvore esquerda do No esq
+                p=rotEE(p);
+            else//se foi inserido na subarvore direita do No esq
+                p=rotED(p);
+        else
+            p->bal=-1;
     }
-    //Balanceia
-
+    else if( d > p->dado ){
+        //Chama para  subarvore direita
+        p->dir = insere_no(p->dir,d,mudouAltura);
+        //Corrige balanceamento
+        if(mudouAltura && p->bal==1)
+            if(p->dir->bal == 1)//se foi inserido na subarvore direita do No dir
+                p=rotDD(p);
+            else//se foi inserido na subarvore direita do No dir
+                p=rotDE(p);
+        else
+            p->bal=1;
+    }
+    else {
+        //Atualiza o dado
+        p->dado=d;
+    }
+    return p;
 }
 
 ///Remove
@@ -228,7 +223,7 @@ void Arvore<T>::remove( T d /**< [in] Dado a ser removido.*/)
 template <class T>
 typename Arvore<T>::No* Arvore<T>::remove_no( No *p, T d ) {
     if( !p )
-        return 0;
+        return NULL;
     if( d < p->dado )
         p->esq = remove_no(p->esq,d);
     else if( d > p->dado )
