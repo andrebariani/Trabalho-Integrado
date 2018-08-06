@@ -36,9 +36,9 @@ Texto::Texto( string na ) {
         if(total_size > 10000) // Atingiu o tamanho máximo do vetor
             break;
 
-        c > 'a' ? wcout << c << " Is larger than a"  << endl : wcout << c << " Is smaller than a"  << endl;
-        c > 'b' ? wcout << c << " Is larger than b"  << endl : wcout << c << " Is smaller than b"  << endl;
-        c > 'e' ? wcout << c << " Is larger than e"  << endl : wcout << c << " Is smaller than e"  << endl;
+        // c > 'a' ? wcout << c << " Is larger than a"  << endl : wcout << c << " Is smaller than a"  << endl;
+        // c > 'b' ? wcout << c << " Is larger than b"  << endl : wcout << c << " Is smaller than b"  << endl;
+        // c > 'e' ? wcout << c << " Is larger than e"  << endl : wcout << c << " Is smaller than e"  << endl;
 
         switch (iswalpha(c)) {
             case 0: // Se não
