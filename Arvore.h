@@ -19,12 +19,6 @@ template <class T>
 class Arvore {
 
     typedef struct _no{
-    /*    struct _no (T _data, int _bal=0){
-            dado = _dado;
-            esq = dir = NULL;
-            bal = _bal;
-        }
-    */
         T dado;
         int bal;
         struct _no * esq;
@@ -62,6 +56,10 @@ class Arvore {
         ///Busca
         /** Retorna um ponteiro para T se o T foi encontrado, NULL do contrário.*/
         T * busca( T d /**< [in] Dado a ser buscado.*/);
+
+        ///Get Quantidade de Nos
+        /** Retorna o numero de Nos da Arvore*/
+        unsigned getQtd();
 
     private:
         No * raiz;
@@ -355,7 +353,7 @@ typename Arvore<T>::No* Arvore<T>::rotED( No* A ) {
     }
     return C;
 }
-
+/*
 No* rotEEremove(No* p, int &mudouAltura) {
     No* A = p->esquerda;
     p->esquerda = A->direita;
@@ -395,7 +393,7 @@ No* rotDEremove(No* p, int &mudouAltura) {
     mudouAltura = 0;
     return rotDE(p);
 }
-
+*/
 //Método auxiliar para realizar o percurso em ordem, usando os Nos
 template <class T>
 void Arvore<T>::emOrdem(No * t, void (*processa)(T)){
@@ -416,5 +414,13 @@ void Arvore<T>::percursoEmOrdem( void (*processa)(T)/**< [in] Função que proce
     emOrdem(raiz, processa);
     std::cout  << '\n';
 }
+
+///Get Quantidade de Nos
+/** Retorna o numero de Nos da Arvore*/
+template <class T>
+unsigned Arvore<T>::getQtd(){
+    return qtd;
+}
+
 
 #endif /* ARVORE_H */
