@@ -12,7 +12,7 @@
 #include <iostream>
 #include <string>
 
-Palavra::Palavra(std::string p){
+Palavra::Palavra(std::wstring p){
     palavra=p;
 }
 
@@ -32,20 +32,20 @@ void Palavra::operator=( Palavra p2)
 {
     palavra = p2.getPalavra();
 }
-void Palavra::setPalavra(std::string p){
+void Palavra::setPalavra(std::wstring p){
     palavra=p;
 }
-std::string Palavra::getPalavra(){
+std::wstring Palavra::getPalavra(){
     return palavra;
 }
 
-std::ostream &operator<< (std::ostream & o, Palavra& p){
+std::wostream &operator<< (std::wostream & o, Palavra& p){
     o << p.getPalavra();
     return o;
 }
 
-std::istream &operator>> (std::istream & i, Palavra& p){
-    std::string pal;
+std::wistream &operator>> (std::wistream & i, Palavra& p){
+    std::wstring pal;
     i >> pal;
     p.setPalavra(pal);
     return i;
