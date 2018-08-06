@@ -66,7 +66,7 @@ class Arvore {
     private:
         No * raiz;
         unsigned qtd;
-        No* insere_no( No *p, T d , bool &mudouAltura);
+        No* insere_no( No *p, T d , bool &noAlocado);
         ///Remove No
         /**
          * Método auxiliar para remover o No
@@ -174,7 +174,7 @@ void Arvore<T>::insere( T d /**< [in] Dado a ser inserido.*/)
 /** Funcao privada que insere o dado d na arvore.
     Retorna exceção se não for inserido com sucesso.*/
 template <class T>
-typename Arvore<T>::No* Arvore<T>::insere_no( No *p, T d , bool &mudouAltura) {
+typename Arvore<T>::No* Arvore<T>::insere_no( No *p, T d , bool &noAlocado) {
     if( !p )//Posicao encontrada
     {
         //Alocar No
@@ -184,15 +184,15 @@ typename Arvore<T>::No* Arvore<T>::insere_no( No *p, T d , bool &mudouAltura) {
         p->bal=0;
         p->esq=NULL;
         p->dir=NULL;
-        //mudouAltura
-        mudouAltura=true;
+        //noAlocado
+        noAlocado=true;
     }
     else{
         if( d < p->dado ){
             //Chama para  subarvore esquerda
-            p->esq = insere_no(p->esq,d,mudouAltura);
+            p->esq = insere_no(p->esq,d,noAlocado);
             //Corrige balanceamento
-            if(mudouAltura && p->bal==-1)
+            if(noAlocado && p->bal==-1)
                 if(p->esq->bal == -1)//se foi inserido na subarvore esquerda do No esq
                     p=rotEE(p);
                 else//se foi inserido na subarvore direita do No esq
@@ -202,9 +202,9 @@ typename Arvore<T>::No* Arvore<T>::insere_no( No *p, T d , bool &mudouAltura) {
         }
         else if( d > p->dado ){
             //Chama para  subarvore direita
-            p->dir = insere_no(p->dir,d,mudouAltura);
+            p->dir = insere_no(p->dir,d,noAlocado);
             //Corrige balanceamento
-            if(mudouAltura && p->bal==1)
+            if(noAlocado && p->bal==1)
                 if(p->dir->bal == 1)//se foi inserido na subarvore direita do No dir
                     p=rotDD(p);
                 else//se foi inserido na subarvore direita do No dir
@@ -217,7 +217,7 @@ typename Arvore<T>::No* Arvore<T>::insere_no( No *p, T d , bool &mudouAltura) {
             //Atualiza o dado
             p->dado=d;
             //NAO mudou altura
-            mudouAltura=false;
+            noAlocado=false;
         }
     }
     return p;
@@ -354,6 +354,46 @@ typename Arvore<T>::No* Arvore<T>::rotED( No* A ) {
         B->bal = 0;
     }
     return C;
+}
+
+No* rotEEremove(No* p, int &mudouAltura) {
+    No* A = p->esquerda;
+    p->esquerda = A->direita;
+    A->direita = p;
+    if(A->bal == 0) {
+        A->bal = 1;
+        p->bal = -1;
+        mudouAltura = 0;
+    } else {
+        A->bal = 0;
+        p->bal = 0;
+        mudouAltura = 1;
+    }
+    return A;
+}
+No* rotEDremove(No* n, int &mudouAltura) {
+    mudouAltura = 1;
+    return rotED(p);
+}
+
+No* rotDDremove(No* p, int &mudouAltura) {
+    No *B = p->direita;
+    p->direita = B->esquerda;
+    B->esquerda = p;
+    if(B->bal == 0) {
+        B->bal = -1;
+        p->bal = 1;
+        mudouAltura = 0;
+    } else {
+        B->bal = 0;
+        p->bal = 0;
+        mudouAltura = 1;
+    }
+    return B;
+}
+No* rotDEremove(No* p, int &mudouAltura) {
+    mudouAltura = 0;
+    return rotDE(p);
 }
 
 //Método auxiliar para realizar o percurso em ordem, usando os Nos
