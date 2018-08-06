@@ -14,10 +14,6 @@ Texto::Texto( string na ) {
     it_delim = delim.begin();
 
     // Setando local para aceitar acentos
-    // Mesmo com locale, char pega lixo
-    // setlocale não está funcionando, WHY!?!?!?!
-    // setlocale(LC_ALL, "LANG_PORTUGUESE");
-    // cout << "Locale: " << setlocale(LC_ALL, "LANG_PORTUGUESE") << endl;
     printf ("Locale is: %s\n", setlocale(LC_ALL,"pt_BR.UTF-8") );
 
     // Tratando da Extensão do arquivo de entrada
