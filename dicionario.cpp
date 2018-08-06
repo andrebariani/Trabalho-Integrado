@@ -1,6 +1,7 @@
 #include "Dicionario.h"
+using namespace std;
 
-Dicionario::Dicionario()
+dicionario::dicionario()
 {
     cont = 0; //Number of words
 
@@ -8,7 +9,7 @@ Dicionario::Dicionario()
     ifstream file;
 
     //Abre o arquivo no modo "in" que permite apenas leitura
-    file.open("dict.txt", std::ifstream::in);
+    file.open("dict.txt", ifstream::in);
 
         //"is_open" retorna TRUE se o "file" está aberto
         //"good" retorna TRUE se abriu sem problemas
@@ -26,52 +27,41 @@ Dicionario::Dicionario()
         }
         else
         {
-            std::cout << "ERROR" << std::endl;
+            cout << "ERROR" << endl;
         }
 
     //Fecha o arquivo
     file.close();
 }
 
-void Dicionario::limparArquivo()
+void dicionario::limparArquivo()
 {
     ifstream file;
 
     //Abre o arquivo no modo "trunc" para limpar o arquivo
-    file.open("dict.txt", std::ifstream::in |  std::ifstream::trunc);
+    file.open("dict.txt", ifstream::in |  ifstream::trunc);
     
     //Fecha o arquivo    
     file.close();
 }
 
-void Dicionario::atualizarArquivo()
+void dicionario::atualizarArquivo()
 {
     ofstream file;
 
     //Abre o arquivo no modo "out", para escrever e o "app" para que escreva no fim do arquivo
-    file.open("dict.txt", std::ofstream::out | std::ofstream::app);
+    file.open("dict.txt", ofstream::out | ofstream::app);
 
     for(int i = 0; i < cont; i++)
     {
-        file << palavra << std::endl;
+        file << palavra << endl;
     }
 
     //Fecha o arquivo
     file.close();
 }
 
-Palavra * Dicionario::buscaSemelhante(Palavra p)
+void incluir(Palavra p)
 {
-    Palavra * It = arvore.busca(p);
-    Palavra * Inicio = It;
-    int i = 0;
-
-    while(It -> semelhantes(p))
-    {
-            Semelhantes[i] = *It;
-            i++;
-            It++;
-    } 
-
-    return Inicio;
+    arvore.insere(p);
 }

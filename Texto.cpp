@@ -7,17 +7,13 @@ Texto::Texto( string na ) {
     total_size = 0;
     word_first_flag = false;
     nomearq = na;
-    string p = "";
-    string d = "";
-    vector<string>::iterator it_delim;
+    wstring p = L"";
+    wstring d = L"";
+    vector<wstring>::iterator it_delim;
     it_palavras = palavras.begin();
     it_delim = delim.begin();
 
     // Setando local para aceitar acentos
-    // Mesmo com locale, char pega lixo
-    // setlocale não está funcionando, WHY!?!?!?!
-    // setlocale(LC_ALL, "LANG_PORTUGUESE");
-    // cout << "Locale: " << setlocale(LC_ALL, "LANG_PORTUGUESE") << endl;
     printf ("Locale is: %s\n", setlocale(LC_ALL,"pt_BR.UTF-8") );
 
     // Tratando da Extensão do arquivo de entrada
@@ -31,50 +27,51 @@ Texto::Texto( string na ) {
 
     cout << nomearq << endl;
 
-    ifstream arq(nomearq);
+    wifstream arq(nomearq);
     // arq.open( nomearq, std::fstream::in );
 
-    char c;
+    wchar_t c;
 
     while(arq.get(c)) {
         if(total_size > 10000) // Atingiu o tamanho máximo do vetor
             break;
 
-        cout << c << endl;
+        c > 'a' ? wcout << c << " Is larger than a"  << endl : wcout << c << " Is smaller than a"  << endl;
+        c > 'b' ? wcout << c << " Is larger than b"  << endl : wcout << c << " Is smaller than b"  << endl;
+        c > 'e' ? wcout << c << " Is larger than e"  << endl : wcout << c << " Is smaller than e"  << endl;
 
-        // switch (isalpha(c) ? 1 : isAcento(c)) {
         switch (iswalpha(c)) {
             case 0: // Se não
-                cout << "Delim Found: " <<  "-" << c << "-" << endl;
+                // wcout << "Delim Found: " <<  "-" << c << "-" << endl;
 
-                if(p == "") {
+                if(p == L"") {
                     d = d + c;
-                    cout << "-" << d << "-"<< endl;
+                    wcout << "-" << d << "-"<< endl;
                 }
                 else {
                     Palavra paux;
                     paux = p;
                     palavras.push_back(paux);
                     // *(it_palavras++) = paux;
-                    cout << paux << " Inserted!" << endl << endl;
-                    p = "";
+                    // wcout << paux << " Inserted!" << endl << endl;
+                    p = L"";
                     d = d + c;
                 }
             break;
             default: // Se o caracter for Letra
-                cout << "Letter Found: " << c << endl;
+                // wcout << "Letter Found: " << c << endl;
 
                 // Salvando qual entre os dois aparecem primeiro no arquivo
                 if(total_size == 0) word_first_flag = true;
 
-                if(d == "") {
+                if(d == L"") {
                     p = p + c;
-                    cout << p << endl;
+                    // wcout << p << endl;
                 }
                 else {
                     delim.push_back(d);
-                    cout << "-" << d << "-" << " Inserted!" << endl << endl;
-                    d = "";
+                    // wcout << "-" << d << "-" << " Inserted!" << endl << endl;
+                    d = L"";
                     p = p + c;
                 }
             break;
@@ -87,7 +84,7 @@ Texto::Texto( string na ) {
 
     // Por causa do salvarArquivo(), esse trecho é necessário para pegar a última pontuação
     // Não é necessário para o vetor palavras pois todo arquivo .txt termina com '\n'
-    if(d != "")
+    if(d != L"")
         delim.push_back(d);
 
     it_palavras = palavras.begin();
@@ -126,14 +123,14 @@ void Texto::corrigirPalavra( Palavra corrigida ) {
 }
 
 void Texto:: salvarArquivo() {
-    // size_t found = nomearq.find(".txt");
-    // nomearq.insert(found, "-Copy");
-
-    string n = "Copy-" + nomearq;
-    ofstream arq( n );
+    size_t found = nomearq.find(".txt");
+    nomearq.insert(found, "-Copy");
+    wofstream arq( nomearq );
+    // string n = "Copy-" + nomearq;
+    // wofstream arq( n );
 
     it_palavras = palavras.begin();
-    vector<string>::iterator it_delim = delim.begin();
+    vector<wstring>::iterator it_delim = delim.begin();
 
     int i = 0;
     if(word_first_flag) {

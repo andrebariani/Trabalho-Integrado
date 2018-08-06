@@ -19,15 +19,15 @@ int main(int argc, char** argv) {
     while(!(palavra == Null)) {
         Palavra pa = txt.getPalavraAnterior();
         if(!(pa == Null)) {
-        cout << "Anterior: -" << pa << "-" << endl;
+        wcout << "Anterior: -" << pa << "-" << endl;
         }
 
-        cout << "Atual: -" << palavra << "-" << endl;
+        wcout << "Atual: -" << palavra << "-" << endl;
 
         Palavra pp = txt.getPalavraProximo();
         if(!(pp == Null)) {
         // cout << "Proximo: -" << txt.getPalavraProximo() << "-" << endl;
-        cout << "Proximo: -" << pp << "-" << endl;
+        wcout << "Proximo: -" << pp << "-" << endl;
         }
 
         cout << "Trocar palavra?" << endl;
@@ -40,7 +40,7 @@ int main(int argc, char** argv) {
 
             Palavra p;
 
-            cin >> p;
+            wcin >> p;
 
             txt.corrigirPalavra(p);
 

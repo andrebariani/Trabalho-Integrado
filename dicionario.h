@@ -23,7 +23,9 @@ class dicionario
         //Salva a árvore de palavras no arquivo
         void atualizarArquivo();
 
-        //Retorna primeiro elemento do vetor de palavras semelhantes
-        Palavra * buscaSemelhante(Palavra p);
+        ////Retorna primeiro elemento do vetor de palavras semelhantes
+        //NO * buscaSemelhante(Palavra p);
+
+        void incluir(Palavra p);
 
 };

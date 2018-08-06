@@ -13,6 +13,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <cwchar>
 #include <vector>
 #include <locale.h>
 #include <locale>
@@ -54,7 +55,7 @@ class Texto {
 
     private:
         vector<Palavra> palavras; /// Vetor contendo todas as palavras do texto
-        vector<string> delim; /// Vetor de delimitadores do Texto (tudo que não for palavra)
+        vector<wstring> delim; /// Vetor de delimitadores do Texto (tudo que não for palavra)
         string nomearq; /// nome do arquivo original
         vector<Palavra>::iterator it_palavras; /// Iterador do vetor de palavras do texto.
         bool word_first_flag; /// Flag que identfica se a primeira string de um arquivo é um delimitador ou palavra
