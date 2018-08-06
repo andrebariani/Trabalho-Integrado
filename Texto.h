@@ -62,12 +62,4 @@ class Texto {
         int total_size;
 };
 
-//  Trocar na classe Palavra
-// Palavra & Palavra ::operator=(const Palavra & p2 )
-// {
-// this->palavra = p2.palavra;
-// return *this;
-// }
-
-
 #endif /* TEXTO_H */
