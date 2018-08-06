@@ -11,7 +11,7 @@
 class Corretor {
 private:
 	Texto tex;
-	Dicionario dic;
+	dicionario dic;
 	Palavra pal;	
 	struct erros{
 		string palavra;
