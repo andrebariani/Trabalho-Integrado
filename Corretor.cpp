@@ -16,7 +16,7 @@
 	// try catch
 //}
 	
-	void adicionarErro(Palavra palavraErrada){
+	void Corretor::adicionarErro(Palavra palavraErrada){
 		//se palavra não encontrada no dicionário, adicionar erro na lista
 		//caso mesmo erro ocorra novamente, aumentar contagem
 		//apresentarErro
@@ -46,7 +46,7 @@
 		
 	
 
-	void apresentarErro(Palavra palavraErrada){
+	void Corretor::apresentarErro(Palavra palavraErrada){
 		//apresentar contexto
 		//oferecer opções
 		//utilizar função: contexto - texto.cpp
@@ -87,7 +87,7 @@
 	}
 
 	//opções do corretor 
-	void corrigir(){// usar uma palavra fornecida pelo usuário para corrigir uma palavra errada no texto
+	void Corretor::corrigir(){// usar uma palavra fornecida pelo usuário para corrigir uma palavra errada no texto
 		//permitir que o usuário insira uma palavra e substitua a palavra errada
 		string correta;
 		cout << "Insira a palavra correta";
@@ -96,21 +96,25 @@
 		tex.corrigirPalavra(correta);
 			
 			//corrigirPalavra - texto.cpp
-
 	}
 	
-	int ignorarErro(){//ignorar um erro encontrado pelo corretor e não fazer mais nada
+	int Corretor::ignorarErro(){//ignorar um erro encontrado pelo corretor e não fazer mais nada
 		return 0; 
 	}
 
-	Palavra selecPalavraSemelhante(Palavra p){//utilizar palavra semelhante sugerida
+	Palavra Corretor::selecPalavraSemelhante(Palavra p){//utilizar palavra semelhante sugerida
 		//substituir palavra errada por palavra semelhante do dicionário
+		Palavra *iSemelhantes;
+		int j;
 
-		//utilizar funções:
-			//semelhantes - palavra.cpp
+		iSemelhantes = dic.PalavraSemelhante(p);
+		for(j = 1; j < 6; j++){
+			cout << j << "-" << *iSemelhantes << endl;
+			iSemelhantes++;
+		}
 	}
 
-	void adicionarDicionario(Palavra palavraErrada){
-		
+	void Corretor::adicionarDicionario(Palavra palavraErrada){
+		//classe inclusão - Dicionario.cpp
 	}
 
