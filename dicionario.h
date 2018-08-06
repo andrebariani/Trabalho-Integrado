@@ -1,14 +1,12 @@
 #include <iostream>
 #include <fstream>
 #include <cstring>
-#include <vector>
 #include "Arvore.h"
 #include "Palavra.h"
 
 class dicionario
 {
     private:
-        std::vector<Palavra> Semelhantes;
         Arvore<Palavra> arvore;
         int cont;
 
@@ -21,11 +19,12 @@ class dicionario
         void limparArquivo();
 
         //Salva a árvore de palavras no arquivo
-        void atualizarArquivo();
+        void atualizarArquivo(Palavra p);
 
         ////Retorna primeiro elemento do vetor de palavras semelhantes
         //NO * buscaSemelhante(Palavra p);
 
         void incluir(Palavra p);
 
+        void remover(Palavra p);
 };
