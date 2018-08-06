@@ -36,12 +36,13 @@ Texto::Texto( string na ) {
         if(total_size > 10000) // Atingiu o tamanho máximo do vetor
             break;
 
-        wcout << c << endl;
+        c > 'a' ? wcout << c << " Is larger than a"  << endl : wcout << c << " Is smaller than a"  << endl;
+        c > 'b' ? wcout << c << " Is larger than b"  << endl : wcout << c << " Is smaller than b"  << endl;
+        c > 'e' ? wcout << c << " Is larger than e"  << endl : wcout << c << " Is smaller than e"  << endl;
 
-        // switch (isalpha(c) ? 1 : isAcento(c)) {
         switch (iswalpha(c)) {
             case 0: // Se não
-                wcout << "Delim Found: " <<  "-" << c << "-" << endl;
+                // wcout << "Delim Found: " <<  "-" << c << "-" << endl;
 
                 if(p == L"") {
                     d = d + c;
@@ -52,24 +53,24 @@ Texto::Texto( string na ) {
                     paux = p;
                     palavras.push_back(paux);
                     // *(it_palavras++) = paux;
-                    wcout << paux << " Inserted!" << endl << endl;
+                    // wcout << paux << " Inserted!" << endl << endl;
                     p = L"";
                     d = d + c;
                 }
             break;
             default: // Se o caracter for Letra
-                wcout << "Letter Found: " << c << endl;
+                // wcout << "Letter Found: " << c << endl;
 
                 // Salvando qual entre os dois aparecem primeiro no arquivo
                 if(total_size == 0) word_first_flag = true;
 
                 if(d == L"") {
                     p = p + c;
-                    wcout << p << endl;
+                    // wcout << p << endl;
                 }
                 else {
                     delim.push_back(d);
-                    wcout << "-" << d << "-" << " Inserted!" << endl << endl;
+                    // wcout << "-" << d << "-" << " Inserted!" << endl << endl;
                     d = L"";
                     p = p + c;
                 }
@@ -122,11 +123,11 @@ void Texto::corrigirPalavra( Palavra corrigida ) {
 }
 
 void Texto:: salvarArquivo() {
-    // size_t found = nomearq.find(".txt");
-    // nomearq.insert(found, "-Copy");
-
-    string n = "Copy-" + nomearq;
-    wofstream arq( n );
+    size_t found = nomearq.find(".txt");
+    nomearq.insert(found, "-Copy");
+    wofstream arq( nomearq );
+    // string n = "Copy-" + nomearq;
+    // wofstream arq( n );
 
     it_palavras = palavras.begin();
     vector<wstring>::iterator it_delim = delim.begin();

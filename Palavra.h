@@ -34,7 +34,8 @@ public:
 
     /// Operador =
     /** \Atribui o valor da palavra em uma segunda palavra.*/
-    void operator=( Palavra p2/**< [in] Valor da Palavra para atribuir à segunda palavra*/ );
+    Palavra & operator=(const Palavra & p2 );
+    // void operator=( Palavra p2/**< [in] Valor da Palavra para atribuir à segunda palavra*/ );
 
     /// set Palavra
     /** Atribui na palavra a string p.*/
