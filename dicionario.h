@@ -27,4 +27,6 @@ class dicionario
         void incluir(Palavra p);
 
         void remover(Palavra p);
+
+        queue<Palavra> * buscaSemelhante(Palavra p);
 };
