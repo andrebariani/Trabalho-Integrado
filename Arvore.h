@@ -8,6 +8,7 @@
 #define ARVORE_H
 
 #include<iostream>
+#include<queue>
 
 template <class T>
 
@@ -60,9 +61,23 @@ class Arvore {
         /** Retorna o numero de Nos da Arvore*/
         unsigned getQtd();
 
+        ///Método para buscar um intervalo, e retornar um std::stack<T> com os elementos entre o maior e o menor
+        void buscaIntervalo( std::queue<T> &q/**< [out] Fila com elementos do intervalo.*/,
+                        T menor         /**< [in] Limitante inferior.*/,
+                        T maior         /**< [in] Limitante superior.*/);
+
     private:
         No * raiz;
         unsigned qtd;
+        ///Insere no
+        /**
+         * Método auxiliar para Inserir o dado d na arvore.
+         * Retorna exceção se não for inserido com sucesso.
+         * @param  p         Ponteiro do nó atual
+         * @param  d         Dado a ser inserido
+         * @param  noAlocado Flag para saber se o no foi alocado
+         * @return           Arvore com dado inserido
+         */
         No* insere_no( No *p, T d , bool &noAlocado);
         ///Remove No
         /**
@@ -85,6 +100,17 @@ class Arvore {
          * @param t Raiz da subarvore
          */
         void emOrdem(No * t, void (*processa)(T));
+
+        ///
+        /**
+         * Método auxiliar para buscar um intervalo, e retornar um std::stack<T> com os elementos entre o maior e o menor
+         * @param  p     Ponteiro para no atual
+         * @param  q     Fila para retornar elementos
+         * @param  menor Limitante superior
+         * @param  maior Limitante inferior
+         */
+        void  buscaIntervalo_no(No* p, std::queue<T> &q, T menor, T maior);
+
         ///Rotação Esquerda
         /**
          * Método auxiliar para realizar a rotação
@@ -248,7 +274,6 @@ typename Arvore<T>::No* Arvore<T>::remove_no( No *p, T d ) {
     if( d < p->dado ){
         p->esq = remove_no(p->esq,d);
         //VERIFICAR BALANCEAMENTO
-        
 
     }
     else if( d > p->dado ){
@@ -450,5 +475,29 @@ unsigned Arvore<T>::getQtd(){
     return qtd;
 }
 
+///Método para buscar um intervalo, e retornar um std::stack<T> com os elementos entre o maior e o menor
+template <class T>
+void Arvore<T>::buscaIntervalo(std::queue<T> &q, T menor, T maior) {
+    //Esvazia Fila
+    while(!q.empty())
+        q.pop();
+    //Chama funcao privada
+    buscaIntervalo_no(raiz, q, menor, maior);
+}
+
+///Método auxiliar para buscar um intervalo, e retornar um std::stack<T> com os elementos entre o maior e o menor
+template <class T>
+void  Arvore<T>::buscaIntervalo_no(No* p, std::queue<T> &q, T menor, T maior) {
+    if (!p)
+        return;
+    if( menor < p->dado )
+        buscaIntervalo_no( p->esq, q, menor, maior);
+    if( menor<= p->dado && maior >= p->dado ){
+        q.push(p->dado);
+        std::cout << "PUSH" << '\n';
+    }
+    if( maior > p->dado )
+        buscaIntervalo_no( p->dir, q, menor, maior);
+}
 
 #endif /* ARVORE_H */
