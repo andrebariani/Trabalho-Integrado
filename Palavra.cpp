@@ -28,6 +28,18 @@ bool Palavra::operator<( Palavra& p2)
 {
     return palavra<p2.getPalavra();
 }
+bool Palavra::operator<=( Palavra& p2)
+{
+    return palavra<=p2.getPalavra();
+}
+bool Palavra::operator>( Palavra& p2)
+{
+    return palavra>p2.getPalavra();
+}
+bool Palavra::operator>=( Palavra& p2)
+{
+    return palavra>=p2.getPalavra();
+}
 Palavra & Palavra ::operator=(const Palavra & p2 )
 {
     this->palavra = p2.palavra;

@@ -32,6 +32,18 @@ public:
     /** \return Verdadeiro se a palavra é menor que a segunda (valor de char menor e tamanho menor), falso do contrário.*/
     bool operator<( Palavra& p2);
 
+    /// Operador <=
+    /** \return Verdadeiro se a palavra é menor ou igual que a segunda (valor de char menor e tamanho menor), falso do contrário.*/
+    bool operator<=( Palavra& p2);
+
+    /// Operador >
+    /** \return Verdadeiro se a palavra é maior que a segunda (valor de char menor e tamanho menor), falso do contrário.*/
+    bool operator>( Palavra& p2);
+
+    /// Operador >=
+    /** \return Verdadeiro se a palavra é maior ou igual que a segunda (valor de char menor e tamanho menor), falso do contrário.*/
+    bool operator>=( Palavra& p2);
+
     /// Operador =
     /** \Atribui o valor da palavra em uma segunda palavra.*/
     Palavra & operator=(const Palavra & p2 );

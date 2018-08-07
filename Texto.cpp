@@ -14,7 +14,7 @@ Texto::Texto( string na ) {
     it_delim = delim.begin();
 
     // Setando local para aceitar acentos
-    // printf ("Locale is: %s\n", setlocale(LC_ALL,"pt_BR.UTF-8") );
+    setlocale(LC_ALL,"pt_BR.UTF-8");
 
     // Tratando da Extensão do arquivo de entrada
     size_t found = nomearq.find(".txt");
@@ -28,7 +28,6 @@ Texto::Texto( string na ) {
     cout << nomearq << endl;
 
     wifstream arq(nomearq);
-    // arq.open( nomearq, std::fstream::in );
 
     wchar_t c;
 
@@ -36,12 +35,8 @@ Texto::Texto( string na ) {
         if(total_size > 10000) // Atingiu o tamanho máximo do vetor
             break;
 
-        // c > 'a' ? wcout << c << " Is larger than a"  << endl : wcout << c << " Is smaller than a"  << endl;
-        // c > 'b' ? wcout << c << " Is larger than b"  << endl : wcout << c << " Is smaller than b"  << endl;
-        // c > 'e' ? wcout << c << " Is larger than e"  << endl : wcout << c << " Is smaller than e"  << endl;
-
         switch (iswalpha(c)) {
-            case 0: // Se não
+            case 0: // Se não for letra
                 // wcout << "Delim Found: " <<  "-" << c << "-" << endl;
 
                 if(p == L"") {
@@ -52,13 +47,12 @@ Texto::Texto( string na ) {
                     Palavra paux;
                     paux = p;
                     palavras.push_back(paux);
-                    // *(it_palavras++) = paux;
                     // wcout << paux << " Inserted!" << endl << endl;
                     p = L"";
                     d = d + c;
                 }
             break;
-            default: // Se o caracter for Letra
+            default: // Se for Letra
                 // wcout << "Letter Found: " << c << endl;
 
                 // Salvando qual entre os dois aparecem primeiro no arquivo
@@ -125,9 +119,8 @@ void Texto::corrigirPalavra( Palavra corrigida ) {
 void Texto:: salvarArquivo() {
     size_t found = nomearq.find(".txt");
     nomearq.insert(found, "-Copy");
+
     wofstream arq( nomearq );
-    // string n = "Copy-" + nomearq;
-    // wofstream arq( n );
 
     it_palavras = palavras.begin();
     vector<wstring>::iterator it_delim = delim.begin();
