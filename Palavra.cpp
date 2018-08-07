@@ -56,6 +56,21 @@ std::wstring Palavra::getPalavra(){
     return palavra;
 }
 
+Palavra Palavra::minuscula() {
+    int i = 0;
+
+    std::wstring minusculo = L"";
+
+    while(palavra[i]) {
+        wchar_t c = palavra[i];
+        c = towlower(c);
+        minusculo += c;
+        i++;
+    }
+
+    return Palavra(minusculo);
+}
+
 std::wostream &operator<< (std::wostream & o, Palavra& p){
     o << p.getPalavra();
     return o;
