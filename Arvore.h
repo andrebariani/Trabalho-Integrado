@@ -8,13 +8,12 @@
 #define ARVORE_H
 
 #include<iostream>
-#include <vector>
 
 template <class T>
 
 /*! \class Arvore Binaria de Busca
     \brief Classe de manipulação de arvores de busca
-    Implementação Rubro-Negra
+    Implementação AVL
 */
 class Arvore {
 
@@ -114,6 +113,18 @@ class Arvore {
          * @return   No rotacionado
          */
         No* rotED( No* A );
+
+        ///Método auxiliar para realizar a rotação EE na remocao
+        No* rotEEremove(No* p, bool &mudouAltura);
+
+        ///Método auxiliar para realizar a rotação ED na remocao
+        No* rotEDremove(No* p, bool &mudouAltura);
+
+        ///Método auxiliar para realizar a rotação DD na remocao
+        No* rotDDremove(No* p, bool &mudouAltura);
+
+        ///Método auxiliar para realizar a rotação DE na remocao
+        No* rotDEremove(No* p, bool &mudouAltura);
 };
 
 
@@ -234,15 +245,22 @@ template <class T>
 typename Arvore<T>::No* Arvore<T>::remove_no( No *p, T d ) {
     if( !p )
         return NULL;
-    if( d < p->dado )
+    if( d < p->dado ){
         p->esq = remove_no(p->esq,d);
-    else if( d > p->dado )
+        //VERIFICAR BALANCEAMENTO
+        
+
+    }
+    else if( d > p->dado ){
         p->dir = remove_no(p->dir,d);
+        //VERIFICAR balanceamento
+    }
     else {
+        //Dado encontrado
         if( !p->dir ) {
             No *esquerda = p->esq;
             delete p;
-        return esquerda;
+            return esquerda;
         }
         if( !p->esq ) {
             No *direita = p->dir;
@@ -353,11 +371,13 @@ typename Arvore<T>::No* Arvore<T>::rotED( No* A ) {
     }
     return C;
 }
-/*
-No* rotEEremove(No* p, int &mudouAltura) {
-    No* A = p->esquerda;
-    p->esquerda = A->direita;
-    A->direita = p;
+
+//Método auxiliar para realizar a rotação EE na remocao
+template <class T>
+typename Arvore<T>::No* Arvore<T>::rotEEremove(No* p, bool &mudouAltura) {
+    No* A = p->esq;
+    p->esq = A->dir;
+    A->dir= p;
     if(A->bal == 0) {
         A->bal = 1;
         p->bal = -1;
@@ -369,15 +389,20 @@ No* rotEEremove(No* p, int &mudouAltura) {
     }
     return A;
 }
-No* rotEDremove(No* n, int &mudouAltura) {
+
+//Método auxiliar para realizar a rotação ED na remocao
+template <class T>
+typename Arvore<T>::No* Arvore<T>::rotEDremove(No* p, bool &mudouAltura) {
     mudouAltura = 1;
     return rotED(p);
 }
 
-No* rotDDremove(No* p, int &mudouAltura) {
-    No *B = p->direita;
-    p->direita = B->esquerda;
-    B->esquerda = p;
+//Método auxiliar para realizar a rotação DD na remocao
+template <class T>
+typename Arvore<T>::No* Arvore<T>::rotDDremove(No* p, bool &mudouAltura) {
+    No *B = p->dir;
+    p->dir = B->esq;
+    B->esq = p;
     if(B->bal == 0) {
         B->bal = -1;
         p->bal = 1;
@@ -389,11 +414,14 @@ No* rotDDremove(No* p, int &mudouAltura) {
     }
     return B;
 }
-No* rotDEremove(No* p, int &mudouAltura) {
+
+//Método auxiliar para realizar a rotação DE na remocao
+template <class T>
+typename Arvore<T>::No* Arvore<T>::rotDEremove(No* p, bool &mudouAltura) {
     mudouAltura = 0;
     return rotDE(p);
 }
-*/
+
 //Método auxiliar para realizar o percurso em ordem, usando os Nos
 template <class T>
 void Arvore<T>::emOrdem(No * t, void (*processa)(T)){
