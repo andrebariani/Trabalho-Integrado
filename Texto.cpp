@@ -25,7 +25,7 @@ Texto::Texto( string na ) {
     }
     //
 
-    cout << nomearq << endl;
+    // cout << nomearq << endl;
 
     wifstream arq;
     // arq.exceptions ( ifstream::goodbit );
@@ -49,7 +49,7 @@ Texto::Texto( string na ) {
 
                 if(p == L"") {
                     d = d + c;
-                    wcout << "-" << d << "-"<< endl;
+                    // wcout << "-" << d << "-"<< endl;
                 }
                 else {
                     Palavra paux;
