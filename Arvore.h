@@ -227,25 +227,31 @@ typename Arvore<T>::No* Arvore<T>::insere_no( No *p, T d , bool &noAlocado) {
             //Chama para  subarvore esquerda
             p->esq = insere_no(p->esq,d,noAlocado);
             //Corrige balanceamento
-            if(noAlocado && p->bal==-1)
+            if(noAlocado && p->bal==-1 && !p->esq->bal==0)
+            {
                 if(p->esq->bal == -1)//se foi inserido na subarvore esquerda do No esq
                     p=rotEE(p);
                 else//se foi inserido na subarvore direita do No esq
                     p=rotED(p);
-            else
+            }
+            else if (noAlocado && p->bal!=-1)
                 p->bal--;
         }
         else if( d > p->dado ){
             //Chama para  subarvore direita
             p->dir = insere_no(p->dir,d,noAlocado);
             //Corrige balanceamento
-            if(noAlocado && p->bal==1)
+            std::cout << p->dado << '\n';
+            if(noAlocado && p->bal==1 && !p->dir->bal==0)
+            {
                 if(p->dir->bal == 1)//se foi inserido na subarvore direita do No dir
                     p=rotDD(p);
                 else//se foi inserido na subarvore direita do No dir
                     p=rotDE(p);
-            else
+            }
+            else if (noAlocado && p->bal!=1){
                 p->bal++;
+            }
         }
         else
         {
@@ -346,6 +352,7 @@ typename Arvore<T>::No* Arvore<T>::max_node( No* p ) {
 //Método auxiliar para realizar a rotação EE
 template <class T>
 typename Arvore<T>::No* Arvore<T>::rotEE( No* A ) {
+    std::cout << "rotEE" << '\n';
     No* B = A->esq;
     A->esq = B->dir;
     B->dir = A;
@@ -357,6 +364,7 @@ typename Arvore<T>::No* Arvore<T>::rotEE( No* A ) {
 //Método auxiliar para realizar a rotação DD
 template <class T>
 typename Arvore<T>::No* Arvore<T>::rotDD( No* A ) {
+    std::cout << "rotDD" << '\n';
     No* B = A->dir;
     A->dir = B->esq;
     B->esq = A;
@@ -368,6 +376,7 @@ typename Arvore<T>::No* Arvore<T>::rotDD( No* A ) {
 //Método auxiliar para realizar a rotação DE
 template <class T>
 typename Arvore<T>::No* Arvore<T>::rotDE( No* A ) {
+    std::cout << "rotDE" << '\n';
     No* B = A->dir;
     No* C = B->esq;
     B->esq = C->dir;
@@ -393,6 +402,7 @@ typename Arvore<T>::No* Arvore<T>::rotDE( No* A ) {
 //Método auxiliar para realizar a rotação ED
 template <class T>
 typename Arvore<T>::No* Arvore<T>::rotED( No* A ) {
+    std::cout << "rotED" << '\n';
     No* B = A->esq;
     No* C = B->dir;
     B->dir = C->esq;
