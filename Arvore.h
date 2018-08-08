@@ -86,7 +86,7 @@ class Arvore {
          * @param  d Dado a ser buscado
          * @return   Ponteiro da arvore sem o No
          */
-        No * remove_no( No *p, T d );
+        No * remove_no( No *p, T d , bool &diminuiuAltura);
         // No maximo
         /**
          * Método auxiliar para encontrar o maior valor de uma subarvore
@@ -264,36 +264,54 @@ typename Arvore<T>::No* Arvore<T>::insere_no( No *p, T d , bool &noAlocado) {
 template <class T>
 void Arvore<T>::remove( T d /**< [in] Dado a ser removido.*/)
 {
-    raiz=remove_no(raiz, d);
+    bool diminuiuAltura = false;
+    raiz=remove_no(raiz, d, diminuiuAltura);
 }
 
 template <class T>
-typename Arvore<T>::No* Arvore<T>::remove_no( No *p, T d ) {
+typename Arvore<T>::No* Arvore<T>::remove_no( No *p, T d , bool &diminuiuAltura)
+{
     if( !p )
         return NULL;
     if( d < p->dado ){
-        p->esq = remove_no(p->esq,d);
+        p->esq = remove_no(p->esq,d,diminuiuAltura);
         //VERIFICAR BALANCEAMENTO
+        if(diminuiuAltura && p->bal==1)
+            if(p->dir->bal == 1)//se foi inserido na subarvore direita do No dir
+                p=rotDDremove(p,diminuiuAltura);
+            else//se foi inserido na subarvore direita do No dir
+                p=rotDEremove(p,diminuiuAltura);
+        else if(diminuiuAltura)
+            p->bal++;
 
     }
     else if( d > p->dado ){
-        p->dir = remove_no(p->dir,d);
+        p->dir = remove_no(p->dir,d,diminuiuAltura);
         //VERIFICAR balanceamento
+        if(diminuiuAltura && p->bal==-1)
+            if(p->esq->bal == -1)//se foi inserido na subarvore esquerda do No esq
+                p=rotEEremove(p,diminuiuAltura);
+            else//se foi inserido na subarvore direita do No esq
+                p=rotEDremove(p,diminuiuAltura);
+        else if (diminuiuAltura)
+            p->bal--;
     }
     else {
         //Dado encontrado
         if( !p->dir ) {
             No *esquerda = p->esq;
             delete p;
+            diminuiuAltura=true;
             return esquerda;
         }
         if( !p->esq ) {
             No *direita = p->dir;
             delete p;
+            diminuiuAltura=true;
             return direita;
         }
         p->dado = max_node(p->esq)->dado;
-        p->esq = remove_no( p->esq, p->dado);
+        p->esq = remove_no( p->esq, p->dado,diminuiuAltura);
     }
     return p;
 }
@@ -494,7 +512,6 @@ void  Arvore<T>::buscaIntervalo_no(No* p, std::queue<T> &q, T menor, T maior) {
         buscaIntervalo_no( p->esq, q, menor, maior);
     if( menor<= p->dado && maior >= p->dado ){
         q.push(p->dado);
-        std::cout << "PUSH" << '\n';
     }
     if( maior > p->dado )
         buscaIntervalo_no( p->dir, q, menor, maior);
