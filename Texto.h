@@ -28,7 +28,7 @@ class Texto {
         /// Construtor de Texto
 
         /** Recebe uma string que corresponde ao nome do arquivo do texto a ser carregado ao programa */
-        Texto( string na = "nomearq" /**< [in] nome do arquivo a ser carregado. O arquivo pode ou não conter
+        Texto( string na = "texto" /**< [in] nome do arquivo a ser carregado. O arquivo pode ou não conter
                                         a extensão ".txt". Por padrão, "nomearq". */);
 
         /// Percurso do Texto
@@ -51,15 +51,13 @@ class Texto {
         /** Retorna palavra superior à palavra atual  */
         Palavra getPalavraProximo();
 
-        // int isAcento(wchar_t c);
-
     private:
         vector<Palavra> palavras; /// Vetor contendo todas as palavras do texto
         vector<wstring> delim; /// Vetor de delimitadores do Texto (tudo que não for palavra)
         string nomearq; /// nome do arquivo original
         vector<Palavra>::iterator it_palavras; /// Iterador do vetor de palavras do texto.
         bool word_first_flag; /// Flag que identfica se a primeira string de um arquivo é um delimitador ou palavra
-        int total_size;
+        int total_size; /// Tamanho total da junção dos vetores de palavras e delimitadores
 };
 
 #endif /* TEXTO_H */

@@ -20,7 +20,7 @@ Texto::Texto( string na ) {
     size_t found = nomearq.find(".txt");
 
     if(found == std::string::npos) {
-        cout << ".txt not found" << endl;
+        // cout << ".txt not found" << endl;
         nomearq += ".txt";
     }
     //
@@ -74,8 +74,6 @@ Texto::Texto( string na ) {
         ++total_size;
     }
 
-    // cout << "boy" ;
-
     // Por causa do salvarArquivo(), esse trecho é necessário para pegar a última pontuação
     // Não é necessário para o vetor palavras pois todo arquivo .txt termina com '\n'
     if(d != L"")
@@ -118,7 +116,7 @@ void Texto::corrigirPalavra( Palavra corrigida ) {
 
 void Texto:: salvarArquivo() {
     size_t found = nomearq.find(".txt");
-    nomearq.insert(found, "-Copy");
+    nomearq.insert(found, "-corrigido");
 
     wofstream arq( nomearq );
 

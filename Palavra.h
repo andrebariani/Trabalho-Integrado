@@ -54,8 +54,12 @@ public:
     void setPalavra(std::wstring p /**< [in] Palavra a ser atualizada.*/);
 
     /// get Palavra
-    /** \return string com a palavra armazenada.*/
+    /** \retorna string com a palavra armazenada.*/
     std::wstring getPalavra();
+
+    /// minuscula
+    /** \retorna string com a palavra armazenada e todos os caracteres minúsculos.*/
+    Palavra minuscula();
 
 private:
     std::wstring palavra; ///< String com a palavra armazenada
