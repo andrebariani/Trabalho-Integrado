@@ -13,10 +13,10 @@
 #include <fstream>
 #include <iostream>
 #include <string>
-#include <cwchar>
+// #include <cwchar>
 #include <vector>
-#include <locale.h>
 #include <locale>
+#include <stdexcept>
 
 #include "Palavra.h"
 

@@ -27,7 +27,15 @@ Texto::Texto( string na ) {
 
     cout << nomearq << endl;
 
-    wifstream arq(nomearq);
+    wifstream arq;
+    // arq.exceptions ( ifstream::goodbit );
+
+    // arq.open(nomearq);
+    // throw e;
+    arq.open(nomearq);
+    //
+    if (!arq)
+        throw std::runtime_error("Arquivo não encontrado\n");
 
     wchar_t c;
 

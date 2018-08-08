@@ -7,50 +7,60 @@ using namespace std;
 int main(int argc, char** argv) {
 
     // setlocale(LC_ALL, "portuguese-brazilian");
-    Texto txt("texto");
 
     Palavra palavra;
 
-    palavra = txt.percorrerTexto();
-    // palavra.setPalavra(txt.percorrerTexto().getPalavra());
+    cout << "Insira nome do arquivo texto: " << endl;
 
-    Palavra Null;
+    string arq;
+    cin >> arq;
 
-    while(!(palavra == Null)) {
-        Palavra pa = txt.getPalavraAnterior();
-        if(!(pa == Null)) {
-        wcout << "Anterior: -" << pa.minuscula().getPalavra()  << "-" << endl;
-        }
-
-        Palavra pmin = palavra.minuscula();
-        wcout << "Atual: -" << pmin << "-" << endl;
-
-        Palavra pp = txt.getPalavraProximo();
-        if(!(pp == Null)) {
-        Palavra ppmin = pp.minuscula();
-        wcout << "Proximo: -" << ppmin << "-" << endl;
-        }
-
-        cout << "Trocar palavra?" << endl;
-
-        char y;
-        cin >> y;
-
-        if(y == 's') {
-            cout << "Trocar por qual palavra?" << '\n';
-
-            Palavra p;
-
-            wcin >> p;
-
-            txt.corrigirPalavra(p);
-
-        }
+    try {
+        Texto txt(arq);
 
         palavra = txt.percorrerTexto();
         // palavra.setPalavra(txt.percorrerTexto().getPalavra());
+
+        Palavra Null;
+
+        while(!(palavra == Null)) {
+            Palavra pa = txt.getPalavraAnterior();
+            if(!(pa == Null)) {
+                wcout << "Anterior: -" << pa.minuscula().getPalavra()  << "-" << endl;
+            }
+
+            Palavra pmin = palavra.minuscula();
+            wcout << "Atual: -" << pmin << "-" << endl;
+
+            Palavra pp = txt.getPalavraProximo();
+            if(!(pp == Null)) {
+                Palavra ppmin = pp.minuscula();
+                wcout << "Proximo: -" << ppmin << "-" << endl;
+            }
+
+            cout << "Trocar palavra?" << endl;
+
+            char y;
+            cin >> y;
+
+            if(y == 's') {
+                cout << "Trocar por qual palavra?" << '\n';
+
+                Palavra p;
+
+                wcin >> p;
+
+                txt.corrigirPalavra(p);
+
+            }
+
+            palavra = txt.percorrerTexto();
+            // palavra.setPalavra(txt.percorrerTexto().getPalavra());
+        }
+
+        txt.salvarArquivo();
+    } catch( std::exception &e ) {
+                cout << "ERRO! Não foi possível abrir o arquivo:\n" << e.what() << endl;
+                return -1;
     }
-
-    txt.salvarArquivo();
-
 }
