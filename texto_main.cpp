@@ -60,7 +60,7 @@ int main(int argc, char** argv) {
 
         txt.salvarArquivo();
     } catch( std::exception &e ) {
-                cout << "ERRO! Não foi possível abrir o arquivo:\n" << e.what() << endl;
+                cout << "ERRO!\n" << e.what() << endl;
                 return -1;
     }
 }
