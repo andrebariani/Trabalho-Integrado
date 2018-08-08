@@ -13,8 +13,8 @@ dicionario::dicionario()
         //"good" retorna TRUE se abriu sem problemas
         if(file.is_open() && file.good())
         {
-            Palavra p;
-            wstring s;
+                Palavra p;
+                wstring s;
 
             //"file" envia seu conteúdo para "dict" 
             while(getline(file, s));   //Salva a palavra do arquivo para s
@@ -26,14 +26,13 @@ dicionario::dicionario()
                 }
                 else
                 {
-                    //ERRO
-                    //Passou limite
+                    throw runtime_error("Árvore cheia\n"); //Tratamento de excessão
                 }  
             }
         }
         else
         {
-            cout << "ERROR" << endl;
+            throw runtime_error("Erro ao abrir o arquivo\n"); //Tratamento de excessão
         }
 
     //Fecha o arquivo
@@ -46,6 +45,10 @@ void dicionario::limparArquivo()
 
     //Abre o arquivo no modo "trunc" para limpar o arquivo
     file.open("dict.txt", wifstream::in |  wifstream::trunc);
+    if(!(file.is_open() && file.good()))
+    {
+        throw runtime_error("Erro ao abrir o arquivo\n"); //Tratamento de excessão
+    }
     
     //Fecha o arquivo    
     file.close();
@@ -57,6 +60,11 @@ void dicionario::atualizarArquivo(Palavra p)
 
     //Abre o arquivo no modo "out", para escrever e o "app" para que escreva no fim do arquivo
     file.open("dict.txt", wofstream::out | wofstream::app);
+   
+    if(!(file.is_open() && file.good()))
+    {
+        throw runtime_error("Erro ao abrir o arquivo\n"); //Tratamento de excessão
+    }
 
     //Adiciona a palavra do Nó em questão no arquivo
     file << p << endl;
@@ -68,13 +76,27 @@ void dicionario::atualizarArquivo(Palavra p)
 void dicionario::incluir(Palavra p)
 {
     //Chama processo de inserção da arvore
-    arvore.insere(p);
+    if(arvore.getQtd() < 10000)
+    {
+        arvore.insere(p);
+    }
+    else   
+    {
+        throw runtime_error("Árvore cheia\n"); //Tratamento de excessão
+    }
 }
 
 void dicionario::remover(Palavra p)
 {
     //Chama processo de remoção da arvore
-    arvore.remove(p);
+    if(arvore.getQtd() > 0)
+    {
+        arvore.remove(p);
+    }
+    else
+    {
+        throw runtime_error("Árvore vazia\n"); //Tratamento de excessão
+    }
 }
 
 queue<Palavra> * dicionario::buscaSemelhante(Palavra p)
@@ -88,9 +110,28 @@ queue<Palavra> * dicionario::buscaSemelhante(Palavra p)
 
     arvore.buscaIntervalo(*semelhantes, menor, maior);
     
-    if((semelhantes -> back).semelhantes(p))
+    if(semelhantes -> empty)
     {
-        return semelhantes;
+        throw runtime_error("Não há palavras semelhantes\n"); //Tratamento de excessão
     }
+
+    //Se o último elemento da fila não for semelhante a p
+    if(!((semelhantes -> back).semelhantes(p))) 
+    {
+        queue<Palavra> temp;
+
+        //Passa todos os valores menos o último de semelhantes para temp 
+        for(int i = 0; i < (semelhantes -> size() - 1); i++)
+        {
+            temp.push(semelhantes -> front());
+            semelhantes -> pop();
+        }
+
+        //Troca os conteúdos entre temp e semelhantes
+        semelhantes -> swap(temp);
+
+    }   
+    
+    return semelhantes;    
 
 }

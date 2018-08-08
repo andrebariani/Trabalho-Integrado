@@ -60,7 +60,11 @@ int main(int argc, char** argv) {
 
         txt.salvarArquivo();
     } catch( std::exception &e ) {
+<<<<<<< HEAD
                 cout << "ERRO! " << e.what() << endl;
+=======
+                cout << "ERRO!\n" << e.what() << endl;
+>>>>>>> 73e1ea523e582ae81cf64bf84bf0fc5ef56a2ca4
                 return -1;
     }
 }
