@@ -177,9 +177,6 @@ Arvore<T>::Arvore(const Arvore& orig  /**< [in] Arvore de origem a ser copiada.*
 /* Destroi a arvore*/
 template <class T>
 Arvore<T>::~Arvore() {
-    while (!vazia()) {
-        remove(raiz->dado);
-    }
 }
 
 ///Vazia
@@ -210,6 +207,9 @@ typename Arvore<T>::No* Arvore<T>::insere_no( No *p, T d , bool &cresceuAltura) 
     {
         //Alocar No
         p = new No;
+        if(p==NULL)
+            throw std::runtime_error("Nao foi possivel alocar o No na Arvore\n");
+
         //Atribuir dado no No
         p->dado = d;
         p->bal=0;
@@ -268,14 +268,12 @@ typename Arvore<T>::No* Arvore<T>::insere_no( No *p, T d , bool &cresceuAltura) 
 }
 
 ///Remove
-/** Remove o T d na arvore.
-    Retorna exceção se não for removido com sucesso.*/
+/** Remove o T d na arvore.*/
 template <class T>
 void Arvore<T>::remove( T d /**< [in] Dado a ser removido.*/)
 {
     bool diminuiuAltura = false;
     raiz=remove_no(raiz, d, diminuiuAltura);
-    qtd--;
 }
 
 template <class T>
@@ -286,7 +284,6 @@ typename Arvore<T>::No* Arvore<T>::remove_no( No *p, T d , bool &diminuiuAltura)
     if( d < p->dado ){
         p->esq = remove_no(p->esq,d,diminuiuAltura);
         //Verificar balanceamento
-        std::cout << diminuiuAltura << '\n';
         if(diminuiuAltura)
         {
             if(p->bal==1){
@@ -297,6 +294,8 @@ typename Arvore<T>::No* Arvore<T>::remove_no( No *p, T d , bool &diminuiuAltura)
             }
             else{
                 p->bal++;
+                if(p->bal==1)
+                    diminuiuAltura=false;
             }
         }
     }
@@ -312,6 +311,8 @@ typename Arvore<T>::No* Arvore<T>::remove_no( No *p, T d , bool &diminuiuAltura)
                     p=rotEDremove(p,diminuiuAltura);
             else{
                 p->bal--;
+                if(p->bal==-1)
+                    diminuiuAltura=false;
             }
         }
 
@@ -321,12 +322,14 @@ typename Arvore<T>::No* Arvore<T>::remove_no( No *p, T d , bool &diminuiuAltura)
         if( !p->dir ) {
             No *esquerda = p->esq;
             delete p;
+            qtd--;
             diminuiuAltura=true;
             return esquerda;
         }
         if( !p->esq ) {
             No *direita = p->dir;
             delete p;
+            qtd--;
             diminuiuAltura=true;
             return direita;
         }
@@ -354,7 +357,7 @@ T * Arvore<T>::busca( T d /**< [in] Dado a ser buscado.*/)
     return NULL;
 }
 
-//Método auxiliar para encontrar o maior valor de uma subarvore
+///Método auxiliar para encontrar o maior valor de uma subarvore
 template <class T>
 typename Arvore<T>::No* Arvore<T>::max_node( No* p ) {
     if( ! p->dir )
@@ -363,10 +366,9 @@ typename Arvore<T>::No* Arvore<T>::max_node( No* p ) {
         return max_node( p->dir );
 }
 
-//Método auxiliar para realizar a rotação EE
+///Método auxiliar para realizar a rotação EE
 template <class T>
 typename Arvore<T>::No* Arvore<T>::rotEE( No* A ) {
-    std::cout << "rotEE" << '\n';
     No* B = A->esq;
     A->esq = B->dir;
     B->dir = A;
@@ -375,10 +377,9 @@ typename Arvore<T>::No* Arvore<T>::rotEE( No* A ) {
     return B;
 }
 
-//Método auxiliar para realizar a rotação DD
+///Método auxiliar para realizar a rotação DD
 template <class T>
 typename Arvore<T>::No* Arvore<T>::rotDD( No* A ) {
-    std::cout << "rotDD" << '\n';
     No* B = A->dir;
     A->dir = B->esq;
     B->esq = A;
@@ -387,17 +388,15 @@ typename Arvore<T>::No* Arvore<T>::rotDD( No* A ) {
     return B;
 }
 
-//Método auxiliar para realizar a rotação DE
+///Método auxiliar para realizar a rotação DE
 template <class T>
 typename Arvore<T>::No* Arvore<T>::rotDE( No* A ) {
-    std::cout << "rotDE" << '\n';
     No* B = A->dir;
     No* C = B->esq;
     B->esq = C->dir;
     C->dir = B;
     A->dir = C->esq;
     C->esq = A;
-    std::cout << "bal do node " << C->dado << ":"<< C->bal << '\n';
     //Corrgir balanceamento
     if( C->bal == -1 ) {
         A->bal = 0;
@@ -414,10 +413,9 @@ typename Arvore<T>::No* Arvore<T>::rotDE( No* A ) {
     return C;
 }
 
-//Método auxiliar para realizar a rotação ED
+///Método auxiliar para realizar a rotação ED
 template <class T>
 typename Arvore<T>::No* Arvore<T>::rotED( No* A ) {
-    std::cout << "rotED" << '\n';
     No* B = A->esq;
     No* C = B->dir;
     B->dir = C->esq;
@@ -440,10 +438,9 @@ typename Arvore<T>::No* Arvore<T>::rotED( No* A ) {
     return C;
 }
 
-//Método auxiliar para realizar a rotação EE na remocao
+///Método auxiliar para realizar a rotação EE na remocao
 template <class T>
 typename Arvore<T>::No* Arvore<T>::rotEEremove(No* p, bool &mudouAltura) {
-    std::cout << "rotEEr" << '\n';
     No* A = p->esq;
     p->esq = A->dir;
     A->dir= p;
@@ -459,17 +456,16 @@ typename Arvore<T>::No* Arvore<T>::rotEEremove(No* p, bool &mudouAltura) {
     return A;
 }
 
-//Método auxiliar para realizar a rotação ED na remocao
+///Método auxiliar para realizar a rotação ED na remocao
 template <class T>
 typename Arvore<T>::No* Arvore<T>::rotEDremove(No* p, bool &mudouAltura) {
     mudouAltura = true;
     return rotED(p);
 }
 
-//Método auxiliar para realizar a rotação DD na remocao
+///Método auxiliar para realizar a rotação DD na remocao
 template <class T>
 typename Arvore<T>::No* Arvore<T>::rotDDremove(No* p, bool &mudouAltura) {
-    std::cout << "rotDDr" << '\n';
     No *B = p->dir;
     p->dir = B->esq;
     B->esq = p;
@@ -485,20 +481,19 @@ typename Arvore<T>::No* Arvore<T>::rotDDremove(No* p, bool &mudouAltura) {
     return B;
 }
 
-//Método auxiliar para realizar a rotação DE na remocao
+///Método auxiliar para realizar a rotação DE na remocao
 template <class T>
 typename Arvore<T>::No* Arvore<T>::rotDEremove(No* p, bool &mudouAltura) {
     mudouAltura = true;
     return rotDE(p);
 }
 
-//Método auxiliar para realizar o percurso em ordem, usando os Nos
+///Método auxiliar para realizar o percurso em ordem, usando os Nos
 template <class T>
 void Arvore<T>::emOrdem(No * t, void (*processa)(T)){
     if(t){
         emOrdem(t->esq, processa);
         processa(t->dado);
-        std::cout << "(bal=["<< t->bal << "])" << '|';
         emOrdem(t->dir, processa);
     }
 
@@ -510,8 +505,7 @@ template <class T>
 void Arvore<T>::percursoEmOrdem( void (*processa)(T)/**< [in] Função que processa o No*/)
 {
     emOrdem(raiz, processa);
-    std::cout  << '\n';
-}
+
 
 ///Get Quantidade de Nos
 /** Retorna o numero de Nos da Arvore*/
