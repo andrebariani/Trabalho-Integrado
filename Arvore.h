@@ -32,8 +32,8 @@ class Arvore {
         /** Inicializa a Arvore*/
         Arvore();
 
-        Arvore(const Arvore& orig);
-
+        ///Destrutor
+        /* Destroi a arvore*/
         virtual ~Arvore();
 
         ///Vazia
@@ -166,17 +166,13 @@ Arvore<T>::Arvore() {
     qtd=0;
 }
 
-///Construtor por Cópia
-/* Aloca uma nova arvore igual a original*/
-template <class T>
-Arvore<T>::Arvore(const Arvore& orig  /**< [in] Arvore de origem a ser copiada.*/) {
-
-}
-
 ///Destrutor
 /* Destroi a arvore*/
 template <class T>
 Arvore<T>::~Arvore() {
+    while (!vazia())
+        remove(raiz->dado);
+
 }
 
 ///Vazia
