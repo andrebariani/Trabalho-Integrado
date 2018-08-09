@@ -39,9 +39,11 @@ int main() {
                 }
                 break;
                 case CORRIGI: {
+                    printf("\tIniciando Correção...\t\t\t\n");
                     Texto txt(nome_texto);
-                    // dicionario dic(nome_dic);
-                    // Rest of code
+
+                    Corretor corretor(nome_texto);
+
                 }
                 break;
             }

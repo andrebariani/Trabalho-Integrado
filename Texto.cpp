@@ -7,12 +7,18 @@ Texto::Texto( string na ) {
     total_size = 0;
     word_first_flag = false;
     nomearq = na;
-    wstring p = L"";
-    wstring d = L"";
     vector<wstring>::iterator it_delim;
     it_palavras = palavras.begin();
     it_delim = delim.begin();
 
+    if(na != "")
+        carregarTexto();
+}
+
+void Texto::carregarTexto() {
+
+    wstring p = L"";
+    wstring d = L"";
     // Setando local para aceitar acentos
     setlocale(LC_ALL,"pt_BR.UTF-8");
 
@@ -93,7 +99,6 @@ Texto::Texto( string na ) {
     arq.close();
 }
 
-
 Palavra Texto::percorrerTexto() {
     if( it_palavras + 1 > palavras.end() ) {
         Palavra Null;
@@ -149,4 +154,16 @@ void Texto:: salvarArquivo() {
     }
 
     cout << "Arquivo Salvo" << endl;
+}
+
+Texto & Texto::operator=(const Texto & t2 )
+{
+    this->palavras = t2.palavras;
+    this->delim = t2.delim;
+    this->nomearq = t2.nomearq;
+    this->it_palavras = t2.it_palavras;
+    this->word_first_flag = t2.word_first_flag;
+    this->total_size = t2.total_size;
+
+    return *this;
 }

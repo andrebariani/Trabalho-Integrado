@@ -28,8 +28,13 @@ class Texto {
         /// Construtor de Texto
 
         /** Recebe uma string que corresponde ao nome do arquivo do texto a ser carregado ao programa */
-        Texto( string na = "texto" /**< [in] nome do arquivo a ser carregado. O arquivo pode ou não conter
-                                        a extensão ".txt". Por padrão, "nomearq". */);
+        Texto( string na = "" /**< [in] nome do arquivo a ser carregado. O arquivo pode ou não conter
+                                        a extensão ".txt". Por padrão, não carrega o arquivo. */);
+
+        /// Carregador de Texto
+        /** Carrega um arquivo texto, preenchendo as listas de palavras e delimitadores
+            com o conteúdo do arquivo*/
+        void carregarTexto();
 
         /// Percurso do Texto
         /** Retorna uma Palavra do texto em ordem de chamada dessa função */
@@ -50,6 +55,10 @@ class Texto {
         /// Pegar palavra superior
         /** Retorna palavra superior à palavra atual  */
         Palavra getPalavraProximo();
+
+        /// Operador =
+        /** \Atribui o valor do texto em um segundo texto.*/
+        Texto & operator=(const Texto & t2 );
 
     private:
         vector<Palavra> palavras; /// Vetor contendo todas as palavras do texto
