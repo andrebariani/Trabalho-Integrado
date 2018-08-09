@@ -1,4 +1,6 @@
 #include "Dicionario.h"
+#include "Arvore.h"
+#include "Palavra.h"
 using namespace std;
 
 dicionario::dicionario()
@@ -32,7 +34,7 @@ dicionario::dicionario()
         }
         else
         {
-            throw runtime_error("Erro ao abrir o arquivo\n"); //Tratamento de excessão
+            throw runtime_error("1 Erro ao abrir o arquivo\n"); //Tratamento de excessão
         }
 
     //Fecha o arquivo
@@ -41,13 +43,13 @@ dicionario::dicionario()
 
 void dicionario::limparArquivo()
 {
-    wifstream file;
+    wofstream file;
 
     //Abre o arquivo no modo "trunc" para limpar o arquivo
-    file.open("dict.txt", wifstream::in |  wifstream::trunc);
-    if(!(file.is_open() && file.good()))
+    file.open("dict.txt", wofstream::in |  wofstream::trunc);
+    if(!file.is_open() && !file.good())
     {
-        throw runtime_error("Erro ao abrir o arquivo\n"); //Tratamento de excessão
+        throw runtime_error("2 Erro ao abrir o arquivo\n"); //Tratamento de excessão
     }
     
     //Fecha o arquivo    
@@ -88,8 +90,9 @@ void dicionario::incluir(Palavra p)
 
 void dicionario::remover(Palavra p)
 {
+    wcout << arvore.getQtd() << endl;
     //Chama processo de remoção da arvore
-    if(arvore.getQtd() > 0)
+    if(arvore.getQtd() > 1)
     {
         arvore.remove(p);
     }
@@ -99,39 +102,59 @@ void dicionario::remover(Palavra p)
     }
 }
 
+bool dicionario::buscaPalavra(Palavra p)
+{
+    if(arvore.busca(p))
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
 queue<Palavra> * dicionario::buscaSemelhante(Palavra p)
 {
-    queue<Palavra> *semelhantes = new queue<Palavra>;
+    queue<Palavra> *queueSemelhante= new queue<Palavra>;
 
-    wstring menor = L"";
-    wstring maior = L"";
-    menor = p.getPalavra[1] + p.getPalavra[2];
-    maior = p.getPalavra[1] + (p.getPalavra[2] + 1);
+    Palavra menor;
+    Palavra maior;
+    wstring aux;
+    menor.setPalavra(p.getPalavra().substr(0, 2));  
+    aux = (p.getPalavra())[0] + ((p.getPalavra())[1] + 1);
+    maior.setPalavra(aux);
 
-    arvore.buscaIntervalo(*semelhantes, menor, maior);
+    arvore.buscaIntervalo(*queueSemelhante, menor, maior);
     
-    if(semelhantes -> empty)
+    if(queueSemelhante-> empty())
     {
         throw runtime_error("Não há palavras semelhantes\n"); //Tratamento de excessão
     }
 
     //Se o último elemento da fila não for semelhante a p
-    if(!((semelhantes -> back).semelhantes(p))) 
+    if(!((queueSemelhante -> back()).semelhantes(p))) 
     {
         queue<Palavra> temp;
 
         //Passa todos os valores menos o último de semelhantes para temp 
-        for(int i = 0; i < (semelhantes -> size() - 1); i++)
+        for(int i = 0; i < (queueSemelhante -> size() - 1); i++)
         {
-            temp.push(semelhantes -> front());
-            semelhantes -> pop();
+            temp.push(queueSemelhante-> front());
+            queueSemelhante -> pop();
         }
 
         //Troca os conteúdos entre temp e semelhantes
-        semelhantes -> swap(temp);
+        //queueSemelhante -> swap(temp);
+        queueSemelhante -> pop();
 
+        for(int i = 0; i < (temp.size()); i++)
+        {
+            queueSemelhante -> push(temp.front());
+            temp.pop();
+        }
     }   
     
-    return semelhantes;    
+    return queueSemelhante;    
 
 }

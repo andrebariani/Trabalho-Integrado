@@ -1,6 +1,13 @@
 {
     "files.associations": {
         "iosfwd": "cpp",
-        "xiosbase": "cpp"
+        "xiosbase": "cpp",
+        "queue": "cpp",
+        "deque": "cpp",
+        "forward_list": "cpp",
+        "vector": "cpp",
+        "xstring": "cpp",
+        "fstream": "cpp",
+        "iostream": "cpp"
     }
 }

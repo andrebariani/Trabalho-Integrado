@@ -1,8 +1,15 @@
+#ifndef DICIONARIO_H
+#define DICIONARIO_H
+
 #include <iostream>
 #include <fstream>
 #include <cstring>
+#include <queue>
+
 #include "Arvore.h"
 #include "Palavra.h"
+
+using namespace std;
 
 class dicionario
 {
@@ -28,5 +35,8 @@ class dicionario
 
         void remover(Palavra p);
 
+        bool buscaPalavra(Palavra p);
+
         queue<Palavra> * buscaSemelhante(Palavra p);
 };
+#endif 
