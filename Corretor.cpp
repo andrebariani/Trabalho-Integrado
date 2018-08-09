@@ -27,7 +27,7 @@ void Corretor::iniciarCorrecao() {
 		texto.percorrerTexto();
 	}
 
-	if(!palavrasErradas.empty()) {
+	if(!wrongWords.empty()) {
 		exibirErros();
 		texto.salvarArquivo();
 		return;
@@ -43,17 +43,17 @@ void Corretor::apresentarErro(Palavra palavraErrada){
 
 	cout << "Uma palavra inexistente no dicionário foi encontrada no texto: \"...";
 	wcout << pa << palavraErrada << pp << L"...\", por favor selecione uma opção\n";
-	cout << "Opção 1: Inserir a palavra correta\n"
-	cout << "Opção 2: Ignorar o erro\n"
-	cout << "Opção 3: Selecionar palavra semelhante encontrada no dicionário\n"
-	cout << "Opção 4: Adicionar a palavra ao dicionário\n"
+	cout << "Opção 1: Inserir a palavra correta\n";
+	cout << "Opção 2: Ignorar o erro\n";
+	cout << "Opção 3: Selecionar palavra semelhante encontrada no dicionário\n";
+	cout << "Opção 4: Adicionar a palavra ao dicionário\n";
 
 	adicionarErro(palavraErrada);
 
 		cin >> op;
 	do{
 		if(op == 1){
-				corrigir(palavraErrada);
+				corrigir();
 			break;
 		}
 		else if(op == 2){
@@ -78,9 +78,9 @@ void Corretor::apresentarErro(Palavra palavraErrada){
 
 }
 
-void mudarTexto( string nome_texto ) {
-	texto.carregarNovoTexto(nome_texto);
-}
+// void mudarTexto( string nome_texto ) {
+// 	texto.carregarNovoTexto(nome_texto);
+// }
 
 void Corretor::corrigir(){// usar uma palavra fornecida pelo usuário para corrigir uma palavra errada no texto
 	//permitir que o usuário insira uma palavra e substitua a palavra errada
@@ -117,7 +117,8 @@ Palavra Corretor::selecPalavraSemelhante(Palavra palavraErrada){//utilizar palav
 		switch(op < j && op > 0) {
 			case 1:
 				while(op-- > 0) {
-					escolhida = temp.pop();
+					escolhida = temp.front();
+					temp.pop();
 				}
 				return escolhida;
 			break;
@@ -136,13 +137,13 @@ void Corretor::adicionarErro(Palavra palavraErrada){
 	//se palavra não encontrada no dicionário, adicionar erro na lista
 	//caso mesmo erro ocorra novamente, aumentar contagem
 	//apresentarErro
-	wstring P = palavraErrada;
+	wstring P = palavraErrada.getPalavra();
+	erros r;
 
 	if(wrongWords.empty()){
-		erros r;
 		r.palavra = P;
 		r.contador = r.contador + 1;
-		wrongWords.assign(r);
+		wrongWords.push_front(r);
 	}
 	else{
 		std::forward_list<erros>::iterator it;
@@ -150,17 +151,16 @@ void Corretor::adicionarErro(Palavra palavraErrada){
 			if(r.palavra == P){
 				r.contador = r.contador + 1;
 			}
-			else if((r.palavra != P) && ((i+1)==wrongWords.end())) {
-			erros r;
-			r.palavra = P;
-			r.contador = r.contador + 1;
-			wrongWords.push_front(r);
+			else if((r.palavra != P) && ((it)==wrongWords.end())) {
+				r.palavra = P;
+				r.contador = r.contador + 1;
+				wrongWords.push_front(r);
 			}
 		}
 	}
 }
 
-void Corretor::exibirErro() {
+void Corretor::exibirErros() {
 	std::forward_list<erros>::iterator it;
 	for(it=wrongWords.begin(); it != wrongWords.end(); it++){
 		wcout << (*it).palavra << L"Errou " << (*it).contador << L"Vezes" << endl;

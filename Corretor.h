@@ -30,7 +30,7 @@ class Corretor {
         Palavra selecPalavraSemelhante(Palavra palavraErrada);
         void adicionarPalavraDicionario(Palavra palavraErrada);
     	void adicionarErro(Palavra palavraErrada);
-        void exibirErro();
+        void exibirErros();
     	// void apresentarErro();
     	// void corrigir();// usar uma palavra fornecida pelo dicionário para corrigir uma palavra errada no texto
     	// void ignorar();//ignorar um erro encontrado pelo corretor e não fazer mais nada
