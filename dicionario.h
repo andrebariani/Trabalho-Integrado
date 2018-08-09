@@ -26,7 +26,7 @@ class dicionario
         void limparArquivo();
 
         //Salva a árvore de palavras no arquivo
-        void atualizarArquivo(Palavra p);
+        void atualizarArquivo();
 
         ////Retorna primeiro elemento do vetor de palavras semelhantes
         //NO * buscaSemelhante(Palavra p);
@@ -37,6 +37,8 @@ class dicionario
 
         bool buscaPalavra(Palavra p);
 
-        queue<Palavra> * buscaSemelhante(Palavra p);
+        queue<Palavra> & buscaSemelhante(Palavra p, queue<Palavra> & queueSemelhante);
+
+        void printar();
 };
 #endif 
