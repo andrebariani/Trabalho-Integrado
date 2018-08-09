@@ -32,10 +32,6 @@ class Arvore {
         /** Inicializa a Arvore*/
         Arvore();
 
-        Arvore(const Arvore& orig);
-
-        virtual ~Arvore();
-
         ///Vazia
         /** Retorna verdadeiro se a Arvore está vazia, falso do contrário.*/
         bool vazia();
@@ -62,7 +58,7 @@ class Arvore {
         /** Retorna o numero de Nos da Arvore*/
         unsigned getQtd();
 
-        ///Método para buscar um intervalo, e retornar um std::stack<T> com os elementos entre o maior e o menor
+        ///Método para buscar um intervalo, e retornar um std::queue<T> com os elementos entre o maior e o menor
         void buscaIntervalo( std::queue<T> &q/**< [out] Fila com elementos do intervalo.*/,
                         T menor         /**< [in] Limitante inferior.*/,
                         T maior         /**< [in] Limitante superior.*/);
@@ -104,7 +100,7 @@ class Arvore {
 
         ///
         /**
-         * Método auxiliar para buscar um intervalo, e retornar um std::stack<T> com os elementos entre o maior e o menor
+         * Método auxiliar para buscar um intervalo, e retornar um std::queue<T> com os elementos entre o maior e o menor
          * @param  p     Ponteiro para no atual
          * @param  q     Fila para retornar elementos
          * @param  menor Limitante superior
@@ -164,19 +160,6 @@ template <class T>
 Arvore<T>::Arvore() {
     raiz=NULL;
     qtd=0;
-}
-
-///Construtor por Cópia
-/* Aloca uma nova arvore igual a original*/
-template <class T>
-Arvore<T>::Arvore(const Arvore& orig  /**< [in] Arvore de origem a ser copiada.*/) {
-
-}
-
-///Destrutor
-/* Destroi a arvore*/
-template <class T>
-Arvore<T>::~Arvore() {
 }
 
 ///Vazia
@@ -505,7 +488,7 @@ template <class T>
 void Arvore<T>::percursoEmOrdem( void (*processa)(T)/**< [in] Função que processa o No*/)
 {
     emOrdem(raiz, processa);
-
+}
 
 ///Get Quantidade de Nos
 /** Retorna o numero de Nos da Arvore*/
@@ -514,7 +497,7 @@ unsigned Arvore<T>::getQtd(){
     return qtd;
 }
 
-///Método para buscar um intervalo, e retornar um std::stack<T> com os elementos entre o maior e o menor
+///Método para buscar um intervalo, e retornar um std::queue<T> com os elementos entre o maior e o menor
 template <class T>
 void Arvore<T>::buscaIntervalo(std::queue<T> &q, T menor, T maior) {
     //Esvazia Fila
@@ -524,7 +507,7 @@ void Arvore<T>::buscaIntervalo(std::queue<T> &q, T menor, T maior) {
     buscaIntervalo_no(raiz, q, menor, maior);
 }
 
-///Método auxiliar para buscar um intervalo, e retornar um std::stack<T> com os elementos entre o maior e o menor
+///Método auxiliar para buscar um intervalo, e retornar um std::queue<T> com os elementos entre o maior e o menor
 template <class T>
 void  Arvore<T>::buscaIntervalo_no(No* p, std::queue<T> &q, T menor, T maior) {
     if (!p)
