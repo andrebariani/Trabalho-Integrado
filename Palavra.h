@@ -15,7 +15,6 @@
 class Palavra {
 public:
     /// Construtor de Palavra
-
     /** Recebe uma string para inicializar a palavra */
     Palavra(std::wstring p=L""/**< [in] Palavra a ser inicializada. Por padrão, "". */);
 
@@ -47,7 +46,6 @@ public:
     /// Operador =
     /** \Atribui o valor da palavra em uma segunda palavra.*/
     Palavra & operator=(const Palavra & p2 );
-    // void operator=( Palavra p2/**< [in] Valor da Palavra para atribuir à segunda palavra*/ );
 
     /// set Palavra
     /** Atribui na palavra a string p.*/
