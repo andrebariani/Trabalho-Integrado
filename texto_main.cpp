@@ -21,6 +21,8 @@ int main(int argc, char** argv) {
         palavra = txt.percorrerTexto();
         // palavra.setPalavra(txt.percorrerTexto().getPalavra());
 
+        wcout << palavra << endl;
+
         Palavra Null;
 
         while(!(palavra == Null)) {
