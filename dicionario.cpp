@@ -11,32 +11,73 @@ dicionario::dicionario()
     //Abre o arquivo no modo "in" que permite apenas leitura
     file.open("dict.txt", wifstream::in);
 
-        //"is_open" retorna TRUE se o "file" está aberto
-        //"good" retorna TRUE se abriu sem problemas
-        if(file.is_open() && file.good())
-        {
-                Palavra p;
-                wstring s;
+    //"is_open" retorna TRUE se o "file" está aberto
+    //"good" retorna TRUE se abriu sem problemas
+    if(file.is_open() && file.good())
+    {
 
-            //"file" envia seu conteúdo para "dict" 
-            while(getline(file, s));   //Salva a palavra do arquivo para s
+            Palavra p;
+            wstring s;
+
+        //"file" envia seu conteúdo para "dict"
+        while(file >> s)   //Salva a palavra do arquivo para s
+        {
+            if(arvore.getQtd() <= 10000)
             {
-                if(arvore.getQtd() <= 10000)
-                {
-                    p.setPalavra(s);    //Passa palavra para p
-                    arvore.insere(p);   //Adiciona p na arvore
-                }
-                else
-                {
-                    throw runtime_error("Árvore cheia\n"); //Tratamento de excessão
-                }  
+
+                wcout << "Adicionou " << s << " na arvore" << endl;
+                p.setPalavra(s);    //Passa palavra para p
+                arvore.insere(p);   //Adiciona p na arvore
+            }
+            else
+            {
+                throw runtime_error("Árvore cheia\n"); //Tratamento de excessão
+            }
+/*
+        wstring p = L"";
+        wstring d = L"";
+        // Setando local para aceitar acentos
+        setlocale(LC_ALL,"pt_BR.UTF-8");
+            wchar_t c;
+        while(file.get(c)) {
+            if(arvore.getQtd() > 10000) // Atingiu o tamanho máximo do vetor
+                break;
+
+            switch (iswalpha(c)) {
+                case 0: // Se não for letra
+                    // wcout << "Delim Found: " <<  "-" << c << "-" << endl;
+
+                    if(p == L"") {
+                        d = d + c;
+                        // wcout << "-" << d << "-"<< endl;
+                    } else {
+                        Palavra paux;
+                        paux = p;
+                        arvore.insere(paux);
+                        cout << "Adicionou " << p.compare("abacaxi") << "na arvore" << endl;
+                        // wcout << paux << " Inserted!" << endl << endl;
+                        p = L"";
+                        d = d + c;
+                    }
+                break;
+                default: // Se for Letra
+                    // wcout << "Letter Found: " << c << endl;
+
+
+                    if(d == L"") {
+                        p = p + c;
+                        // wcout << p << endl;
+                    } else {
+                        d = L"";
+                        p = p + c;
+                    }
+                break;
             }
         }
-        else
-        {
-            throw runtime_error("1 Erro ao abrir o arquivo\n"); //Tratamento de excessão
-        }
+    }
 
+*/
+}}
     //Fecha o arquivo
     file.close();
 }
@@ -51,8 +92,8 @@ void dicionario::limparArquivo()
     {
         throw runtime_error("2 Erro ao abrir o arquivo\n"); //Tratamento de excessão
     }
-    
-    //Fecha o arquivo    
+
+    //Fecha o arquivo
     file.close();
 }
 
@@ -62,7 +103,7 @@ void dicionario::atualizarArquivo(Palavra p)
 
     //Abre o arquivo no modo "out", para escrever e o "app" para que escreva no fim do arquivo
     file.open("dict.txt", wofstream::out | wofstream::app);
-   
+
     if(!(file.is_open() && file.good()))
     {
         throw runtime_error("Erro ao abrir o arquivo\n"); //Tratamento de excessão
@@ -82,7 +123,7 @@ void dicionario::incluir(Palavra p)
     {
         arvore.insere(p);
     }
-    else   
+    else
     {
         throw runtime_error("Árvore cheia\n"); //Tratamento de excessão
     }
@@ -121,23 +162,23 @@ queue<Palavra> * dicionario::buscaSemelhante(Palavra p)
     Palavra menor;
     Palavra maior;
     wstring aux;
-    menor.setPalavra(p.getPalavra().substr(0, 2));  
+    menor.setPalavra(p.getPalavra().substr(0, 2));
     aux = (p.getPalavra())[0] + ((p.getPalavra())[1] + 1);
     maior.setPalavra(aux);
 
     arvore.buscaIntervalo(*queueSemelhante, menor, maior);
-    
+
     if(queueSemelhante-> empty())
     {
         throw runtime_error("Não há palavras semelhantes\n"); //Tratamento de excessão
     }
 
     //Se o último elemento da fila não for semelhante a p
-    if(!((queueSemelhante -> back()).semelhantes(p))) 
+    if(!((queueSemelhante -> back()).semelhantes(p)))
     {
         queue<Palavra> temp;
 
-        //Passa todos os valores menos o último de semelhantes para temp 
+        //Passa todos os valores menos o último de semelhantes para temp
         for(int i = 0; i < (queueSemelhante -> size() - 1); i++)
         {
             temp.push(queueSemelhante-> front());
@@ -153,8 +194,8 @@ queue<Palavra> * dicionario::buscaSemelhante(Palavra p)
             queueSemelhante -> push(temp.front());
             temp.pop();
         }
-    }   
-    
-    return queueSemelhante;    
+    }
+
+    return queueSemelhante;
 
 }
