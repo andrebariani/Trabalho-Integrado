@@ -4,7 +4,7 @@
 
 #include "Corretor.h"
 
-enum {SAIR, CARREGATEXTO, CORRIGI};
+enum {SAIR, CARREGATEXTO, CORRIGIR};
 
 int main() {
 
@@ -24,7 +24,7 @@ int main() {
 
         cout << ">>" ;
         cin >> op;
-        
+
         try {
             switch (op) {
                 case SAIR:
@@ -37,7 +37,7 @@ int main() {
                     cin >> nome_texto;
                 }
                 break;
-                case CORRIGI: {
+                case CORRIGIR: {
                     printf("\tIniciando Correção...\t\t\t\n");
 
                     Corretor corretor(nome_texto);

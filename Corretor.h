@@ -1,12 +1,14 @@
 #ifndef CORRETOR_H
 #define CORRETOR_H
 
+#include <iostream>
+#include <string>
+#include <forward_list>
 #include "Palavra.h"
 #include "Texto.h"
 #include "dicionario.h"
 
-#include <string>
-#include <forward_list>
+using namespace std;
 
 class Corretor {
     private:
@@ -20,7 +22,7 @@ class Corretor {
     	// Palavra pal;
 
     public:
-        Corretor(string nome_texto);
+        Corretor(std::string nometexto);
         void iniciarCorrecao(); // Inicia processo de correção do arquivo de texto inteiro
         void apresentarErro(Palavra palavraErrada);
         // void mudarTexto( string nome_texto );

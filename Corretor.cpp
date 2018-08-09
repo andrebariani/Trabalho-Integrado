@@ -2,9 +2,9 @@
 #include "Palavra.h"
 #include "Texto.h"
 #include "dicionario.h"
-#include <iostream>
-#include <string>
-#include <forward_list>
+// #include <iostream>
+// #include <string>
+// #include <forward_list>
 
 Corretor::Corretor( string nome_texto ) {
 	texto.carregarNovoTexto(nome_texto);
@@ -163,7 +163,7 @@ void Corretor::adicionarErro(Palavra palavraErrada){
 void Corretor::exibirErro() {
 	std::forward_list<erros>::iterator it;
 	for(it=wrongWords.begin(); it != wrongWords.end(); it++){
-		wcout << (*it) << L"Errou " << (*it).contador << L"Vezes" << endl;
+		wcout << (*it).palavra << L"Errou " << (*it).contador << L"Vezes" << endl;
 	}
 }
 
