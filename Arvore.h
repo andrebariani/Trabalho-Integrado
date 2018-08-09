@@ -75,10 +75,10 @@ class Arvore {
          * Retorna exceção se não for inserido com sucesso.
          * @param  p         Ponteiro do nó atual
          * @param  d         Dado a ser inserido
-         * @param  noAlocado Flag para saber se o no foi alocado
+         * @param  cresceuAltura Flag para saber se o no foi alocado
          * @return           Arvore com dado inserido
          */
-        No* insere_no( No *p, T d , bool &noAlocado);
+        No* insere_no( No *p, T d , bool &cresceuAltura);
         ///Remove No
         /**
          * Método auxiliar para remover o No
@@ -200,16 +200,16 @@ bool Arvore<T>::vazia()
 template <class T>
 void Arvore<T>::insere( T d /**< [in] Dado a ser inserido.*/)
 {
-    bool noAlocado=false;
-    raiz=insere_no(raiz, d, noAlocado);
-    if(noAlocado)
+    bool cresceuAltura=false;
+    raiz=insere_no(raiz, d, cresceuAltura);
+    if(cresceuAltura)
         qtd++;
 }
 ///Insere No
 /** Funcao privada que insere o dado d na arvore.
     Retorna exceção se não for inserido com sucesso.*/
 template <class T>
-typename Arvore<T>::No* Arvore<T>::insere_no( No *p, T d , bool &noAlocado) {
+typename Arvore<T>::No* Arvore<T>::insere_no( No *p, T d , bool &cresceuAltura) {
     if( !p )//Posicao encontrada
     {
         //Alocar No
@@ -219,38 +219,46 @@ typename Arvore<T>::No* Arvore<T>::insere_no( No *p, T d , bool &noAlocado) {
         p->bal=0;
         p->esq=NULL;
         p->dir=NULL;
-        //noAlocado
-        noAlocado=true;
+        //cresceuAltura
+        cresceuAltura=true;
     }
     else{
         if( d < p->dado ){
             //Chama para  subarvore esquerda
-            p->esq = insere_no(p->esq,d,noAlocado);
+            p->esq = insere_no(p->esq,d,cresceuAltura);
             //Corrige balanceamento
-            if(noAlocado && p->bal==-1 && !p->esq->bal==0)
+            if(cresceuAltura)
             {
-                if(p->esq->bal == -1)//se foi inserido na subarvore esquerda do No esq
-                    p=rotEE(p);
-                else//se foi inserido na subarvore direita do No esq
-                    p=rotED(p);
+                if(p->bal==-1)
+                    if(p->esq->bal ==-1)//se foi inserido na subarvore direita do No dir
+                        p=rotEE(p);
+                    else                //se foi inserido na subarvore direita do No dir
+                        p=rotED(p);
+                else{
+                    p->bal--;
+                    if(p->bal==0)
+                        cresceuAltura=false;
+                }
             }
-            else if (noAlocado && p->bal!=-1)
-                p->bal--;
         }
         else if( d > p->dado ){
             //Chama para  subarvore direita
-            p->dir = insere_no(p->dir,d,noAlocado);
+            p->dir = insere_no(p->dir,d,cresceuAltura);
             //Corrige balanceamento
             std::cout << p->dado << '\n';
-            if(noAlocado && p->bal==1 && !p->dir->bal==0)
+            if(cresceuAltura)
             {
-                if(p->dir->bal == 1)//se foi inserido na subarvore direita do No dir
-                    p=rotDD(p);
-                else//se foi inserido na subarvore direita do No dir
-                    p=rotDE(p);
-            }
-            else if (noAlocado && p->bal!=1){
-                p->bal++;
+                if(p->bal==1){
+                    if(p->dir->bal == 1)//se foi inserido na subarvore direita do No dir
+                        p=rotDD(p);
+                    else                //se foi inserido na subarvore direita do No dir
+                        p=rotDE(p);
+                }
+                else{
+                    p->bal++;
+                    if(p->bal==0)
+                        cresceuAltura=false;
+                }
             }
         }
         else
@@ -258,7 +266,7 @@ typename Arvore<T>::No* Arvore<T>::insere_no( No *p, T d , bool &noAlocado) {
             //Atualiza o dado
             p->dado=d;
             //NAO mudou altura
-            noAlocado=false;
+            cresceuAltura=false;
         }
     }
     return p;
@@ -272,6 +280,7 @@ void Arvore<T>::remove( T d /**< [in] Dado a ser removido.*/)
 {
     bool diminuiuAltura = false;
     raiz=remove_no(raiz, d, diminuiuAltura);
+    qtd--;
 }
 
 template <class T>
@@ -284,9 +293,9 @@ typename Arvore<T>::No* Arvore<T>::remove_no( No *p, T d , bool &diminuiuAltura)
         //VERIFICAR BALANCEAMENTO
         if(diminuiuAltura && p->bal==1)
             if(p->dir->bal == 1)//se foi inserido na subarvore direita do No dir
-                p=rotDDremove(p,diminuiuAltura);
-            else//se foi inserido na subarvore direita do No dir
                 p=rotDEremove(p,diminuiuAltura);
+            else//se foi inserido na subarvore direita do No dir
+                p=rotDDremove(p,diminuiuAltura);
         else if(diminuiuAltura)
             p->bal++;
 
@@ -296,11 +305,12 @@ typename Arvore<T>::No* Arvore<T>::remove_no( No *p, T d , bool &diminuiuAltura)
         //VERIFICAR balanceamento
         if(diminuiuAltura && p->bal==-1)
             if(p->esq->bal == -1)//se foi inserido na subarvore esquerda do No esq
-                p=rotEEremove(p,diminuiuAltura);
+                p=rotDEremove(p,diminuiuAltura);
             else//se foi inserido na subarvore direita do No esq
-                p=rotEDremove(p,diminuiuAltura);
-        else if (diminuiuAltura)
+                p=rotEEremove(p,diminuiuAltura);
+        else if(diminuiuAltura)
             p->bal--;
+
     }
     else {
         //Dado encontrado
@@ -383,6 +393,7 @@ typename Arvore<T>::No* Arvore<T>::rotDE( No* A ) {
     C->dir = B;
     A->dir = C->esq;
     C->esq = A;
+    std::cout << C->bal << '\n';
     //Corrgir balanceamento
     if( C->bal == -1 ) {
         A->bal = 0;
@@ -428,6 +439,7 @@ typename Arvore<T>::No* Arvore<T>::rotED( No* A ) {
 //Método auxiliar para realizar a rotação EE na remocao
 template <class T>
 typename Arvore<T>::No* Arvore<T>::rotEEremove(No* p, bool &mudouAltura) {
+    std::cout << "rotEEr" << '\n';
     No* A = p->esq;
     p->esq = A->dir;
     A->dir= p;
@@ -453,6 +465,7 @@ typename Arvore<T>::No* Arvore<T>::rotEDremove(No* p, bool &mudouAltura) {
 //Método auxiliar para realizar a rotação DD na remocao
 template <class T>
 typename Arvore<T>::No* Arvore<T>::rotDDremove(No* p, bool &mudouAltura) {
+    std::cout << "rotDDr" << '\n';
     No *B = p->dir;
     p->dir = B->esq;
     B->esq = p;
