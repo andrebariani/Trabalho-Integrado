@@ -34,7 +34,7 @@ class Texto {
         /// Carregador de Texto
         /** Carrega um arquivo texto, preenchendo as listas de palavras e delimitadores
             com o conteúdo do arquivo*/
-        void carregarTexto();
+        void carregarNovoTexto( string na );
 
         /// Percurso do Texto
         /** Retorna uma Palavra do texto em ordem de chamada dessa função */
