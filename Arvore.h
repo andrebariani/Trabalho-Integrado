@@ -1,6 +1,7 @@
 /*! \file Arvore.h
     \brief Classe Arvore Binaria de Busca
- *  Autor: Anderson Pinheiro Garrote
+ *  \author Anderson Pinheiro Garrote
+ *  \author Thiago Yussuki Uehara
  *  Created on 23 de Maio de 2018, 18:10
 */
 
@@ -152,11 +153,6 @@ class Arvore {
         ///Método auxiliar para realizar a rotação DE na remocao
         No* rotDEremove(No* p, bool &mudouAltura);
 };
-
-
-///Busca Semelhantes
-/** Retorna verdadeiro se o T foi encontrado, falso do contrário.*/
-//T * buscaSemelhantes( T d /**< [in] Dado a ser buscado.*/, Iterator it);
 
 
 /******************************************************************************
