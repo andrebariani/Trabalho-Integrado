@@ -120,8 +120,8 @@ queue<Palavra> & dicionario::buscaSemelhante(Palavra p, queue<Palavra> & queueSe
 
         //Passa todos os valores menos o último de semelhantes para temp
         for(int i = 0; i < (queueSemelhante.size() - 1); i++)
-        {
-            temp.push(queueSemelhante.front());
+        {   
+            queueSemelhante.push(queueSemelhante.front());
             queueSemelhante.pop();
         }
 
@@ -129,11 +129,12 @@ queue<Palavra> & dicionario::buscaSemelhante(Palavra p, queue<Palavra> & queueSe
         queueSemelhante.pop(); //Tira o último elemento de queueSemelhante
 
         //Passa os elementos de temp para queueSemelhante
-        for(int i = 0; i < temp.size(); i++)
-        {
-            queueSemelhante.push(temp.front());
-            temp.pop();
-        }
+        //for(int i = 0; i < temp.size(); i++)
+        //{
+        //    wcout << temp.front() << endl;
+        //    queueSemelhante.push(temp.front());
+        //    temp.pop();
+        // }
     }
 
     return queueSemelhante;

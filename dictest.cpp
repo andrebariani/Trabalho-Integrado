@@ -6,7 +6,7 @@ int main()
 {
     dicionario dict;
     Palavra p;
-    
+    queue<Palavra> fila; 
     p.setPalavra(L"esse");
     dict.incluir(p);
     p.setPalavra(L"teste");
@@ -16,7 +16,8 @@ int main()
     p.setPalavra(L"certo");
     dict.incluir(p);
     dict.printar();
-    dict.limparArquivo();
+    p.setPalavra(L"delco");
+    dict.buscaSemelhante(p, fila);
     dict.atualizarArquivo();
 
     return 0;
