@@ -18,9 +18,10 @@ void Corretor::iniciarCorrecao() {
 	Palavra Null;
 	Palavra atual = texto.percorrerTexto();
 
+	wcout << "Conferindo palavra: " << atual << endl;
+
 	while(!(atual == Null)) {
-		Palavra encontrado = dicionario.buscaPalavra(atual);
-		if(encontrado == Null) {
+		if(!dic.buscaPalavra(atual)) {
 			apresentarErro(atual);
 		}
 
@@ -42,7 +43,7 @@ void Corretor::apresentarErro(Palavra palavraErrada){
 	int op;
 
 	cout << "Uma palavra inexistente no dicionário foi encontrada no texto: \"...";
-	wcout << pa << palavraErrada << pp << L"...\", por favor selecione uma opção\n";
+	wcout << pa << " " << palavraErrada << " " << pp << L"...\", por favor selecione uma opção\n";
 	cout << "Opção 1: Inserir a palavra correta\n";
 	cout << "Opção 2: Ignorar o erro\n";
 	cout << "Opção 3: Selecionar palavra semelhante encontrada no dicionário\n";
@@ -50,8 +51,8 @@ void Corretor::apresentarErro(Palavra palavraErrada){
 
 	adicionarErro(palavraErrada);
 
-		cin >> op;
 	do{
+		cin >> op;
 		if(op == 1){
 				corrigir();
 			break;
@@ -73,9 +74,7 @@ void Corretor::apresentarErro(Palavra palavraErrada){
 			cout << "Opção inválida";
 			cin >> op;
 		}
-	}while(op < 1 || op > 4);
-
-
+	}while(op >= 1 && op <= 4);
 }
 
 // void mudarTexto( string nome_texto ) {

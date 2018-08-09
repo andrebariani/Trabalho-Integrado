@@ -42,7 +42,7 @@ int main() {
 
                     Corretor corretor(nome_texto);
 
-                    corretor.corrigir();
+                    corretor.iniciarCorrecao();
 
                 }
                 break;
