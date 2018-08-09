@@ -12,11 +12,11 @@ Texto::Texto( string na ) {
     it_delim = delim.begin();
 
     if(na != "")
-        carregarTexto();
+        carregarNovoTexto(nomearq);
 }
 
-void Texto::carregarTexto() {
-
+void Texto::carregarNovoTexto( string na ) {
+    nomearq = na;
     wstring p = L"";
     wstring d = L"";
     // Setando local para aceitar acentos
@@ -25,11 +25,8 @@ void Texto::carregarTexto() {
     // Tratando da Extensão do arquivo de entrada
     size_t found = nomearq.find(".txt");
 
-    if(found == std::string::npos) {
-        // cout << ".txt not found" << endl;
+    if(found == std::string::npos)
         nomearq += ".txt";
-    }
-    //
 
     // cout << nomearq << endl;
 
@@ -56,8 +53,7 @@ void Texto::carregarTexto() {
                 if(p == L"") {
                     d = d + c;
                     // wcout << "-" << d << "-"<< endl;
-                }
-                else {
+                } else {
                     Palavra paux;
                     paux = p;
                     palavras.push_back(paux);
@@ -75,8 +71,7 @@ void Texto::carregarTexto() {
                 if(d == L"") {
                     p = p + c;
                     // wcout << p << endl;
-                }
-                else {
+                } else {
                     delim.push_back(d);
                     // wcout << "-" << d << "-" << " Inserted!" << endl << endl;
                     d = L"";

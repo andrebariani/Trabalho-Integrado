@@ -2,14 +2,13 @@
 #include <string>
 #include <iostream>
 
-// #include "Corretor.h"
-// #include "dicionario.h"
-#include "Texto.h"
-#include "Palavra.h"
+#include "Corretor.h"
 
 enum {SAIR, CARREGATEXTO, CORRIGI};
 
 int main() {
+
+    // $ g++ -o main_exe main.cpp Texto.cpp Palavra.cpp dicionario.cpp Corretor.cpp
 
     string nome_texto;
 
@@ -25,7 +24,7 @@ int main() {
 
         cout << ">>" ;
         cin >> op;
-
+        
         try {
             switch (op) {
                 case SAIR:
@@ -40,9 +39,10 @@ int main() {
                 break;
                 case CORRIGI: {
                     printf("\tIniciando Correção...\t\t\t\n");
-                    Texto txt(nome_texto);
 
                     Corretor corretor(nome_texto);
+
+                    corretor.corrigir();
 
                 }
                 break;
