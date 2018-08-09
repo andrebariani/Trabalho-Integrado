@@ -46,15 +46,8 @@ dicionario::dicionario()
         //"file" envia seu conteúdo para "dict"
         while(file >> s)   //Salva a palavra do arquivo para s
         {
-            if(arvore.getQtd() <= 10000)
-            {
-                p.setPalavra(s);    //Passa palavra para p
-                arvore.insere(p);   //Adiciona p na arvore
-            }
-            else
-            {
-                throw runtime_error("Árvore cheia\n"); //Tratamento de excessão
-            }
+            p.setPalavra(s);    //Passa palavra para p
+            arvore.insere(p);   //Adiciona p na arvore
         }      
     }
     //Fecha o arquivo
@@ -79,46 +72,31 @@ void dicionario::limparArquivo()
 void dicionario::incluir(Palavra p)
 {
     //Chama processo de inserção da arvore
-    if(arvore.getQtd() < 10000)
-    {
-        arvore.insere(p);
-    }
-    else
-    {
-        throw runtime_error("Árvore cheia\n"); //Tratamento de excessão
-    }
+    arvore.insere(p);
 }
 
 void dicionario::remover(Palavra p)
 {
     //Chama processo de remoção da arvore
-    if(arvore.getQtd() > 1)
-    {
-
-        arvore.remove(p);
-    }
-    else
-    {
-        throw runtime_error("Árvore vazia\n"); //Tratamento de excessão
-    }
+    arvore.remove(p);
 }
 
 bool dicionario::buscaPalavra(Palavra p)
 {
+    //Se encontrar, return true
     if(arvore.busca(p))
     {
-        return 1;
+        return true;
     }
+    //Se não, retorna false
     else
     {
-        return 0;
+        return false;
     }
 }
 
 queue<Palavra> & dicionario::buscaSemelhante(Palavra p, queue<Palavra> & queueSemelhante)
 {
-
-
     Palavra menor;
     Palavra maior;
     wstring aux;
@@ -126,12 +104,14 @@ queue<Palavra> & dicionario::buscaSemelhante(Palavra p, queue<Palavra> & queueSe
     aux = (p.getPalavra())[0] + ((p.getPalavra())[1] + 1);
     maior.setPalavra(aux);
 
-    arvore.buscaIntervalo(queueSemelhante, menor, maior);
-
-    if(queueSemelhante.empty())
+    //Esvaziando a queue
+     while(!queueSemelhante.empty())
     {
-        throw runtime_error("Não há palavras semelhantes\n"); //Tratamento de excessão
+        queueSemelhante.pop();
     }
+
+    //Pegando elementos semelhantes a p
+    arvore.buscaIntervalo(queueSemelhante, menor, maior);
 
     //Se o último elemento da fila não for semelhante a p
     if(!((queueSemelhante.back()).semelhantes(p)))
@@ -146,10 +126,10 @@ queue<Palavra> & dicionario::buscaSemelhante(Palavra p, queue<Palavra> & queueSe
         }
 
         //Troca os conteúdos entre temp e semelhantes
-        //queueSemelhante.swap(temp);
-        queueSemelhante.pop();
+        queueSemelhante.pop(); //Tira o último elemento de queueSemelhante
 
-        for(int i = 0; i < (temp.size()); i++)
+        //Passa os elementos de temp para queueSemelhante
+        for(int i = 0; i < temp.size(); i++)
         {
             queueSemelhante.push(temp.front());
             temp.pop();
@@ -162,10 +142,11 @@ queue<Palavra> & dicionario::buscaSemelhante(Palavra p, queue<Palavra> & queueSe
 
 void dicionario::printar()
 {
-    arvore.percursoEmOrdem( printPalavra );
+    arvore.percursoEmOrdem( printPalavra ); //Imprime a arvore em EmOrdem
 }
 
 void dicionario::atualizarArquivo()
 {
-    arvore.percursoEmOrdem( adicionarArquivo );
+    limparArquivo(); //Limpa o arquivo
+    arvore.percursoEmOrdem( adicionarArquivo ); //Coloca a arvore no arquivo em EmOrdem
 }
