@@ -506,7 +506,7 @@ void Arvore<T>::percursoEmOrdem( void (*processa)(T)/**< [in] Função que proce
 ///Get Quantidade de Nos
 /** Retorna o numero de Nos da Arvore*/
 template <class T>
-unsigned Arvore<T>::getQtd(){
+unsigned Arvore<T>::getQtd() {
     return qtd;
 }
 
