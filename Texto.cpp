@@ -28,6 +28,8 @@ void Texto::carregarNovoTexto( string na ) {
     wstring p = L"";
     wstring d = L"";
 
+    setlocale(LC_ALL,"pt_BR.UTF-8");
+
     // Tratando da Extensão do arquivo de entrada
     size_t found = nomearq.find(".txt");
 
