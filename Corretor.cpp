@@ -89,6 +89,7 @@ void Corretor::corrigir(){// usar uma palavra fornecida pelo usuário para corri
 	//permitir que o usuário insira uma palavra e substitua a palavra errada
 	wstring correta;
 	cout << "Insira a palavra correta: ";
+	wcin.clear();
 	wcin >> correta;
 
 	texto.corrigirPalavra(correta);
