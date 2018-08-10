@@ -56,10 +56,6 @@ class Texto {
         /** Retorna palavra superior à palavra atual  */
         Palavra getPalavraProximo();
 
-        /// Operador =
-        /** \Atribui o valor do texto em um segundo texto.*/
-        Texto & operator=(const Texto & t2 );
-
     private:
         vector<Palavra> palavras; /// Vetor contendo todas as palavras do texto
         vector<wstring> delim; /// Vetor de delimitadores do Texto (tudo que não for palavra)
