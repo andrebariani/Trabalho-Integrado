@@ -43,12 +43,12 @@ void Corretor::apresentarErro(Palavra palavraErrada){
 	Palavra pa = texto.getPalavraAnterior();
 	Palavra pp = texto.getPalavraProximo();
 	int op;
-
+	std::cout << "=============================================" << "\n\n";
 	cout << "Palavra errada encontrada: ";
 	wcout << palavraErrada;
 	cout << "\nContexto:\"...";
 	wcout << pa << " " << palavraErrada << " " << pp << L"...\"\n ";
-	cout << "Por favor selecione uma opção\n";
+	cout << "\nPor favor selecione uma opção\n";
 	cout << " -Opção 1: Inserir a palavra correta\n";
 	cout << " -Opção 2: Ignorar o erro\n";
 	cout << " -Opção 3: Selecionar palavra semelhante encontrada no dicionário\n";
@@ -175,9 +175,10 @@ void Corretor::adicionarErro(Palavra palavraErrada){
 }
 
 void Corretor::exibirErros() {
-	std::cout << "Sem mais erros!" << '\n';
+	std::cout << "=============================================" << "\n\n";
+	std::cout << "Sem mais erros!" << '\n\n';
 	std::cin.ignore();
-	std::cout << "===============" << '\n';
+	std::cout << "=============================================" << '\n';
 	std::cout << "Lista de Erros:" << '\n';
 	std::forward_list<erros>::iterator it;
 	wrongWords.reverse();
