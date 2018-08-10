@@ -19,7 +19,6 @@ class Corretor {
             int contador;
         } erros;
         forward_list<erros> wrongWords;
-    	// Palavra pal;
 
     public:
         Corretor(std::string nometexto);
