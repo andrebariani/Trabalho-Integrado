@@ -1,13 +1,10 @@
-#include "Dicionario.h"
+#include "dicionario.h"
 #include "Arvore.h"
 #include "Palavra.h"
 using namespace std;
 
-void printPalavra(Palavra p)
-{
-    wcout << p <<"\t";
-}
-
+//Método que adiciona a palavra p ao arquivo dict.txt
+//Parâmetro p, palavra a ser adicionada ao arquivo
 void adicionarArquivo(Palavra p)
 {
     wofstream file;
@@ -15,6 +12,7 @@ void adicionarArquivo(Palavra p)
     //Abre o arquivo no modo "out", para escrever e o "app" para que escreva no fim do arquivo
     file.open("dict.txt", wofstream::out | wofstream::app);
 
+    //Caso o arquivo não seja aberto ou ocorra um erro na abertura do mesmo
     if(!(file.is_open() && file.good()))
     {
         throw runtime_error("Erro ao abrir o arquivo\n"); //Tratamento de excessão
@@ -27,6 +25,8 @@ void adicionarArquivo(Palavra p)
     file.close();
 }
 
+///Construtor
+/*cria um arquivo que possui uma árvore de palavras extraidas do arquivo dict.txt*/
 dicionario::dicionario()
 {
     //Cria um objeto wifstream "file"
@@ -54,6 +54,8 @@ dicionario::dicionario()
     file.close();
 }
 
+///limparArquivo
+/*Exclui todo o conteúdo do arquivo dict.txt*/
 void dicionario::limparArquivo()
 {
     wofstream file;
@@ -69,18 +71,24 @@ void dicionario::limparArquivo()
     file.close();
 }
 
+///Incluir
+/*Inclui a palavra p na árvore de palavras*/
 void dicionario::incluir(Palavra p)
 {
     //Chama processo de inserção da arvore
     arvore.insere(p);
 }
 
+///Remover
+/*Remove a palavra p da árvore de palavras*/
 void dicionario::remover(Palavra p)
 {
     //Chama processo de remoção da arvore
     arvore.remove(p);
 }
 
+///Buscar palavra
+/*Retorna TRUE caso p pertença a árvore de palavras, FALSE caso contrário*/
 bool dicionario::buscaPalavra(Palavra p)
 {
     //Se encontrar, return true
@@ -95,6 +103,8 @@ bool dicionario::buscaPalavra(Palavra p)
     }
 }
 
+///Busca semelhante
+/*Retorna uma fila de palavras que sejam semelhantes a p e pertençam à árvore de palavras*/
 queue<Palavra> & dicionario::buscaSemelhante(Palavra p, queue<Palavra> & queueSemelhante)
 {
     Palavra menor;
@@ -127,25 +137,14 @@ queue<Palavra> & dicionario::buscaSemelhante(Palavra p, queue<Palavra> & queueSe
 
         //Troca os conteúdos entre temp e semelhantes
         queueSemelhante.pop(); //Tira o último elemento de queueSemelhante
-
-        //Passa os elementos de temp para queueSemelhante
-        //for(int i = 0; i < temp.size(); i++)
-        //{
-        //    wcout << temp.front() << endl;
-        //    queueSemelhante.push(temp.front());
-        //    temp.pop();
-        // }
     }
 
     return queueSemelhante;
 
 }
 
-void dicionario::printar()
-{
-    arvore.percursoEmOrdem( printPalavra ); //Imprime a arvore em EmOrdem
-}
-
+///Atualizar arquivo
+/*Salva todas as palavras pertencentes à árvore no arquivo em branco dict.txt*/
 void dicionario::atualizarArquivo()
 {
     limparArquivo(); //Limpa o arquivo
