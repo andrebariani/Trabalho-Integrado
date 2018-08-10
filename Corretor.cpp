@@ -123,9 +123,10 @@ Palavra Corretor::selecPalavraSemelhante(Palavra palavraErrada){//utilizar palav
 
 	Palavra escolhida;
 
-	int op;
-	cin >> op;
+	int op=0;
+
 	do{
+		cin >> op;
 		if(op < j+1 && op > 0) {
 			while(op-- > 0) {
 				escolhida = iSemelhantes.front();
@@ -136,7 +137,7 @@ Palavra Corretor::selecPalavraSemelhante(Palavra palavraErrada){//utilizar palav
 			cout << "Selecione Opção válida" << endl;
 			std::cout << ">>";
 		}
-	}while(op < j+1 && op > 0);
+	}while(!(op < j+1 && op > 0));
 
 	while(!iSemelhantes.empty())
 		iSemelhantes.pop();
