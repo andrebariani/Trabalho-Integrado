@@ -47,7 +47,7 @@ void Texto::carregarNovoTexto( string na ) {
 
     while(arq.get(c)) {
         if(total_size > 10000) // Atingiu o tamanho máximo do vetor
-            break;
+            throw std::runtime_error("Texto com mais de 10000 palavras\n");
 
         switch (iswalpha(c)) {
             case 0: // Se não for letra
@@ -55,6 +55,7 @@ void Texto::carregarNovoTexto( string na ) {
                 if(p == L"") {
                     d = d + c;
                 } else {
+                    ++total_size;
                     Palavra paux;
                     paux = p;
                     palavras.push_back(paux);
@@ -76,7 +77,6 @@ void Texto::carregarNovoTexto( string na ) {
             break;
         }
 
-        ++total_size;
     }
 
     // Por causa do salvarArquivo(), esse trecho é necessário para pegar a última pontuação

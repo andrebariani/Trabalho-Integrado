@@ -169,9 +169,9 @@ void Corretor::adicionarErro(Palavra palavraErrada){
 
 void Corretor::exibirErros() {
 	std::cout << "=============================================" << "\n\n";
-	std::cout << "Sem mais erros!" << '\n\n';
+	std::cout << "Sem mais erros!" << "\n\n";
 	std::cin.ignore();
-	std::cout << "=============================================" << '\n';
+	std::cout << "=============================================" << "\n";
 	std::cout << "Lista de Erros:" << '\n';
 	std::forward_list<erros>::iterator it;
 	wrongWords.reverse();
