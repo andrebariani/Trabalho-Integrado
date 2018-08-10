@@ -17,13 +17,16 @@
 
 using namespace std;
 
+/*! \class Dicionario
+    \brief Classe armazenadora de palavras em um dicionario
+*/
 class Dicionario
 {
     private:
         Arvore<Palavra> arvore;
 
         ///Limpar arquivo
-        /** 
+        /**
          * Exclui tudo que está no arquivo dict.txt
          * Usada apenas antes da chamada da função atualizarArquivo*/
         void limparArquivo();
@@ -58,7 +61,7 @@ class Dicionario
         /**
          * @param   p                   palavra a ser procurada
          * @return                      true caso a palavra p exista na árvore, false caso o contrário*/
-        
+
         bool buscaPalavra(Palavra p);
 
         /**
@@ -67,4 +70,4 @@ class Dicionario
          * @param   queueSemelhante     fila de palavras a ser preenchida por palavras semelhantes a p e pertencentes à árvore*/
         queue<Palavra> & buscaSemelhante(Palavra p, queue<Palavra> & queueSemelhante);
 };
-#endif 
+#endif

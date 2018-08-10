@@ -1,3 +1,11 @@
+/*! \file main.cpp
+    \brief Função Principal do Corretor
+ *  \author Anderson Pinheiro Garrote
+ *  \author Thiago Yussuki Uehara
+ *  \author Mariane Lamas Malheiros
+ *  \author André Matheus Bariani Trava
+ *  Created on 9 de Agosto de 2018
+*/
 #include <locale>
 #include <string>
 #include <iostream>
@@ -7,8 +15,6 @@
 enum {SAIR, CORRIGIR, CARREGATEXTO};
 
 int main() {
-
-    // $ g++ -o main_exe main.cpp Texto.cpp Palavra.cpp dicionario.cpp Corretor.cpp
 
     string nome_texto = "texto.txt";
 

@@ -1,17 +1,17 @@
 /*! \file Palavra.h
-    \brief Classe palavra e funções relacionadas
- *  Autor: Anderson Pinheiro Garrote
+ *  \brief Classe palavra e funções relacionadas
+ *  \author Anderson Pinheiro Garrote
+ *  \author André Matheus Bariani Trava 
  *  Created on 17 de Maio de 2018, 11:14
-*/
-/*! \class Palavra
-    \brief Classe de manipulação de palavras
 */
 
 #ifndef PALAVRA_H
 #define PALAVRA_H
 
 #include<string>
-
+/*! \class Palavra
+    \brief Classe de manipulação de palavras
+*/
 class Palavra {
 public:
     /// Construtor de Palavra
