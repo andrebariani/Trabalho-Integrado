@@ -3,7 +3,6 @@
 using namespace std;
 
 Texto::Texto( string na ) {
-    // Inicializa variáveis
     total_size = 0;
     word_first_flag = false;
     nomearq = na;
@@ -19,8 +18,6 @@ void Texto::carregarNovoTexto( string na ) {
     nomearq = na;
     wstring p = L"";
     wstring d = L"";
-    // Setando local para aceitar acentos
-    setlocale(LC_ALL,"pt_BR.UTF-8");
 
     // Tratando da Extensão do arquivo de entrada
     size_t found = nomearq.find(".txt");
@@ -28,15 +25,10 @@ void Texto::carregarNovoTexto( string na ) {
     if(found == std::string::npos)
         nomearq += ".txt";
 
-    // cout << nomearq << endl;
-
     wifstream arq;
-    // arq.exceptions ( ifstream::goodbit );
 
-    // arq.open(nomearq);
-    // throw e;
     arq.open(nomearq);
-    //
+
     if (!arq)
         throw std::runtime_error("Arquivo não encontrado\n");
 
@@ -48,32 +40,25 @@ void Texto::carregarNovoTexto( string na ) {
 
         switch (iswalpha(c)) {
             case 0: // Se não for letra
-                // wcout << "Delim Found: " <<  "-" << c << "-" << endl;
 
                 if(p == L"") {
                     d = d + c;
-                    // wcout << "-" << d << "-"<< endl;
                 } else {
                     Palavra paux;
                     paux = p;
                     palavras.push_back(paux);
-                    // wcout << paux << " Inserted!" << endl << endl;
                     p = L"";
                     d = d + c;
                 }
             break;
             default: // Se for Letra
-                // wcout << "Letter Found: " << c << endl;
-
                 // Salvando qual entre os dois aparecem primeiro no arquivo
                 if(total_size == 0) word_first_flag = true;
 
                 if(d == L"") {
                     p = p + c;
-                    // wcout << p << endl;
                 } else {
                     delim.push_back(d);
-                    // wcout << "-" << d << "-" << " Inserted!" << endl << endl;
                     d = L"";
                     p = p + c;
                 }
@@ -87,10 +72,10 @@ void Texto::carregarNovoTexto( string na ) {
     // Não é necessário para o vetor palavras pois todo arquivo .txt termina com '\n'
     if(d != L"")
         delim.push_back(d);
+    //
 
     it_palavras = palavras.begin();
 
-    // cout << total_size << endl;
     arq.close();
 }
 
@@ -124,7 +109,7 @@ void Texto::corrigirPalavra( Palavra corrigida ) {
 
 void Texto:: salvarArquivo() {
     size_t found = nomearq.find(".txt");
-    nomearq.insert(found, "-corrigido");
+    nomearq.insert(found, "-Corrigido");
 
     wofstream arq( nomearq );
 
@@ -149,16 +134,4 @@ void Texto:: salvarArquivo() {
     }
 
     cout << "Arquivo Salvo" << endl;
-}
-
-Texto & Texto::operator=(const Texto & t2 )
-{
-    this->palavras = t2.palavras;
-    this->delim = t2.delim;
-    this->nomearq = t2.nomearq;
-    this->it_palavras = t2.it_palavras;
-    this->word_first_flag = t2.word_first_flag;
-    this->total_size = t2.total_size;
-
-    return *this;
 }
