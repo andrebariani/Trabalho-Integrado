@@ -13,10 +13,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
-// #include <cwchar>
 #include <vector>
-#include <locale>
-#include <stdexcept>
 
 #include "Palavra.h"
 
@@ -37,7 +34,8 @@ class Texto {
         void carregarNovoTexto( string na );
 
         /// Percurso do Texto
-        /** Retorna uma Palavra do texto em ordem de chamada dessa função */
+        /** Retorna uma Palavra do texto em ordem de chamada dessa função, e relativo à posição do iterador
+            do vetor de palavras.  */
         Palavra percorrerTexto();
 
         /// Correção da palavra do Texto
@@ -45,7 +43,7 @@ class Texto {
         void corrigirPalavra( Palavra corrigida /** < [in] Palavra correta que troca com a palavra do texto */ );
 
         /// Armazenamento do novo texto
-        /** Salva o texto em um novo arquivo com extensão ".txt" com as palavras corrigidas */
+        /** Salva o texto em um novo arquivo com nome concatenado à "-Corrigido.txt" com as palavras corrigidas */
         void salvarArquivo();
 
         /// Pegar palavra anterior
