@@ -16,7 +16,7 @@ Corretor::Corretor( string nome_texto ) {
 
 void Corretor::iniciarCorrecao() {
 	Palavra Null;
-	Palavra atual = texto.percorrerTexto();
+	Palavra atual = texto.percorrerTexto().minuscula();
 
 
 
@@ -26,12 +26,13 @@ void Corretor::iniciarCorrecao() {
 			apresentarErro(atual);
 		}
 
-		atual = texto.percorrerTexto();
+		atual = texto.percorrerTexto().minuscula();
 	}
 
 	if(!wrongWords.empty()) {
 		exibirErros();
 		texto.salvarArquivo();
+		dic.atualizarArquivo();
 		return;
 	}
 	cout << "Não há erros no texto. Parabéns!!" << endl;
@@ -39,6 +40,7 @@ void Corretor::iniciarCorrecao() {
 
 void Corretor::apresentarErro(Palavra palavraErrada){
 
+	Palavra Null;
 	Palavra pa = texto.getPalavraAnterior();
 	Palavra pp = texto.getPalavraProximo();
 	int op;
@@ -65,7 +67,8 @@ void Corretor::apresentarErro(Palavra palavraErrada){
 		}
 		else if(op == 3){
 			Palavra correta = selecPalavraSemelhante(palavraErrada);
-			texto.corrigirPalavra(correta);
+			if(!(correta == Null))
+				texto.corrigirPalavra(correta);
 			break;
 		}
 		else if(op == 4){
@@ -74,7 +77,6 @@ void Corretor::apresentarErro(Palavra palavraErrada){
 		}
 		else{
 			cout << "Opção inválida" << endl;
-			cin >> op;
 		}
 	}while(op < 1 || op > 4);
 }
@@ -96,38 +98,55 @@ void Corretor::corrigir(){// usar uma palavra fornecida pelo usuário para corri
 
 Palavra Corretor::selecPalavraSemelhante(Palavra palavraErrada){//utilizar palavra semelhante sugerida
 	//substituir palavra errada por palavra semelhante do dicionário
-	queue<Palavra> *iSemelhantes = dic.buscaSemelhante(palavraErrada);
-	int j;
+	// queue<Palavra> iSemelhantes = dic.buscaSemelhante(palavraErrada);
+	queue<Palavra> iSemelhantes;
 
-	int size = iSemelhantes->size();
+	iSemelhantes = dic.buscaSemelhante(palavraErrada, iSemelhantes);
+
+	if(iSemelhantes.empty()) {
+		Palavra Null;
+		cout << "Palavra semelhante não encontrada no dicionario...\n" << endl;
+		return Null;
+	}
+	// Palavra p;
+	//
+	// while(j--) {
+	// 	wcin >> p;
+	// 	iSemelhantes.push(p);
+	// }
+
+	int size = iSemelhantes.size();
 
 	queue<Palavra> temp;
 
 	cout << "Selecione qual palavra semelhante gostaria de escolher" << endl;
-	for( j = 0; j < (iSemelhantes -> size() - 1); j++){
-		temp.push(iSemelhantes -> front());
-		wcout << j << L" - " << temp.front() << endl;
-		iSemelhantes -> pop();
+
+	int j;
+
+	for( j = 0 ; j < size ; j++){
+		wcout << L"[" << j+1 << L"]" << L" - " << iSemelhantes.front() << L" ";
+		iSemelhantes.push(iSemelhantes.front());
+		iSemelhantes.pop();
 	}
 
 	Palavra escolhida;
 
 	int op;
 	cin >> op;
-	while(1){
-		switch(op < j && op > 0) {
-			case 1:
-				while(op-- > 0) {
-					escolhida = temp.front();
-					temp.pop();
-				}
-				return escolhida;
-			break;
-			default:
-				cout << "Selecione Opção válida" << endl;
-			break;
+	do{
+		if(op < j+1 && op > 0) {
+			while(op-- > 0) {
+				escolhida = iSemelhantes.front();
+				iSemelhantes.pop();
+			}
+			return escolhida;
+		} else {
+			cout << "Selecione Opção válida" << endl;
 		}
-	}
+	}while(op < j+1 && op > 0);
+
+	while(!iSemelhantes.empty())
+		iSemelhantes.pop();
 }
 
 void Corretor::adicionarPalavraDicionario(Palavra palavraErrada){
@@ -164,9 +183,12 @@ void Corretor::adicionarErro(Palavra palavraErrada){
 void Corretor::exibirErros() {
 	std::forward_list<erros>::iterator it;
 	wrongWords.reverse();
-	for(it=wrongWords.begin(); it != wrongWords.end(); it++){
-		wcout << it -> palavra << ": " << L"Errou " << it -> contador << L" vezes" << endl;
+	for(it = wrongWords.begin() ; it != wrongWords.end() ; it++){
+		wcout << it -> palavra << ": " << L"Errou " << it -> contador << L" vez(es)" << endl;
 	}
+
+	while(!wrongWords.empty())
+		wrongWords.pop_front();
 }
 
 
