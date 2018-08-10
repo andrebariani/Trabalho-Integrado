@@ -3,6 +3,7 @@
 #include "Palavra.h"
 using namespace std;
 
+///Adicionar arquivo
 /**
  * Método que adiciona a palavra p ao arquivo dict.txt
  * @param   p   palavra a ser adicionada ao arquivo*/
@@ -27,7 +28,7 @@ void adicionarArquivo(Palavra p)
 }
 
 ///Construtor
-/*cria um arquivo que possui uma árvore de palavras extraidas do arquivo dict.txt*/
+/** cria um arquivo que possui uma árvore de palavras extraidas do arquivo dict.txt*/
 Dicionario::Dicionario()
 {
     //Cria um objeto wifstream "file"
@@ -63,7 +64,7 @@ Dicionario::~Dicionario()
 }
 
 ///limparArquivo
-/*Exclui todo o conteúdo do arquivo dict.txt*/
+/** Exclui todo o conteúdo do arquivo dict.txt*/
 void Dicionario::limparArquivo()
 {
     wofstream file;
@@ -80,7 +81,7 @@ void Dicionario::limparArquivo()
 }
 
 ///Incluir
-/*Inclui a palavra p na árvore de palavras*/
+/** Inclui a palavra p na árvore de palavras*/
 void Dicionario::incluir(Palavra p)
 {
     //Chama processo de inserção da arvore
@@ -88,7 +89,7 @@ void Dicionario::incluir(Palavra p)
 }
 
 ///Remover
-/*Remove a palavra p da árvore de palavras*/
+/** Remove a palavra p da árvore de palavras*/
 void Dicionario::remover(Palavra p)
 {
     //Chama processo de remoção da arvore
@@ -96,7 +97,7 @@ void Dicionario::remover(Palavra p)
 }
 
 ///Buscar palavra
-/*Retorna TRUE caso p pertença a árvore de palavras, FALSE caso contrário*/
+/** Retorna TRUE caso p pertença a árvore de palavras, FALSE caso contrário*/
 bool Dicionario::buscaPalavra(Palavra p)
 {
     //Se encontrar, return true
@@ -112,7 +113,7 @@ bool Dicionario::buscaPalavra(Palavra p)
 }
 
 ///Busca semelhante
-/*Retorna uma fila de palavras que sejam semelhantes a p e pertençam à árvore de palavras*/
+/** Retorna uma fila de palavras que sejam semelhantes a p e pertençam à árvore de palavras*/
 queue<Palavra> & Dicionario::buscaSemelhante(Palavra p, queue<Palavra> & queueSemelhante)
 {
     Palavra menor;
@@ -153,7 +154,7 @@ queue<Palavra> & Dicionario::buscaSemelhante(Palavra p, queue<Palavra> & queueSe
 }
 
 ///Atualizar arquivo
-/*Salva todas as palavras pertencentes à árvore no arquivo em branco dict.txt*/
+/** Salva todas as palavras pertencentes à árvore no arquivo em branco dict.txt*/
 void Dicionario::atualizarArquivo()
 {
     limparArquivo(); //Limpa o arquivo

@@ -23,22 +23,23 @@ class Dicionario
         Arvore<Palavra> arvore;
 
         ///Limpar arquivo
-        /**Exclui tudo que está no arquivo dict.txt
-         *Usada apenas antes da chamada da função atualizarArquivo*/
+        /** 
+         * Exclui tudo que está no arquivo dict.txt
+         * Usada apenas antes da chamada da função atualizarArquivo*/
         void limparArquivo();
 
     public:
 
         ///Construtor:
-        /**Coloca as palavras do arquivo na árvore de palavras*/
+        /** Coloca as palavras do arquivo na árvore de palavras*/
         Dicionario();
 
         ///Destrutor:
-        /**Salva as palavras da arvore no arquivo e destroi o dicionario*/
+        /** Salva as palavras da arvore no arquivo e destroi o dicionario*/
         ~Dicionario();
 
         ///Atualizar arquivo
-        /**Salva a árvore de palavras no arquivo*/
+        /** Salva a árvore de palavras no arquivo*/
         void atualizarArquivo();
 
         ///Incluir
