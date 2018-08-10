@@ -1,3 +1,12 @@
+/*! \file Texto.h
+    \brief Classe texto e funções relacionadas
+ *  \author André Matheus Bariani Trava
+ *  Created on 30 de Maio de 2018, 14:35
+*/
+/*! \class Texto
+    \brief Classe de manipulação de um texto
+*/
+
 #include "Texto.h"
 #include "Palavra.h"
 using namespace std;
@@ -72,7 +81,6 @@ void Texto::carregarNovoTexto( string na ) {
     // Não é necessário para o vetor palavras pois todo arquivo .txt termina com '\n'
     if(d != L"")
         delim.push_back(d);
-    //
 
     it_palavras = palavras.begin();
 
