@@ -143,5 +143,8 @@ void Texto:: salvarArquivo() {
         }
     }
 
+    palavras.erase(palavras.begin(), palavras.end());
+    delim.erase(delim.begin(), delim.end());
+
     cout << "Arquivo Salvo" << endl;
 }
