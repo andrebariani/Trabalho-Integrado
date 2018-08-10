@@ -48,7 +48,7 @@ dicionario::dicionario()
         {
             p.setPalavra(s);    //Passa palavra para p
             arvore.insere(p);   //Adiciona p na arvore
-        }      
+        }
     }
     //Fecha o arquivo
     file.close();
@@ -113,32 +113,29 @@ queue<Palavra> & dicionario::buscaSemelhante(Palavra p, queue<Palavra> & queueSe
     menor.setPalavra(p.getPalavra().substr(0, 2));
     aux = (p.getPalavra())[0] + ((p.getPalavra())[1] + 1);
     maior.setPalavra(aux);
-
     //Esvaziando a queue
-     while(!queueSemelhante.empty())
-    {
+    while(!queueSemelhante.empty())
         queueSemelhante.pop();
-    }
 
     //Pegando elementos semelhantes a p
     arvore.buscaIntervalo(queueSemelhante, menor, maior);
-
-    //Se o último elemento da fila não for semelhante a p
-    if(!((queueSemelhante.back()).semelhantes(p)))
+    if(!queueSemelhante.empty())
     {
-        queue<Palavra> temp;
+        //Se o último elemento da fila não for semelhante a p
+        if(!(queueSemelhante.back().semelhantes(p)))
+        {
+            int qSize = queueSemelhante.size() - 1;
+            //Passa todos os valores menos o último de semelhantes para temp
+            for(int i = 0; i < qSize; i++)
+            {
+                queueSemelhante.push(queueSemelhante.front());
+                queueSemelhante.pop();
+            }
 
-        //Passa todos os valores menos o último de semelhantes para temp
-        for(int i = 0; i < (queueSemelhante.size() - 1); i++)
-        {   
-            queueSemelhante.push(queueSemelhante.front());
-            queueSemelhante.pop();
+            //Troca os conteúdos entre temp e semelhantes
+            queueSemelhante.pop(); //Tira o último elemento de queueSemelhante
         }
-
-        //Troca os conteúdos entre temp e semelhantes
-        queueSemelhante.pop(); //Tira o último elemento de queueSemelhante
     }
-
     return queueSemelhante;
 
 }
