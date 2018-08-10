@@ -1,6 +1,6 @@
 /*! \file Texto.h
     \brief Classe texto e funções relacionadas
- *  Autor: André Matheus Bariani Trava
+ *  \author André Matheus Bariani Trava
  *  Created on 30 de Maio de 2018, 14:35
 */
 /*! \class Texto
