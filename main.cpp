@@ -4,23 +4,24 @@
 
 #include "Corretor.h"
 
-enum {SAIR, CARREGATEXTO, CORRIGIR};
+enum {SAIR, CORRIGIR, CARREGATEXTO};
 
 int main() {
 
     // $ g++ -o main_exe main.cpp Texto.cpp Palavra.cpp dicionario.cpp Corretor.cpp
 
-    string nome_texto;
+    string nome_texto = "texto.txt";
 
-    printf( "\t**Corretor Ortográfico (v1.0)**\t\t\t\n");
+    std::cout << "\n\t" << "**Corretor Ortográfico (v1.5)**" << "\t\t\t\n\n";
 
     int op;
 
     while(1) {
-        printf("\t\tInsira Opção:\t\t\t\t\t\t\n");
-        printf("1 - Carregar Texto:\t\t\t\t\t\t\n");
-        printf("2 - Iniciar Correção:\t\t\t\t\t\t\n");
-        printf("0 - Sair:\t\t\t\t\t\t\n");
+        std::cout << "Arquivo atual: " << nome_texto <<'\n';
+        std::cout << "\tInsira Opção:\n";
+        std::cout << "1 - Iniciar Correção\n";
+        std::cout << "2 - Alterar Texto\n";
+        std::cout << "0 - Sair:\n";
 
         cout << ">>" ;
         cin >> op;
@@ -32,13 +33,13 @@ int main() {
                     return 0;
                 break;
                 case CARREGATEXTO: {
-                    printf("\tInsira Nome do arquivo de texto\t\t\t\n");
+                    std::cout << "\tInsira Nome do arquivo de texto\t\t\t\n";
                     cout << ">>" ;
                     cin >> nome_texto;
                 }
                 break;
                 case CORRIGIR: {
-                    printf("\tIniciando Correção...\t\t\t\n");
+                    std::cout << "\tIniciando Correção...\t\t\t\n";
 
                     Corretor corretor(nome_texto);
 

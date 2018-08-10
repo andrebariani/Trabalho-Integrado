@@ -125,7 +125,6 @@ queue<Palavra> & Dicionario::buscaSemelhante(Palavra p, queue<Palavra> & queueSe
     aux1 = ((p.getPalavra())[1] + 1);
     aux0.append(aux1);
     maior.setPalavra(aux0);
-    wcout << menor << " " << maior << endl;
     //Esvaziando a queue
     while(!queueSemelhante.empty())
         queueSemelhante.pop();
