@@ -109,10 +109,14 @@ queue<Palavra> & dicionario::buscaSemelhante(Palavra p, queue<Palavra> & queueSe
 {
     Palavra menor;
     Palavra maior;
-    wstring aux;
+    wstring aux0;
+    wstring aux1;
     menor.setPalavra(p.getPalavra().substr(0, 2));
-    aux = (p.getPalavra())[0] + ((p.getPalavra())[1] + 1);
-    maior.setPalavra(aux);
+    aux0 = p.getPalavra()[0];
+    aux1 = ((p.getPalavra())[1] + 1);
+    aux0.append(aux1);
+    maior.setPalavra(aux0);
+    
     //Esvaziando a queue
     while(!queueSemelhante.empty())
         queueSemelhante.pop();
