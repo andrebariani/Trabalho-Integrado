@@ -1,5 +1,5 @@
-/*! \file dicionario.h
-    \brief Classe dicionario
+/*! \file Dicionario.h
+    \brief Classe Dicionario
  *  \author Thiago Yussuki Uehara
  *  Created on 30 de Maio de 2018, 15:01
 */
@@ -18,7 +18,7 @@
 using namespace std;
 
 /*! \class Dicionario
-    \brief Classe armazenadora de palavras em um dicionario
+    \brief Classe armazenadora de palavras em um Dicionario
 */
 class Dicionario
 {
@@ -38,7 +38,7 @@ class Dicionario
         Dicionario();
 
         ///Destrutor:
-        /** Salva as palavras da arvore no arquivo e destroi o dicionario*/
+        /** Salva as palavras da arvore no arquivo e destroi o Dicionario*/
         ~Dicionario();
 
         ///Atualizar arquivo

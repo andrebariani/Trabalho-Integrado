@@ -2,17 +2,10 @@
 #include "Palavra.h"
 #include "Texto.h"
 #include "Dicionario.h"
-// #include <iostream>
-// #include <string>
-// #include <forward_list>
 
 Corretor::Corretor( string nome_texto ) {
 	texto.carregarNovoTexto(nome_texto);
 }
-
-// void mudarTexto( string nome_texto ) {
-// 	texto.carregarNovoTexto(nome_texto);
-// }
 
 void Corretor::iniciarCorrecao() {
 	Palavra Null;
