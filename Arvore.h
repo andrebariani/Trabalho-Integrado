@@ -9,6 +9,7 @@
 #define ARVORE_H
 
 #include<queue>
+#include <iostream>
 
 template <class T>
 
