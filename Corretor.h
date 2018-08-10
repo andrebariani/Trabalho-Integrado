@@ -6,14 +6,14 @@
 #include <forward_list>
 #include "Palavra.h"
 #include "Texto.h"
-#include "dicionario.h"
+#include "Dicionario.h"
 
 using namespace std;
 
 class Corretor {
     private:
     	Texto texto;
-    	dicionario dic;
+    	Dicionario dic;
         typedef struct {
             wstring palavra;
             int contador;

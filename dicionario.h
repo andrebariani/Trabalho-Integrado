@@ -17,39 +17,54 @@
 
 using namespace std;
 
-class dicionario
+class Dicionario
 {
     private:
         Arvore<Palavra> arvore;
 
-        //Exclui tudo que está no arquivo dict.txt
-        //Usada apenas antes da chamada da função atualizarArquivo
+        ///Limpar arquivo
+        /** 
+         * Exclui tudo que está no arquivo dict.txt
+         * Usada apenas antes da chamada da função atualizarArquivo*/
         void limparArquivo();
 
     public:
 
-        //Construtor:
-        //Coloca as palavras do arquivo na árvore de palavras
-        dicionario();
+        ///Construtor:
+        /** Coloca as palavras do arquivo na árvore de palavras*/
+        Dicionario();
 
-        //Salva a árvore de palavras no arquivo
+        ///Destrutor:
+        /** Salva as palavras da arvore no arquivo e destroi o dicionario*/
+        ~Dicionario();
+
+        ///Atualizar arquivo
+        /** Salva a árvore de palavras no arquivo*/
         void atualizarArquivo();
 
-        //Adiciona a palavra p na árvore de palavras
-        // Parâmetro p, palavra a ser inserida
+        ///Incluir
+        /**
+         * Adiciona a palavra p na árvore de palavras
+         * @param   p                   palavra a ser inserida*/
         void incluir(Palavra p);
 
-        //Remove a palavra p da árvore de palavras
-        // Parâmetro p, palavra a ser removida
+        ///Remover
+        /**
+         * Remove a palavra p da árvore de palavra
+         * @param   p                   palavra a ser removida*/
         void remover(Palavra p);
 
-        //Retorna true caso a palavra p exista na árvore, false caso o contrário
-        //Parâmetro p, palavra a ser procurada
+        ///Busca palavra
+        /**
+         * @param   p                   palavra a ser procurada
+         * @return                      true caso a palavra p exista na árvore, false caso o contrário*/
+        
         bool buscaPalavra(Palavra p);
 
-        //Recebe uma fila de palavras e retorna essa fila com apenas palavras que sejam semelhantes a p e pertencem à árvore
-        // Parâmetro p, palavra base
-        // Parâmetro & queueSemelhante, fila de palavras a ser preenchida por palavras semelhantes a p e pertencentes à árvore
+        /**
+         * Recebe uma fila de palavras e retorna essa fila com apenas palavras que sejam semelhantes a p e pertencem à árvore
+         * @param   p                   palavra base
+         * @param   queueSemelhante     fila de palavras a ser preenchida por palavras semelhantes a p e pertencentes à árvore*/
         queue<Palavra> & buscaSemelhante(Palavra p, queue<Palavra> & queueSemelhante);
 };
 #endif 

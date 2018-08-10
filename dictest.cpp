@@ -1,10 +1,10 @@
 #include <iostream>
-#include "dicionario.h"
+#include "Dicionario.h"
 using namespace std;
 
 int main()
 {
-    dicionario dict;
+    Dicionario dict;
     Palavra p;
     queue<Palavra> fila; 
     p.setPalavra(L"esse");
@@ -15,7 +15,6 @@ int main()
     dict.incluir(p);
     p.setPalavra(L"certo");
     dict.incluir(p);
-    dict.printar();
     p.setPalavra(L"delco");
     dict.buscaSemelhante(p, fila);
     dict.atualizarArquivo();

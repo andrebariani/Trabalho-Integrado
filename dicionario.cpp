@@ -1,10 +1,12 @@
-#include "dicionario.h"
+#include "Dicionario.h"
 #include "Arvore.h"
 #include "Palavra.h"
 using namespace std;
 
-//Método que adiciona a palavra p ao arquivo dict.txt
-//Parâmetro p, palavra a ser adicionada ao arquivo
+///Adicionar arquivo
+/**
+ * Método que adiciona a palavra p ao arquivo dict.txt
+ * @param   p   palavra a ser adicionada ao arquivo*/
 void adicionarArquivo(Palavra p)
 {
     wofstream file;
@@ -26,8 +28,8 @@ void adicionarArquivo(Palavra p)
 }
 
 ///Construtor
-/*cria um arquivo que possui uma árvore de palavras extraidas do arquivo dict.txt*/
-dicionario::dicionario()
+/** cria um arquivo que possui uma árvore de palavras extraidas do arquivo dict.txt*/
+Dicionario::Dicionario()
 {
     //Cria um objeto wifstream "file"
     wifstream file;
@@ -54,9 +56,16 @@ dicionario::dicionario()
     file.close();
 }
 
+///Destrutor:
+/** Salva as palavras da arvore no arquivo*/
+Dicionario::~Dicionario()
+{
+    atualizarArquivo();
+}
+
 ///limparArquivo
-/*Exclui todo o conteúdo do arquivo dict.txt*/
-void dicionario::limparArquivo()
+/** Exclui todo o conteúdo do arquivo dict.txt*/
+void Dicionario::limparArquivo()
 {
     wofstream file;
 
@@ -72,24 +81,24 @@ void dicionario::limparArquivo()
 }
 
 ///Incluir
-/*Inclui a palavra p na árvore de palavras*/
-void dicionario::incluir(Palavra p)
+/** Inclui a palavra p na árvore de palavras*/
+void Dicionario::incluir(Palavra p)
 {
     //Chama processo de inserção da arvore
     arvore.insere(p);
 }
 
 ///Remover
-/*Remove a palavra p da árvore de palavras*/
-void dicionario::remover(Palavra p)
+/** Remove a palavra p da árvore de palavras*/
+void Dicionario::remover(Palavra p)
 {
     //Chama processo de remoção da arvore
     arvore.remove(p);
 }
 
 ///Buscar palavra
-/*Retorna TRUE caso p pertença a árvore de palavras, FALSE caso contrário*/
-bool dicionario::buscaPalavra(Palavra p)
+/** Retorna TRUE caso p pertença a árvore de palavras, FALSE caso contrário*/
+bool Dicionario::buscaPalavra(Palavra p)
 {
     //Se encontrar, return true
     if(arvore.busca(p))
@@ -104,8 +113,8 @@ bool dicionario::buscaPalavra(Palavra p)
 }
 
 ///Busca semelhante
-/*Retorna uma fila de palavras que sejam semelhantes a p e pertençam à árvore de palavras*/
-queue<Palavra> & dicionario::buscaSemelhante(Palavra p, queue<Palavra> & queueSemelhante)
+/** Retorna uma fila de palavras que sejam semelhantes a p e pertençam à árvore de palavras*/
+queue<Palavra> & Dicionario::buscaSemelhante(Palavra p, queue<Palavra> & queueSemelhante)
 {
     Palavra menor;
     Palavra maior;
@@ -116,7 +125,7 @@ queue<Palavra> & dicionario::buscaSemelhante(Palavra p, queue<Palavra> & queueSe
     aux1 = ((p.getPalavra())[1] + 1);
     aux0.append(aux1);
     maior.setPalavra(aux0);
-    
+    wcout << menor << " " << maior << endl;
     //Esvaziando a queue
     while(!queueSemelhante.empty())
         queueSemelhante.pop();
@@ -145,8 +154,8 @@ queue<Palavra> & dicionario::buscaSemelhante(Palavra p, queue<Palavra> & queueSe
 }
 
 ///Atualizar arquivo
-/*Salva todas as palavras pertencentes à árvore no arquivo em branco dict.txt*/
-void dicionario::atualizarArquivo()
+/** Salva todas as palavras pertencentes à árvore no arquivo em branco dict.txt*/
+void Dicionario::atualizarArquivo()
 {
     limparArquivo(); //Limpa o arquivo
     arvore.percursoEmOrdem( adicionarArquivo ); //Coloca a arvore no arquivo em EmOrdem
