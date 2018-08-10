@@ -1,7 +1,7 @@
 #include "Corretor.h"
 #include "Palavra.h"
 #include "Texto.h"
-#include "dicionario.h"
+#include "Dicionario.h"
 // #include <iostream>
 // #include <string>
 // #include <forward_list>
