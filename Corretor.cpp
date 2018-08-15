@@ -172,7 +172,7 @@ void Corretor::exibirErros() {
 	std::cout << "Sem mais erros!" << "\n\n";
 	std::cin.ignore();
 	std::cout << "=============================================" << "\n";
-	std::cout << "Lista de Erros:" << '\n';
+	std::cout << "Lista de Erros:" << "\n";
 	std::forward_list<erros>::iterator it;
 	wrongWords.reverse();
 	for(it = wrongWords.begin() ; it != wrongWords.end() ; it++){

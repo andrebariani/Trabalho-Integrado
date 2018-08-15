@@ -11,6 +11,8 @@
 #include <fstream>
 #include <cstring>
 #include <queue>
+#include <new>
+#include <locale>
 
 #include "Arvore.h"
 #include "Palavra.h"
@@ -49,7 +51,7 @@ class Dicionario
         /**
          * Adiciona a palavra p na árvore de palavras
          * @param   p                   palavra a ser inserida*/
-        void incluir(Palavra p);
+        bool incluir(Palavra p);
 
         ///Remover
         /**

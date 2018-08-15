@@ -31,6 +31,8 @@ void adicionarArquivo(Palavra p)
 /** cria um arquivo que possui uma árvore de palavras extraidas do arquivo dict.txt*/
 Dicionario::Dicionario()
 {
+    setlocale(LC_ALL,"pt_BR.UTF-8");
+
     //Cria um objeto wifstream "file"
     wifstream file;
 
@@ -52,7 +54,7 @@ Dicionario::Dicionario()
             try{
                 //Adiciona p na Arvore
                 arvore.insere(p);
-            }catch(bad::alloc){
+            }catch(bad_alloc){
             }
         }
     }
@@ -92,7 +94,7 @@ bool Dicionario::incluir(Palavra p)
         //Chama processo de inserção da arvore
         arvore.insere(p);
         return true;
-    }catch(bad::alloc){
+    }catch(bad_alloc){
         return false;
     }
 }
