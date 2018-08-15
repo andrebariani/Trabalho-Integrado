@@ -191,8 +191,6 @@ void Arvore<T>::insere( T d /**< [in] Dado a ser inserido.*/)
 {
     bool cresceuAltura=false;
     raiz=insere_no(raiz, d, cresceuAltura);
-    if(cresceuAltura)
-        qtd++;
 }
 ///Insere No
 /** Funcao privada que insere o dado d na arvore.
@@ -203,6 +201,7 @@ typename Arvore<T>::No* Arvore<T>::insere_no( No *p, T d , bool &cresceuAltura) 
     {
         //Alocar No
         p = new No;
+        qtd++;
 
         //Atribuir dado no No
         p->dado = d;

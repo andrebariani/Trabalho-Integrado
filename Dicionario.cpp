@@ -9,6 +9,8 @@ using namespace std;
  * @param   p   palavra a ser adicionada ao arquivo*/
 void adicionarArquivo(Palavra p)
 {
+    setlocale(LC_ALL,"pt_BR.UTF-8");
+
     wofstream file;
 
     //Abre o arquivo no modo "out", para escrever e o "app" para que escreva no fim do arquivo
@@ -58,6 +60,9 @@ Dicionario::Dicionario()
             }
         }
     }
+
+    cout << "Elementos na árvore" << arvore.getQtd() << endl;
+
     //Fecha o arquivo
     file.close();
 }

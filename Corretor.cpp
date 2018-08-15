@@ -24,7 +24,6 @@ void Corretor::iniciarCorrecao() {
 	if(!wrongWords.empty()) {
 		exibirErros();
 		texto.salvarArquivo();
-		dic.atualizarArquivo();
 		return;
 	}
 	cout << "Não há erros no texto. Parabéns!!" << endl;
