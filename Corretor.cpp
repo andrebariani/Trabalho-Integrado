@@ -108,7 +108,7 @@ Palavra Corretor::selecPalavraSemelhante(Palavra palavraErrada){//utilizar palav
 	int j;
 
 	for( j = 0 ; j < size ; j++){
-		wcout << L"[" << j+1 << L"]" << L" - " << iSemelhantes.front() << L" ";
+		wcout << L"[" << j+1 << L"]" << L" - " << iSemelhantes.front() << L" " << endl;
 		iSemelhantes.push(iSemelhantes.front());
 		iSemelhantes.pop();
 	}
@@ -176,7 +176,7 @@ void Corretor::exibirErros() {
 	std::forward_list<erros>::iterator it;
 	wrongWords.reverse();
 	for(it = wrongWords.begin() ; it != wrongWords.end() ; it++){
-		wcout << it -> palavra << ": " << L"Errou " << it -> contador << L" vez(es)" << endl;
+		wcout << it -> palavra << L": " << L"Errou " << it -> contador << L" vez(es)" << endl;
 	}
 	std::cin.ignore();
 	while(!wrongWords.empty())
