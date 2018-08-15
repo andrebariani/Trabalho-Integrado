@@ -55,6 +55,10 @@ class Arvore {
         /** Percorre a arvore em ordem, processando com a função recebida de parametro.*/
         void percursoEmOrdem( void (*processa)(T)/**< [in] Função que processa o No*/);
 
+        ///Pós ordem
+        /** Percorre a arvore pós-ordem, processando com a função recebida de parametro.*/
+        void percursoPosOrdem( void (*processa)(T)/**< [in] Função que processa o No*/);
+
         ///Busca
         /** Retorna um ponteiro para T se o T foi encontrado, NULL do contrário.*/
         T * busca( T d /**< [in] Dado a ser buscado.*/);
@@ -111,7 +115,12 @@ class Arvore {
          * @param t Raiz da subarvore
          */
         void emOrdem(No * t, void (*processa)(T));
-
+        ///Pos Ordem
+        /**
+         * Método auxiliar para realizar o percurso em ordem, usando os Nos
+         * @param t Raiz da subarvore
+         */
+        void posOrdem(No * t, void (*processa)(T));
         ///
         /**
          * Método auxiliar para buscar um intervalo, e retornar um std::stack<T> com os elementos entre o maior e o menor
@@ -492,23 +501,23 @@ typename Arvore<T>::No* Arvore<T>::rotDEremove(No* p, bool &mudouAltura) {
     return rotDE(p);
 }
 
-///Método auxiliar para realizar o percurso em ordem, usando os Nos
+///Método auxiliar para realizar o percurso em posOrdem, usando os Nos
 template <class T>
-void Arvore<T>::emOrdem(No * t, void (*processa)(T)){
+void Arvore<T>::posOrdem(No * t, void (*processa)(T)){
     if(t){
-        emOrdem(t->esq, processa);
+        posOrdem(t->esq, processa);
+        posOrdem(t->dir, processa);
         processa(t->dado);
-        emOrdem(t->dir, processa);
     }
 
 }
 
 ///Em ordem
-/** Percorre a arvore em ordem, processando com a função recebida de parametro.*/
+/** Percorre a arvore pós-ordem, processando com a função recebida de parametro.*/
 template <class T>
-void Arvore<T>::percursoEmOrdem( void (*processa)(T)/**< [in] Função que processa o No*/)
+void Arvore<T>::percursoPosOrdem( void (*processa)(T)/**< [in] Função que processa o No*/)
 {
-    emOrdem(raiz, processa);
+    posOrdem(raiz, processa);
 }
 
 ///Get Quantidade de Nos
@@ -541,5 +550,7 @@ void  Arvore<T>::buscaIntervalo_no(No* p, std::queue<T> &q, T menor, T maior) {
     if( maior > p->dado )
         buscaIntervalo_no( p->dir, q, menor, maior);
 }
+
+
 
 #endif /* ARVORE_H */
