@@ -49,7 +49,7 @@ class Dicionario
         /**
          * Adiciona a palavra p na árvore de palavras
          * @param   p                   palavra a ser inserida*/
-        void incluir(Palavra p);
+        bool incluir(Palavra p);
 
         ///Remover
         /**
