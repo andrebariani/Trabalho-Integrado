@@ -49,7 +49,11 @@ Dicionario::Dicionario()
         while(file >> s)   //Salva a palavra do arquivo para s
         {
             p.setPalavra(s);    //Passa palavra para p
-            arvore.insere(p);   //Adiciona p na arvore
+            try{
+                //Adiciona p na Arvore
+                arvore.insere(p);
+            }catch(bad::alloc){
+            }
         }
     }
     //Fecha o arquivo
@@ -82,10 +86,15 @@ void Dicionario::limparArquivo()
 
 ///Incluir
 /** Inclui a palavra p na árvore de palavras*/
-void Dicionario::incluir(Palavra p)
+bool Dicionario::incluir(Palavra p)
 {
-    //Chama processo de inserção da arvore
-    arvore.insere(p);
+    try{
+        //Chama processo de inserção da arvore
+        arvore.insere(p);
+        return true;
+    }catch(bad::alloc){
+        return false;
+    }
 }
 
 ///Remover

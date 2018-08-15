@@ -203,8 +203,6 @@ typename Arvore<T>::No* Arvore<T>::insere_no( No *p, T d , bool &cresceuAltura) 
     {
         //Alocar No
         p = new No;
-        if(p==NULL)
-            throw std::runtime_error("Nao foi possivel alocar o No na Arvore\n");
 
         //Atribuir dado no No
         p->dado = d;
