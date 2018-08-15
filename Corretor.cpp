@@ -24,7 +24,6 @@ void Corretor::iniciarCorrecao() {
 	if(!wrongWords.empty()) {
 		exibirErros();
 		texto.salvarArquivo();
-		dic.atualizarArquivo();
 		return;
 	}
 	cout << "Não há erros no texto. Parabéns!!" << endl;
@@ -81,7 +80,7 @@ void Corretor::corrigir(){// usar uma palavra fornecida pelo usuário para corri
 	//permitir que o usuário insira uma palavra e substitua a palavra errada
 	wstring correta;
 	cout << "Insira a palavra correta: ";
-	wcin.clear();
+	std::cin.ignore();
 	wcin >> correta;
 
 	texto.corrigirPalavra(correta);
@@ -108,7 +107,7 @@ Palavra Corretor::selecPalavraSemelhante(Palavra palavraErrada){//utilizar palav
 	int j;
 
 	for( j = 0 ; j < size ; j++){
-		wcout << L"[" << j+1 << L"]" << L" - " << iSemelhantes.front() << L" ";
+		wcout << L"[" << j+1 << L"]" << L" - " << iSemelhantes.front() << L" " << endl;
 		iSemelhantes.push(iSemelhantes.front());
 		iSemelhantes.pop();
 	}
@@ -172,12 +171,13 @@ void Corretor::exibirErros() {
 	std::cout << "Sem mais erros!" << "\n\n";
 	std::cin.ignore();
 	std::cout << "=============================================" << "\n";
-	std::cout << "Lista de Erros:" << '\n';
+	std::cout << "Lista de Erros:" << "\n";
 	std::forward_list<erros>::iterator it;
 	wrongWords.reverse();
 	for(it = wrongWords.begin() ; it != wrongWords.end() ; it++){
-		wcout << it -> palavra << ": " << L"Errou " << it -> contador << L" vez(es)" << endl;
+		wcout << it -> palavra << L": " << L"Errou " << it -> contador << L" vez(es)" << endl;
 	}
+	std::cout << "Pressione Enter para Continuar" << "\n";
 	std::cin.ignore();
 	while(!wrongWords.empty())
 		wrongWords.pop_front();

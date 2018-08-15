@@ -9,6 +9,8 @@ using namespace std;
  * @param   p   palavra a ser adicionada ao arquivo*/
 void adicionarArquivo(Palavra p)
 {
+    setlocale(LC_ALL,"pt_BR.UTF-8");
+
     wofstream file;
 
     //Abre o arquivo no modo "out", para escrever e o "app" para que escreva no fim do arquivo
@@ -31,6 +33,8 @@ void adicionarArquivo(Palavra p)
 /** cria um arquivo que possui uma árvore de palavras extraidas do arquivo dict.txt*/
 Dicionario::Dicionario()
 {
+    setlocale(LC_ALL,"pt_BR.UTF-8");
+
     //Cria um objeto wifstream "file"
     wifstream file;
 
@@ -52,10 +56,11 @@ Dicionario::Dicionario()
             try{
                 //Adiciona p na Arvore
                 arvore.insere(p);
-            }catch(bad::alloc){
+            }catch(bad_alloc){
             }
         }
     }
+
     //Fecha o arquivo
     file.close();
 }
@@ -92,7 +97,7 @@ bool Dicionario::incluir(Palavra p)
         //Chama processo de inserção da arvore
         arvore.insere(p);
         return true;
-    }catch(bad::alloc){
+    }catch(bad_alloc){
         return false;
     }
 }
@@ -165,6 +170,8 @@ queue<Palavra> & Dicionario::buscaSemelhante(Palavra p, queue<Palavra> & queueSe
 /** Salva todas as palavras pertencentes à árvore no arquivo em branco dict.txt*/
 void Dicionario::atualizarArquivo()
 {
+    cout << "Atualizando Dicionário..." << endl;
     limparArquivo(); //Limpa o arquivo
     arvore.percursoEmOrdem( adicionarArquivo ); //Coloca a arvore no arquivo em EmOrdem
+    cout << "Dicionário salvo!" << "\n\n";
 }

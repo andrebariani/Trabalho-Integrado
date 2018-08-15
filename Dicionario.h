@@ -11,6 +11,8 @@
 #include <fstream>
 #include <cstring>
 #include <queue>
+#include <new>
+#include <locale>
 
 #include "Arvore.h"
 #include "Palavra.h"
