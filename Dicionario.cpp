@@ -61,8 +61,6 @@ Dicionario::Dicionario()
         }
     }
 
-    cout << "Elementos na árvore" << arvore.getQtd() << endl;
-
     //Fecha o arquivo
     file.close();
 }
@@ -172,6 +170,8 @@ queue<Palavra> & Dicionario::buscaSemelhante(Palavra p, queue<Palavra> & queueSe
 /** Salva todas as palavras pertencentes à árvore no arquivo em branco dict.txt*/
 void Dicionario::atualizarArquivo()
 {
+    cout << "Atualizando Dicionário..." << endl;
     limparArquivo(); //Limpa o arquivo
     arvore.percursoEmOrdem( adicionarArquivo ); //Coloca a arvore no arquivo em EmOrdem
+    cout << "Dicionário salvo!" << "\n\n";
 }

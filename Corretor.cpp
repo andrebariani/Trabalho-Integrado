@@ -80,7 +80,7 @@ void Corretor::corrigir(){// usar uma palavra fornecida pelo usuário para corri
 	//permitir que o usuário insira uma palavra e substitua a palavra errada
 	wstring correta;
 	cout << "Insira a palavra correta: ";
-	wcin.clear();
+	std::cin.ignore();
 	wcin >> correta;
 
 	texto.corrigirPalavra(correta);
@@ -177,6 +177,7 @@ void Corretor::exibirErros() {
 	for(it = wrongWords.begin() ; it != wrongWords.end() ; it++){
 		wcout << it -> palavra << L": " << L"Errou " << it -> contador << L" vez(es)" << endl;
 	}
+	std::cout << "Pressione Enter para Continuar" << "\n";
 	std::cin.ignore();
 	while(!wrongWords.empty())
 		wrongWords.pop_front();
