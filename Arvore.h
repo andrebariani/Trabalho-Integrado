@@ -527,7 +527,7 @@ unsigned Arvore<T>::getQtd() {
     return qtd;
 }
 
-///Método para buscar um intervalo, e retornar um std::stack<T> com os elementos entre o maior e o menor
+///Método para buscar um intervalo, e retornar um std::queue<T> com os elementos entre o maior e o menor
 template <class T>
 void Arvore<T>::buscaIntervalo(std::queue<T> &q, T menor, T maior) {
     //Esvazia Fila
@@ -537,7 +537,7 @@ void Arvore<T>::buscaIntervalo(std::queue<T> &q, T menor, T maior) {
     buscaIntervalo_no(raiz, q, menor, maior);
 }
 
-///Método auxiliar para buscar um intervalo, e retornar um std::stack<T> com os elementos entre o maior e o menor
+///Método auxiliar para buscar um intervalo, e retornar um std::queue<T> com os elementos entre o maior e o menor
 template <class T>
 void  Arvore<T>::buscaIntervalo_no(No* p, std::queue<T> &q, T menor, T maior) {
     if (!p)
@@ -549,6 +549,53 @@ void  Arvore<T>::buscaIntervalo_no(No* p, std::queue<T> &q, T menor, T maior) {
     }
     if( maior > p->dado )
         buscaIntervalo_no( p->dir, q, menor, maior);
+}
+
+///Método para buscar um intervalo, e retornar um std::deque<T> com os elementos entre o maior e o menor
+template <class T>
+void Arvore<T>::buscaIntervalo(std::deque<T> &d, T menor, T maior) {
+    //Esvazia Deque
+    while(!d.empty())
+        d.pop_front();
+    //Chama funcao privada
+    buscaIntervalo_no(raiz, d, menor, maior);
+}
+
+///Método auxiliar para buscar um intervalo, e retornar um std::deque<T> com os elementos entre o maior e o menor
+template <class T>
+void  Arvore<T>::buscaIntervalo_no(No* p, std::deque<T> &d, T menor, T maior) {
+    if (!p)
+        return;
+    if( menor < p->dado )
+        buscaIntervalo_no( p->esq, d, menor, maior);
+    if( menor<= p->dado && maior >= p->dado ){
+        d.push_front(p->dado);
+    }
+    if( maior > p->dado )
+        buscaIntervalo_no( p->dir, d, menor, maior);
+}
+///Método para buscar um intervalo, e retornar um std::stack<T> com os elementos entre o maior e o menor
+template <class T>
+void Arvore<T>::buscaIntervalo(std::stack<T> &s, T menor, T maior) {
+    //Esvazia Pilha
+    while(!q.empty())
+        s.pop();
+    //Chama funcao privada
+    buscaIntervalo_no(raiz, s, menor, maior);
+}
+
+///Método auxiliar para buscar um intervalo, e retornar um std::stack<T> com os elementos entre o maior e o menor
+template <class T>
+void  Arvore<T>::buscaIntervalo_no(No* p, std::stack<T> &s, T menor, T maior) {
+    if (!p)
+        return;
+    if( menor < p->dado )
+        buscaIntervalo_no( p->esq, s, menor, maior);
+    if( menor<= p->dado && maior >= p->dado ){
+        s.push(p->dado);
+    }
+    if( maior > p->dado )
+        buscaIntervalo_no( p->dir, s, menor, maior);
 }
 
 
