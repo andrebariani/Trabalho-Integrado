@@ -33,6 +33,10 @@ class Arvore {
         /** Inicializa a Arvore*/
         Arvore();
 
+        ///Contrutor por Copia
+        /**Copia a arvore*/
+        Arvore(const Arvore& orig);
+
         ///Destrutor
         /* Destroi a arvore*/
         virtual ~Arvore();
@@ -59,9 +63,13 @@ class Arvore {
         /** Percorre a arvore pós-ordem, processando com a função recebida de parametro.*/
         void percursoPosOrdem( void (*processa)(T)/**< [in] Função que processa o No*/);
 
-        ///Busca
+        ///Busca Ponteiro
         /** Retorna um ponteiro para T se o T foi encontrado, NULL do contrário.*/
-        T * busca( T d /**< [in] Dado a ser buscado.*/);
+        T * buscaPonteiro( T d /**< [in] Dado a ser buscado.*/);
+
+        ///Busca
+        /** Retorna T se o T foi encontrado, NULL do contrário.*/
+        T busca( T d /**< [in] Dado a ser buscado.*/);
 
         ///Get Quantidade de Nos
         /** Retorna o numero de Nos da Arvore*/
@@ -350,9 +358,26 @@ typename Arvore<T>::No* Arvore<T>::remove_no( No *p, T d , bool &diminuiuAltura)
     }
     return p;
 }
+///Busca Ponteiro
+/** Retorna ponteiro para T se o T foi encontrado, NULL do contrário.*/
+template <class T>
+T * Arvore<T>::buscaPonteiro( T d /**< [in] Dado a ser buscado.*/)
+{
+    No * p=raiz;
+    while( p )
+    {
+        if( d < p->dado )
+            p = p->esq;
+        else if( d > p->dado )
+            p = p->dir;
+        else // d == p->dado
+            return  &p->dado;
+    }
+    return NULL;
+}
 
 ///Busca
-/** Retorna ponteiro para T se o T foi encontrado, NULL do contrário.*/
+/** Retorna T se o T foi encontrado, NULL do contrário.*/
 template <class T>
 T * Arvore<T>::busca( T d /**< [in] Dado a ser buscado.*/)
 {
@@ -364,7 +389,7 @@ T * Arvore<T>::busca( T d /**< [in] Dado a ser buscado.*/)
         else if( d > p->dado )
             p = p->dir;
         else // d == p->dado
-            return  &p->dado;
+            return  p->dado;
     }
     return NULL;
 }
@@ -597,6 +622,6 @@ void  Arvore<T>::buscaIntervalo_no(No* p, std::stack<T> &s, T menor, T maior) {
         buscaIntervalo_no( p->dir, s, menor, maior);
 }
 
-
+Arvore(const Arvore& orig)
 
 #endif /* ARVORE_H */
