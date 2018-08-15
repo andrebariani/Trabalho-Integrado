@@ -9,7 +9,8 @@
 #define ARVORE_H
 
 #include<queue>
-#include <iostream>
+#include<setack>
+#include<deque>
 
 template <class T>
 
@@ -62,8 +63,17 @@ class Arvore {
         /** Retorna o numero de Nos da Arvore*/
         unsigned getQtd();
 
-        ///Método para buscar um intervalo, e retornar um std::stack<T> com os elementos entre o maior e o menor
+        ///Método para buscar um intervalo, e retornar um std::queue<T> com os elementos entre o maior e o menor
         void buscaIntervalo( std::queue<T> &q/**< [out] Fila com elementos do intervalo.*/,
+                        T menor         /**< [in] Limitante inferior.*/,
+                        T maior         /**< [in] Limitante superior.*/);
+        ///Método para buscar um intervalo, e retornar um std::deque<T> com os elementos entre o maior e o menor
+        void buscaIntervalo( std::deque<T> &d/**< [out] Fila com elementos do intervalo.*/,
+                        T menor         /**< [in] Limitante inferior.*/,
+                        T maior         /**< [in] Limitante superior.*/);
+
+        ///Método para buscar um intervalo, e retornar um std::stack<T> com os elementos entre o maior e o menor
+        void buscaIntervalo( std::stack<T> &s/**< [out] Fila com elementos do intervalo.*/,
                         T menor         /**< [in] Limitante inferior.*/,
                         T maior         /**< [in] Limitante superior.*/);
 
