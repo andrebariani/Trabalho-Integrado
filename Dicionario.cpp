@@ -115,7 +115,7 @@ void Dicionario::remover(Palavra p)
 bool Dicionario::buscaPalavra(Palavra p)
 {
     //Se encontrar, return true
-    if(arvore.busca(p))
+    if(arvore.buscaBool(p))
     {
         return true;
     }

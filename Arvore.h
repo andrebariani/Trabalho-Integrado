@@ -8,8 +8,9 @@
 #ifndef ARVORE_H
 #define ARVORE_H
 
+#include<iostream>
 #include<queue>
-#include<setack>
+#include<stack>
 #include<deque>
 
 template <class T>
@@ -19,7 +20,7 @@ template <class T>
     Implementação AVL
 */
 class Arvore {
-
+private:
     typedef struct _no{
         T dado;
         int bal;
@@ -27,158 +28,162 @@ class Arvore {
         struct _no * dir;
     }No;
 
-    public:
+public:
 
-        ///Construtor
-        /** Inicializa a Arvore*/
-        Arvore();
+    ///Construtor
+    /** Inicializa a Arvore*/
+    Arvore();
 
-        ///Contrutor por Copia
-        /**Copia a arvore*/
-        Arvore(const Arvore& orig);
+    ///Contrutor por Copia
+    /**Copia a arvore*/
+    Arvore(const Arvore& orig);
 
-        ///Destrutor
-        /* Destroi a arvore*/
-        virtual ~Arvore();
+    ///Destrutor
+    /* Destroi a arvore*/
+    virtual ~Arvore();
 
-        ///Vazia
-        /** Retorna verdadeiro se a Arvore está vazia, falso do contrário.*/
-        bool vazia();
+    ///Vazia
+    /** Retorna verdadeiro se a Arvore está vazia, falso do contrário.*/
+    bool vazia();
 
-        ///Insere
-        /** Insere o T d na arvore.
-            Retorna exceção se não for inserido com sucesso.*/
-        void insere( T d /**< [in] Dado a ser inserido.*/);
+    ///Insere
+    /** Insere o T d na arvore.
+        Retorna exceção se não for inserido com sucesso.*/
+    void insere( T d /**< [in] Dado a ser inserido.*/);
 
-        ///Remove
-        /** Remove o T d na arvore.
-            Retorna exceção se não for inserido com sucesso.*/
-        void remove( T d /**< [in] Dado a ser removido.*/);
+    ///Remove
+    /** Remove o T d na arvore.
+        Retorna exceção se não for inserido com sucesso.*/
+    void remove( T d /**< [in] Dado a ser removido.*/);
 
-        ///Em ordem
-        /** Percorre a arvore em ordem, processando com a função recebida de parametro.*/
-        void percursoEmOrdem( void (*processa)(T)/**< [in] Função que processa o No*/);
+    ///Em ordem
+    /** Percorre a arvore em ordem, processando com a função recebida de parametro.*/
+    void percursoEmOrdem( void (*processa)(T)/**< [in] Função que processa o No*/);
 
-        ///Pós ordem
-        /** Percorre a arvore pós-ordem, processando com a função recebida de parametro.*/
-        void percursoPosOrdem( void (*processa)(T)/**< [in] Função que processa o No*/);
+    ///Pós ordem
+    /** Percorre a arvore pós-ordem, processando com a função recebida de parametro.*/
+    void percursoPosOrdem( void (*processa)(T)/**< [in] Função que processa o No*/);
 
-        ///Busca Ponteiro
-        /** Retorna um ponteiro para T se o T foi encontrado, NULL do contrário.*/
-        T * buscaPonteiro( T d /**< [in] Dado a ser buscado.*/);
+    ///Busca Bool
 
-        ///Busca
-        /** Retorna T se o T foi encontrado, NULL do contrário.*/
-        T busca( T d /**< [in] Dado a ser buscado.*/);
+    /** Retorna true se o T foi encontrado, false do contrário.*/
+    bool buscaBool( T d /**< [in] Dado a ser buscado.*/);
 
-        ///Get Quantidade de Nos
-        /** Retorna o numero de Nos da Arvore*/
-        unsigned getQtd();
+    ///Busca
+    /** Retorna T se o T foi encontrado, NULL do contrário.*/
+    T busca( T d /**< [in] Dado a ser buscado.*/);
 
-        ///Método para buscar um intervalo, e retornar um std::queue<T> com os elementos entre o maior e o menor
-        void buscaIntervalo( std::queue<T> &q/**< [out] Fila com elementos do intervalo.*/,
-                        T menor         /**< [in] Limitante inferior.*/,
-                        T maior         /**< [in] Limitante superior.*/);
-        ///Método para buscar um intervalo, e retornar um std::deque<T> com os elementos entre o maior e o menor
-        void buscaIntervalo( std::deque<T> &d/**< [out] Fila com elementos do intervalo.*/,
-                        T menor         /**< [in] Limitante inferior.*/,
-                        T maior         /**< [in] Limitante superior.*/);
+    ///Get Quantidade de Nos
+    /** Retorna o numero de Nos da Arvore*/
+    unsigned getQtd();
 
-        ///Método para buscar um intervalo, e retornar um std::stack<T> com os elementos entre o maior e o menor
-        void buscaIntervalo( std::stack<T> &s/**< [out] Fila com elementos do intervalo.*/,
-                        T menor         /**< [in] Limitante inferior.*/,
-                        T maior         /**< [in] Limitante superior.*/);
+    ///Método para buscar um intervalo, e retornar um std::queue<T> com os elementos entre o maior e o menor
+    void buscaIntervalo( std::queue<T> &q/**< [out] Fila com elementos do intervalo.*/,
+                    T menor         /**< [in] Limitante inferior.*/,
+                    T maior         /**< [in] Limitante superior.*/);
+    ///Método para buscar um intervalo, e retornar um std::deque<T> com os elementos entre o maior e o menor
+    void buscaIntervalo( std::deque<T> &d/**< [out] Fila com elementos do intervalo.*/,
+                    T menor         /**< [in] Limitante inferior.*/,
+                    T maior         /**< [in] Limitante superior.*/);
 
-    private:
-        No * raiz;
-        unsigned qtd;
-        ///Insere no
-        /**
-         * Método auxiliar para Inserir o dado d na arvore.
-         * Retorna exceção se não for inserido com sucesso.
-         * @param  p         Ponteiro do nó atual
-         * @param  d         Dado a ser inserido
-         * @param  cresceuAltura Flag para saber se o no foi alocado
-         * @return           Arvore com dado inserido
-         */
-        No* insere_no( No *p, T d , bool &cresceuAltura);
-        ///Remove No
-        /**
-         * Método auxiliar para remover o No
-         * @param  p Ponteiro No atual
-         * @param  d Dado a ser buscado
-         * @return   Ponteiro da arvore sem o No
-         */
-        No * remove_no( No *p, T d , bool &diminuiuAltura);
-        // No maximo
-        /**
-         * Método auxiliar para encontrar o maior valor de uma subarvore
-         * @param  p raiz da subarvore
-         * @return   Ponteiro pro maior No
-         */
-        No * max_node( No* p );
-        ///Em Ordem
-        /**
-         * Método auxiliar para realizar o percurso em ordem, usando os Nos
-         * @param t Raiz da subarvore
-         */
-        void emOrdem(No * t, void (*processa)(T));
-        ///Pos Ordem
-        /**
-         * Método auxiliar para realizar o percurso em ordem, usando os Nos
-         * @param t Raiz da subarvore
-         */
-        void posOrdem(No * t, void (*processa)(T));
-        ///
-        /**
-         * Método auxiliar para buscar um intervalo, e retornar um std::stack<T> com os elementos entre o maior e o menor
-         * @param  p     Ponteiro para no atual
-         * @param  q     Fila para retornar elementos
-         * @param  menor Limitante superior
-         * @param  maior Limitante inferior
-         */
-        void  buscaIntervalo_no(No* p, std::queue<T> &q, T menor, T maior);
+    ///Método para buscar um intervalo, e retornar um std::stack<T> com os elementos entre o maior e o menor
+    void buscaIntervalo( std::stack<T> &s/**< [out] Fila com elementos do intervalo.*/,
+                    T menor         /**< [in] Limitante inferior.*/,
+                    T maior         /**< [in] Limitante superior.*/);
 
-        ///Rotação Esquerda
-        /**
-         * Método auxiliar para realizar a rotação
-         * @param  A Ponteiro do nó atual
-         * @return   No rotacionado
-         */
-        No* rotEE( No* A );
-        ///Rotação Direita
-        /**
-         * Método auxiliar para realizar a rotação
-         * @param  A Ponteiro do nó atual
-         * @return   No rotacionado
-         */
-        No* rotDD( No* A );
-        ///Rotação DireitaEsquerda
-        /**
-         * Método auxiliar para realizar a rotação
-         * @param  A Ponteiro do nó atual
-         * @return   No rotacionado
-         */
-        No* rotDE( No* A );
-        ///Rotação EsquerdaDireita
-        /**
-         * Método auxiliar para realizar a rotação
-         * @param  A Ponteiro do nó atual
-         * @return   No rotacionado
-         */
-        No* rotED( No* A );
+private:
+    No * raiz;
+    unsigned qtd;
+    ///Insere no
+    /**
+     * Método auxiliar para Inserir o dado d na arvore.
+     * Retorna exceção se não for inserido com sucesso.
+     * @param  p         Ponteiro do nó atual
+     * @param  d         Dado a ser inserido
+     * @param  cresceuAltura Flag para saber se o no foi alocado
+     * @return           Arvore com dado inserido
+     */
+    No* insere_no( No *p, T d , bool &cresceuAltura);
+    ///Remove No
+    /**
+     * Método auxiliar para remover o No
+     * @param  p Ponteiro No atual
+     * @param  d Dado a ser buscado
+     * @return   Ponteiro da arvore sem o No
+     */
+    No * remove_no( No *p, T d , bool &diminuiuAltura);
+    // No maximo
+    /**
+     * Método auxiliar para encontrar o maior valor de uma subarvore
+     * @param  p raiz da subarvore
+     * @return   Ponteiro pro maior No
+     */
+    No * max_node( No* p );
+    ///Em Ordem
+    /**
+     * Método auxiliar para realizar o percurso em ordem, usando os Nos
+     * @param t Raiz da subarvore
+     */
+    void emOrdem(No * t, void (*processa)(T));
+    ///Pos Ordem
+    /**
+     * Método auxiliar para realizar o percurso em ordem, usando os Nos
+     * @param t Raiz da subarvore
+     */
+    void posOrdem(No * t, void (*processa)(T));
+    ///Método auxiliar para realizar o percurso em posOrdem removendo os Nos
+    void posOrdemRemove(No * t);
+    ///Busca Intervalo Privado
+    /**
+     * Método auxiliar para buscar um intervalo, e retornar um std::stack<T> com os elementos entre o maior e o menor
+     * @param  p     Ponteiro para no atual
+     * @param  q     Fila para retornar elementos
+     * @param  menor Limitante superior
+     * @param  maior Limitante inferior
+     */
+    void  buscaIntervalo_no(No* p, std::queue<T> &q, T menor, T maior);
+    void  buscaIntervalo_no(No* p, std::deque<T> &d, T menor, T maior);
+    void  buscaIntervalo_no(No* p, std::stack<T> &s, T menor, T maior);
+    ///Rotação Esquerda
+    /**
+     * Método auxiliar para realizar a rotação
+     * @param  A Ponteiro do nó atual
+     * @return   No rotacionado
+     */
+    No* rotEE( No* A );
+    ///Rotação Direita
+    /**
+     * Método auxiliar para realizar a rotação
+     * @param  A Ponteiro do nó atual
+     * @return   No rotacionado
+     */
+    No* rotDD( No* A );
+    ///Rotação DireitaEsquerda
+    /**
+     * Método auxiliar para realizar a rotação
+     * @param  A Ponteiro do nó atual
+     * @return   No rotacionado
+     */
+    No* rotDE( No* A );
+    ///Rotação EsquerdaDireita
+    /**
+     * Método auxiliar para realizar a rotação
+     * @param  A Ponteiro do nó atual
+     * @return   No rotacionado
+     */
+    No* rotED( No* A );
 
-        ///Método auxiliar para realizar a rotação EE na remocao
-        No* rotEEremove(No* p, bool &mudouAltura);
+    ///Método auxiliar para realizar a rotação EE na remocao
+    No* rotEEremove(No* p, bool &mudouAltura);
 
-        ///Método auxiliar para realizar a rotação ED na remocao
-        No* rotEDremove(No* p, bool &mudouAltura);
+    ///Método auxiliar para realizar a rotação ED na remocao
+    No* rotEDremove(No* p, bool &mudouAltura);
 
-        ///Método auxiliar para realizar a rotação DD na remocao
-        No* rotDDremove(No* p, bool &mudouAltura);
+    ///Método auxiliar para realizar a rotação DD na remocao
+    No* rotDDremove(No* p, bool &mudouAltura);
 
-        ///Método auxiliar para realizar a rotação DE na remocao
-        No* rotDEremove(No* p, bool &mudouAltura);
+    ///Método auxiliar para realizar a rotação DE na remocao
+    No* rotDEremove(No* p, bool &mudouAltura);
 };
 
 
@@ -197,9 +202,7 @@ Arvore<T>::Arvore() {
 /* Destroi a arvore*/
 template <class T>
 Arvore<T>::~Arvore() {
-    while (!vazia())
-        remove(raiz->dado);
-
+    posOrdemRemove(raiz);
 }
 
 ///Vazia
@@ -340,6 +343,7 @@ typename Arvore<T>::No* Arvore<T>::remove_no( No *p, T d , bool &diminuiuAltura)
     else {
         //Dado encontrado
         if( !p->dir ) {
+            std::cout << "joojd" << '\n';
             No *esquerda = p->esq;
             delete p;
             qtd--;
@@ -347,6 +351,7 @@ typename Arvore<T>::No* Arvore<T>::remove_no( No *p, T d , bool &diminuiuAltura)
             return esquerda;
         }
         if( !p->esq ) {
+            std::cout << "jooje" << '\n';
             No *direita = p->dir;
             delete p;
             qtd--;
@@ -359,9 +364,9 @@ typename Arvore<T>::No* Arvore<T>::remove_no( No *p, T d , bool &diminuiuAltura)
     return p;
 }
 ///Busca Ponteiro
-/** Retorna ponteiro para T se o T foi encontrado, NULL do contrário.*/
+/** Retorna true se o T foi encontrado, false do contrário.*/
 template <class T>
-T * Arvore<T>::buscaPonteiro( T d /**< [in] Dado a ser buscado.*/)
+bool Arvore<T>::buscaBool( T d /**< [in] Dado a ser buscado.*/)
 {
     No * p=raiz;
     while( p )
@@ -371,15 +376,15 @@ T * Arvore<T>::buscaPonteiro( T d /**< [in] Dado a ser buscado.*/)
         else if( d > p->dado )
             p = p->dir;
         else // d == p->dado
-            return  &p->dado;
+            return true;
     }
-    return NULL;
+    return false;
 }
 
 ///Busca
 /** Retorna T se o T foi encontrado, NULL do contrário.*/
 template <class T>
-T * Arvore<T>::busca( T d /**< [in] Dado a ser buscado.*/)
+T Arvore<T>::busca( T d /**< [in] Dado a ser buscado.*/)
 {
     No * p=raiz;
     while( p )
@@ -527,6 +532,17 @@ typename Arvore<T>::No* Arvore<T>::rotDEremove(No* p, bool &mudouAltura) {
 
 ///Método auxiliar para realizar o percurso em posOrdem, usando os Nos
 template <class T>
+void Arvore<T>::emOrdem(No * t, void (*processa)(T)){
+    if(t){
+        emOrdem(t->esq, processa);
+        processa(t->dado);
+        emOrdem(t->dir, processa);
+    }
+
+}
+
+///Método auxiliar para realizar o percurso em posOrdem, usando os Nos
+template <class T>
 void Arvore<T>::posOrdem(No * t, void (*processa)(T)){
     if(t){
         posOrdem(t->esq, processa);
@@ -537,6 +553,14 @@ void Arvore<T>::posOrdem(No * t, void (*processa)(T)){
 }
 
 ///Em ordem
+/** Percorre a arvore em ordem, processando com a função recebida de parametro.*/
+template <class T>
+void Arvore<T>::percursoEmOrdem( void (*processa)(T)/**< [in] Função que processa o No*/)
+{
+    emOrdem(raiz, processa);
+}
+
+///pos-Ordem
 /** Percorre a arvore pós-ordem, processando com a função recebida de parametro.*/
 template <class T>
 void Arvore<T>::percursoPosOrdem( void (*processa)(T)/**< [in] Função que processa o No*/)
@@ -602,7 +626,7 @@ void  Arvore<T>::buscaIntervalo_no(No* p, std::deque<T> &d, T menor, T maior) {
 template <class T>
 void Arvore<T>::buscaIntervalo(std::stack<T> &s, T menor, T maior) {
     //Esvazia Pilha
-    while(!q.empty())
+    while(!s.empty())
         s.pop();
     //Chama funcao privada
     buscaIntervalo_no(raiz, s, menor, maior);
@@ -622,6 +646,39 @@ void  Arvore<T>::buscaIntervalo_no(No* p, std::stack<T> &s, T menor, T maior) {
         buscaIntervalo_no( p->dir, s, menor, maior);
 }
 
-Arvore(const Arvore& orig)
+template <class T>
+Arvore<T>::Arvore(const Arvore& orig){
+    std::queue <No*> q;
+    //Enfila raiz
+    q.push(raiz);
+
+    while(!q.empty()){
+        //Enfila filhos
+        if(q.front()->dir)
+            q.push(q.front()->dir);
+        if(q.front()->esq)
+            q.push(q.front()->esq);
+
+        //Processa No
+        orig.insere(q.front()->dado);
+
+        //Consome elemento
+        q.pop();
+    }
+
+}
+
+///Método auxiliar para realizar o percurso em posOrdem removendo os Nos
+template <class T>
+void Arvore<T>::posOrdemRemove(No * t){
+    if(t){
+        bool diminuiuAltura=false;
+        if(t->esq)
+            posOrdemRemove(t->esq);
+        if(t->dir)
+            posOrdemRemove(t->dir);
+        delete t;
+    }
+}
 
 #endif /* ARVORE_H */
