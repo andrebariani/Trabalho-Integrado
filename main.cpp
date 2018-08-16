@@ -18,7 +18,7 @@ int main() {
 
     string nome_texto = "texto.txt";
 
-    std::cout << "\n\t" << "**Corretor Ortográfico (v1.5)**" << "\t\t\t\n\n";
+    std::cout << "\n\t" << "**Corretor Ortográfico (v2.0)**" << "\t\t\t\n\n";
 
     int op;
 
