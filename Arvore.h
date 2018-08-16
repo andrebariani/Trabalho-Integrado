@@ -8,7 +8,6 @@
 #ifndef ARVORE_H
 #define ARVORE_H
 
-#include<iostream>
 #include<queue>
 #include<stack>
 #include<deque>
