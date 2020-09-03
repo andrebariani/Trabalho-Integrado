@@ -1,5 +1,5 @@
 # Trabalho-Integrado
-Trabalho Integrado de POO e ED1
+Trabalho Integrado de Programação Orientado a Objetos e Estrutura de Dados 1
 
 Autores:
 * Anderson Garrote
