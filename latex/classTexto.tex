@@ -1,0 +1,87 @@
+\hypertarget{classTexto}{}\section{Referência da Classe Texto}
+\label{classTexto}\index{Texto@{Texto}}
+
+
+Classe de manipulação de um texto.  
+
+
+
+
+{\ttfamily \#include $<$Texto.\+h$>$}
+
+\subsection*{Métodos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classTexto_a994cfaf08f49b74b55c2ff8e637a496c}{Texto} (string na=\char`\"{}nomearq\char`\"{})
+\begin{DoxyCompactList}\small\item\em Construtor de \hyperlink{classTexto}{Texto}. \end{DoxyCompactList}\item 
+\hyperlink{classPalavra}{Palavra} \hyperlink{classTexto_ad5a75aaf1bd72a2ed320cd88f5855fa1}{percorrer\+Texto} ()
+\begin{DoxyCompactList}\small\item\em Percurso do \hyperlink{classTexto}{Texto}. \end{DoxyCompactList}\item 
+void \hyperlink{classTexto_a22a609901801895bd761ea85f0111b19}{corrigir\+Palavra} (\hyperlink{classPalavra}{Palavra} corrigida)
+\begin{DoxyCompactList}\small\item\em Correção da palavra do \hyperlink{classTexto}{Texto}. \end{DoxyCompactList}\item 
+void \hyperlink{classTexto_aa637986e50d826319f321167dfaf2d9c}{salvar\+Arquivo} ()
+\begin{DoxyCompactList}\small\item\em Armazenamento do novo texto. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descrição Detalhada}
+Classe de manipulação de um texto. 
+
+\subsection{Construtores \& Destrutores}
+\mbox{\Hypertarget{classTexto_a994cfaf08f49b74b55c2ff8e637a496c}\label{classTexto_a994cfaf08f49b74b55c2ff8e637a496c}} 
+\index{Texto@{Texto}!Texto@{Texto}}
+\index{Texto@{Texto}!Texto@{Texto}}
+\subsubsection{\texorpdfstring{Texto()}{Texto()}}
+{\footnotesize\ttfamily Texto\+::\+Texto (\begin{DoxyParamCaption}\item[{string}]{na = {\ttfamily \char`\"{}nomearq\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Construtor de \hyperlink{classTexto}{Texto}. 
+
+Recebe uma string que corresponde ao nome do arquivo do texto a ser carregado ao programa 
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em na} & nome do arquivo a ser carregado. O arquivo pode ou não conter a extensão \char`\"{}.\+txt\char`\"{}. Por padrão, \char`\"{}nomearq\char`\"{}. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Métodos}
+\mbox{\Hypertarget{classTexto_a22a609901801895bd761ea85f0111b19}\label{classTexto_a22a609901801895bd761ea85f0111b19}} 
+\index{Texto@{Texto}!corrigir\+Palavra@{corrigir\+Palavra}}
+\index{corrigir\+Palavra@{corrigir\+Palavra}!Texto@{Texto}}
+\subsubsection{\texorpdfstring{corrigir\+Palavra()}{corrigirPalavra()}}
+{\footnotesize\ttfamily void Texto\+::corrigir\+Palavra (\begin{DoxyParamCaption}\item[{\hyperlink{classPalavra}{Palavra}}]{corrigida }\end{DoxyParamCaption})}
+
+
+
+Correção da palavra do \hyperlink{classTexto}{Texto}. 
+
+Recebe uma palavra e substitui a palavra do \hyperlink{classTexto}{Texto} 
+\begin{DoxyParams}{Parâmetros}
+{\em corrigida} & $<$ \mbox{[}in\mbox{]} \hyperlink{classPalavra}{Palavra} correta que troca com a palavra do texto \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classTexto_ad5a75aaf1bd72a2ed320cd88f5855fa1}\label{classTexto_ad5a75aaf1bd72a2ed320cd88f5855fa1}} 
+\index{Texto@{Texto}!percorrer\+Texto@{percorrer\+Texto}}
+\index{percorrer\+Texto@{percorrer\+Texto}!Texto@{Texto}}
+\subsubsection{\texorpdfstring{percorrer\+Texto()}{percorrerTexto()}}
+{\footnotesize\ttfamily \hyperlink{classPalavra}{Palavra} Texto\+::percorrer\+Texto (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Percurso do \hyperlink{classTexto}{Texto}. 
+
+Retorna uma \hyperlink{classPalavra}{Palavra} do texto em ordem de chamada dessa função \mbox{\Hypertarget{classTexto_aa637986e50d826319f321167dfaf2d9c}\label{classTexto_aa637986e50d826319f321167dfaf2d9c}} 
+\index{Texto@{Texto}!salvar\+Arquivo@{salvar\+Arquivo}}
+\index{salvar\+Arquivo@{salvar\+Arquivo}!Texto@{Texto}}
+\subsubsection{\texorpdfstring{salvar\+Arquivo()}{salvarArquivo()}}
+{\footnotesize\ttfamily void Texto\+::salvar\+Arquivo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Armazenamento do novo texto. 
+
+Salva o texto em um novo arquivo com extensão \char`\"{}.\+txt\char`\"{} com as palavras corrigidas 
+
+A documentação para esta classe foi gerada a partir dos seguintes arquivos\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Texto_8h}{Texto.\+h}\item 
+Texto.\+cpp\end{DoxyCompactItemize}
